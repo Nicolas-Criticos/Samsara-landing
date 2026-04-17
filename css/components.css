@@ -1,5 +1,5 @@
 /* ============================================================
-   COMPONENTS.CSS — Buttons, Cards, Slider, Modals, Nav
+   COMPONENTS.CSS — Buttons, Cards, Ghost Messages, Nav
    Samsara Olive Oil Landing Page
    ============================================================ */
 
@@ -115,11 +115,11 @@
   transform: translateY(-4px);
 }
 
-/* Image placeholder */
+/* Image area */
 .product-card__image-wrap {
   position: relative;
   width: 100%;
-  padding-top: 70%; /* aspect ratio */
+  padding-top: 70%;
   overflow: hidden;
   background-color: var(--color-cream-dark);
 }
@@ -199,6 +199,17 @@
   flex: 1;
 }
 
+/* Subtle tree rehabilitation note */
+.product-card__trees-note {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-xs);
+  font-style: italic;
+  color: var(--color-olive);
+  opacity: 0.65;
+  letter-spacing: var(--letter-spacing-wide);
+  margin-top: var(--space-xs);
+}
+
 .product-card__footer {
   margin-top: var(--space-md);
   display: flex;
@@ -217,7 +228,6 @@
   font-size: var(--font-size-xs);
   color: var(--color-text-light);
   display: block;
-  margin-top: -var(--space-xs);
 }
 
 /* Variant selector */
@@ -248,7 +258,7 @@
   color: var(--color-copper);
 }
 
-/* ── Ghost Message (tree counter popup) ──────────────────── */
+/* ── Ghost Message (thankful trees popup) ────────────────── */
 .ghost-message {
   position: fixed;
   bottom: var(--space-xl);
@@ -261,17 +271,18 @@
 }
 
 .ghost-message__item {
-  background: rgba(26, 18, 8, 0.88);
+  background: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(201, 160, 64, 0.25);
+  border: 1px solid rgba(107, 124, 58, 0.2);
   border-radius: var(--radius-lg);
   padding: var(--space-md) var(--space-lg);
-  color: var(--color-cream);
+  color: var(--color-text-dark);
+  font-family: var(--font-heading);
   font-size: var(--font-size-sm);
   line-height: 1.4;
-  max-width: 280px;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+  max-width: 260px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
 
   /* animation */
   opacity: 0;
@@ -295,162 +306,19 @@
 }
 
 .ghost-message__text {
-  color: var(--color-cream);
+  color: var(--color-text-mid);
   font-size: var(--font-size-sm);
+  font-style: italic;
 }
 
 .ghost-message__count {
-  color: var(--color-gold);
+  color: var(--color-olive);
   font-family: var(--font-heading);
   font-size: var(--font-size-xl);
   font-weight: 600;
 }
 
-/* ── Tree Rehabilitation Slider ──────────────────────────── */
-.rehab-slider {
-  max-width: 640px;
-  margin: 0 auto;
-  padding: var(--space-2xl) 0;
-}
-
-.rehab-slider__display {
-  text-align: center;
-  margin-bottom: var(--space-2xl);
-}
-
-.rehab-slider__amount {
-  font-family: var(--font-heading);
-  font-size: var(--font-size-4xl);
-  color: var(--color-text-dark);
-  font-weight: 300;
-  line-height: 1;
-  transition: color var(--duration-normal);
-}
-
-.rehab-slider__label {
-  font-size: var(--font-size-xs);
-  letter-spacing: var(--letter-spacing-widest);
-  text-transform: uppercase;
-  color: var(--color-text-light);
-  margin-top: var(--space-sm);
-}
-
-/* The range input */
-.rehab-slider__track-wrap {
-  position: relative;
-  padding: var(--space-lg) 0;
-}
-
-.rehab-slider__input {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 100%;
-  height: 2px;
-  background: linear-gradient(
-    to right,
-    var(--color-gold) 0%,
-    var(--color-gold) var(--slider-progress, 0%),
-    rgba(74, 44, 10, 0.2) var(--slider-progress, 0%),
-    rgba(74, 44, 10, 0.2) 100%
-  );
-  border-radius: var(--radius-pill);
-  outline: none;
-  cursor: pointer;
-}
-
-/* Thumb */
-.rehab-slider__input::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background: var(--color-gold);
-  box-shadow: 0 0 12px var(--glow-gold), 0 0 0 3px rgba(201, 160, 64, 0.2);
-  transition: box-shadow var(--duration-fast), transform var(--duration-fast);
-}
-
-.rehab-slider__input::-moz-range-thumb {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background: var(--color-gold);
-  border: none;
-  box-shadow: 0 0 12px var(--glow-gold);
-  transition: box-shadow var(--duration-fast);
-}
-
-.rehab-slider__input:hover::-webkit-slider-thumb,
-.rehab-slider__input:focus::-webkit-slider-thumb {
-  box-shadow: 0 0 24px var(--glow-gold), 0 0 0 6px rgba(201, 160, 64, 0.15);
-  transform: scale(1.2);
-}
-
-/* Tree counter result */
-.rehab-slider__result {
-  margin-top: var(--space-2xl);
-  padding: var(--space-xl);
-  background: var(--color-cream-dark);
-  border-radius: var(--radius-lg);
-  border: 1px solid rgba(201, 160, 64, 0.2);
-  text-align: center;
-  transition: box-shadow var(--duration-normal);
-}
-
-.rehab-slider__result:has(.rehab-slider__tree-count:not([data-count="0"])) {
-  box-shadow: 0 0 32px var(--glow-warm);
-}
-
-.rehab-slider__result-text {
-  font-size: var(--font-size-md);
-  color: var(--color-text-mid);
-  margin-bottom: var(--space-md);
-  line-height: var(--line-height-loose);
-}
-
-.rehab-slider__tree-count {
-  font-family: var(--font-heading);
-  font-size: var(--font-size-4xl);
-  color: var(--color-olive);
-  font-weight: 600;
-  line-height: 1;
-  transition: color var(--duration-normal);
-}
-
-.rehab-slider__trees-label {
-  font-size: var(--font-size-sm);
-  letter-spacing: var(--letter-spacing-wide);
-  text-transform: uppercase;
-  color: var(--color-olive-light);
-  margin-top: var(--space-sm);
-}
-
-/* Tree icons row */
-.rehab-slider__tree-icons {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-xs);
-  justify-content: center;
-  margin-top: var(--space-lg);
-  min-height: 40px;
-  transition: all var(--duration-normal);
-}
-
-.tree-icon {
-  font-size: 1.4rem;
-  opacity: 0;
-  transform: scale(0.3) translateY(8px);
-  transition: opacity 0.3s var(--ease-out-expo),
-              transform 0.3s var(--ease-out-expo);
-  display: inline-block;
-}
-
-.tree-icon.is-active {
-  opacity: 1;
-  transform: scale(1) translateY(0);
-}
-
-/* ── Nav / Progress dots (optional) ─────────────────────── */
+/* ── Nav / Progress dots ─────────────────────────────────── */
 .site-nav {
   position: fixed;
   right: var(--space-lg);
@@ -506,6 +374,18 @@
   border-color: var(--color-gold);
   box-shadow: 0 0 20px var(--glow-gold);
   transform: translateY(-2px);
+}
+
+/* Dark variant for light backgrounds */
+.social-link--dark {
+  color: var(--color-text-light);
+  border-color: rgba(30, 20, 10, 0.15);
+}
+
+.social-link--dark:hover {
+  color: var(--color-copper);
+  border-color: var(--color-copper);
+  box-shadow: 0 0 16px var(--glow-copper);
 }
 
 .social-link--whatsapp:hover {

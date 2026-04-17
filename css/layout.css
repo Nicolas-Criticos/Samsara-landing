@@ -256,23 +256,22 @@
   transform: translateY(0);
 }
 
-/* ── MISSION SECTION ─────────────────────────────────────── */
-.mission {
+/* ── Light section variant (inverted from hero) ─────────── */
+.section--light {
   background-color: var(--color-cream);
-  text-align: center;
 }
 
-.mission__cost-note {
-  font-size: var(--font-size-sm);
-  letter-spacing: var(--letter-spacing-wide);
-  text-transform: uppercase;
-  color: var(--color-copper);
-  margin-bottom: var(--space-3xl);
+.section__eyebrow--light {
+  color: var(--color-copper-light);
+}
+
+.section__title--dark {
+  color: var(--color-text-dark);
 }
 
 /* ── PRODUCTS SECTION ────────────────────────────────────── */
 .products {
-  background-color: var(--color-linen);
+  background-color: var(--color-cream);
 }
 
 .products__grid {
@@ -301,12 +300,16 @@
   text-align: center;
 }
 
+.footer--light {
+  background-color: var(--color-linen);
+  border-top: 1px solid var(--color-cream-dark);
+}
+
 .footer__logo {
   width: 80px;
   height: auto;
   margin: 0 auto var(--space-xl);
   opacity: 0.85;
-  filter: brightness(1.1);
 }
 
 .footer__tagline {
@@ -317,6 +320,11 @@
   letter-spacing: var(--letter-spacing-wide);
   margin-bottom: var(--space-2xl);
   opacity: 0.8;
+}
+
+.footer__tagline--dark {
+  color: var(--color-text-mid);
+  opacity: 0.6;
 }
 
 .footer__links {
@@ -333,6 +341,10 @@
   letter-spacing: var(--letter-spacing-wide);
   color: rgba(247, 240, 230, 0.3);
   text-transform: uppercase;
+}
+
+.footer__copyright--dark {
+  color: rgba(30, 20, 10, 0.25);
 }
 
 /* ── Responsive container ────────────────────────────────── */

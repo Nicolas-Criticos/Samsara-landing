@@ -105,14 +105,14 @@
           Neglected for years, they still held life in their roots.
           <br><br>
           We made a vow: to bring them back, one by one, by hand.
-          No shortcuts. No shortcuts. Only patience, soil, sun, and intention.
+          No shortcuts. Only patience, soil, sun, and intention.
           <br><br>
           This oil is the fruit of that work. Every bottle carries the story
           of a tree returned to the earth.
         </p>
 
         <!-- TODO: Link to About page or external project page when ready -->
-        <a href="#mission" class="btn btn--secondary">
+        <a href="#" class="btn btn--secondary">
           Learn More About The Project
         </a>
 
@@ -123,91 +123,14 @@
 
 
   <!-- ═══════════════════════════════════════════════════════
-       SECTION 3 — THE MISSION: Tree Rehabilitation Slider
+       SECTION 3 — PRODUCTS
        ═══════════════════════════════════════════════════════ -->
-  <section class="mission section" id="mission" data-section="mission" aria-label="Our Mission">
-    <div class="container container--narrow">
-
-      <header class="section__header reveal">
-        <span class="section__eyebrow">Your Impact</span>
-        <h2 class="section__title">Every purchase<br>plants roots</h2>
-        <div class="section__divider draw-line"></div>
-        <p class="section__subtitle">
-          It costs <strong>R450</strong> to rehabilitate one olive tree —
-          clearing, pruning, feeding, and bringing it back to full life.
-          Your purchase goes directly to this work.
-        </p>
-      </header>
-
-      <!-- Slider widget -->
-      <div class="rehab-slider reveal reveal--delay-2">
-
-        <!-- Amount display -->
-        <div class="rehab-slider__display">
-          <div
-            id="slider-amount-display"
-            class="rehab-slider__amount"
-            aria-live="polite"
-            aria-label="Purchase amount"
-          >R&nbsp;0</div>
-          <div class="rehab-slider__label">Your purchase amount</div>
-        </div>
-
-        <!-- Range input -->
-        <div class="rehab-slider__track-wrap">
-          <label for="rehab-range" class="u-visually-hidden">
-            Select a purchase amount
-          </label>
-          <input
-            type="range"
-            id="rehab-range"
-            class="rehab-slider__input"
-            min="0"
-            max="10000"
-            step="50"
-            value="0"
-            aria-valuemin="0"
-            aria-valuemax="10000"
-          />
-        </div>
-
-        <!-- Result panel -->
-        <div class="rehab-slider__result">
-          <p id="slider-result-text" class="rehab-slider__result-text">
-            Move the slider to see your impact 🌱
-          </p>
-          <div
-            id="slider-tree-count"
-            class="rehab-slider__tree-count"
-            data-count="0"
-            aria-live="polite"
-            aria-label="Trees rehabilitated"
-          >0</div>
-          <div class="rehab-slider__trees-label">trees rehabilitated 🌿</div>
-
-          <!-- Tree icons -->
-          <div
-            id="slider-tree-icons"
-            class="rehab-slider__tree-icons"
-            aria-hidden="true"
-          ></div>
-        </div>
-
-      </div><!-- /rehab-slider -->
-
-    </div>
-  </section><!-- /mission -->
-
-
-  <!-- ═══════════════════════════════════════════════════════
-       SECTION 4 — PRODUCTS
-       ═══════════════════════════════════════════════════════ -->
-  <section class="products section" id="products" data-section="products" aria-label="Products">
+  <section class="products section section--light" id="products" data-section="products" aria-label="Products">
     <div class="container">
 
       <header class="section__header reveal">
-        <span class="section__eyebrow">The Collection</span>
-        <h2 class="section__title">From our grove<br>to your kitchen</h2>
+        <span class="section__eyebrow section__eyebrow--light">The Collection</span>
+        <h2 class="section__title section__title--dark">From our grove<br>to your kitchen</h2>
         <div class="section__divider draw-line"></div>
         <p class="section__subtitle">
           Each product is made in small batches from our hand-rehabilitated
@@ -222,10 +145,10 @@
           class="product-card"
           data-product-id="5l-evoo"
           data-product-name="5L Extra Virgin Olive Oil"
+          data-trees="3.96"
           aria-label="5L Extra Virgin Organic Olive Oil"
         >
           <div class="product-card__image-wrap">
-            <!-- Using the options.jpeg for the 5L product shot -->
             <img
               src="assets/images/options.jpeg"
               alt="Samsara 5L Extra Virgin Olive Oil — tin"
@@ -240,6 +163,10 @@
             <p class="product-card__description">
               Cold-pressed from hand-rehabilitated Karoo olive trees.
               Single-origin. No blending. Unfiltered liquid gold from the Swartberg.
+            </p>
+
+            <p class="product-card__trees-note">
+              This purchase helps rehabilitate 4 trees 🌿
             </p>
 
             <div class="product-card__footer">
@@ -262,6 +189,7 @@
                 data-product-name="5L Extra Virgin Olive Oil"
                 data-price="1780"
                 data-variant="tin"
+                data-trees="4"
                 aria-label="Add 5L Extra Virgin Olive Oil to cart"
               >
                 Add to Cart
@@ -275,6 +203,7 @@
           class="product-card"
           data-product-id="250ml-infused"
           data-product-name="250ml Infused Olive Oil"
+          data-trees="0.53"
           aria-label="250ml Infused Extra Virgin Olive Oil"
         >
           <div class="product-card__image-wrap">
@@ -295,6 +224,10 @@
               Small-batch cold-pressed oil infused with organic herbs grown
               right here on the farm. A finishing oil for those who love flavour
               with intention.
+            </p>
+
+            <p class="product-card__trees-note">
+              This purchase contributes towards half a tree 🌿
             </p>
 
             <div class="product-card__footer">
@@ -327,6 +260,7 @@
                 data-product-name="250ml Infused Olive Oil"
                 data-price="240"
                 data-variant="rosemary"
+                data-trees="0.5"
                 aria-label="Add 250ml Infused Olive Oil to cart"
               >
                 Add to Cart
@@ -340,6 +274,7 @@
           class="product-card"
           data-product-id="ritual-shot"
           data-product-name="Ritual Health Shot Box"
+          data-trees="1.03"
           aria-label="Ritual Health Shot — Box of 14"
         >
           <div class="product-card__image-wrap">
@@ -362,6 +297,10 @@
               fourteen days of clarity.
             </p>
 
+            <p class="product-card__trees-note">
+              This purchase helps rehabilitate 1 tree 🌿
+            </p>
+
             <div class="product-card__footer">
               <div>
                 <span class="product-card__price">
@@ -377,6 +316,7 @@
                 data-product-name="Ritual Health Shot Box"
                 data-price="462"
                 data-variant="box-14"
+                data-trees="1"
                 aria-label="Add Ritual Health Shot box to cart"
               >
                 Add to Cart
@@ -391,9 +331,9 @@
 
 
   <!-- ═══════════════════════════════════════════════════════
-       SECTION 5 — FOOTER
+       SECTION 4 — FOOTER
        ═══════════════════════════════════════════════════════ -->
-  <footer class="footer" data-section="footer" aria-label="Footer">
+  <footer class="footer footer--light" data-section="footer" aria-label="Footer">
 
     <img
       src="assets/images/logo.png"
@@ -404,7 +344,7 @@
       loading="lazy"
     />
 
-    <p class="footer__tagline reveal reveal--delay-1">
+    <p class="footer__tagline footer__tagline--dark reveal reveal--delay-1">
       Every purchase plants roots in the Karoo
     </p>
 
@@ -415,7 +355,7 @@
       <!-- Instagram -->
       <a
         href="https://www.instagram.com/niccris_samsara"
-        class="social-link"
+        class="social-link social-link--dark"
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Follow us on Instagram @niccris_samsara"
@@ -431,7 +371,7 @@
       <!-- WhatsApp -->
       <a
         href="https://wa.me/27828244145?text=Hi%20Samsara%2C%20I%27d%20like%20to%20order%20some%20olive%20oil%20%F0%9F%AB%92"
-        class="social-link social-link--whatsapp"
+        class="social-link social-link--dark social-link--whatsapp"
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Contact us on WhatsApp"
@@ -444,7 +384,7 @@
 
     </nav>
 
-    <p class="footer__copyright reveal reveal--delay-3">
+    <p class="footer__copyright footer__copyright--dark reveal reveal--delay-3">
       &copy; 2026 Samsara · VrischGewagt Boutique Olive Farm · Swartberg Karoo, South Africa
     </p>
 
@@ -465,13 +405,11 @@
   <nav class="site-nav" aria-label="Page sections">
     <button class="site-nav__dot" title="Hero" aria-label="Go to top"></button>
     <button class="site-nav__dot" title="Story" aria-label="Go to story section"></button>
-    <button class="site-nav__dot" title="Mission" aria-label="Go to mission section"></button>
     <button class="site-nav__dot" title="Products" aria-label="Go to products"></button>
   </nav>
 
 
   <!-- ── Scripts ─────────────────────────────────────────── -->
-  <!-- Loaded as regular scripts so file:// opening works (no CORS issues) -->
   <script src="js/animations.js"></script>
   <script src="js/slider.js"></script>
   <script src="js/cart.js"></script>
