@@ -1,0 +1,357 @@
+/* ============================================================
+   LAYOUT.CSS — Grid, Sections, Containers
+   Samsara Olive Oil Landing Page
+   ============================================================ */
+
+/* ── Site wrapper ────────────────────────────────────────── */
+.site {
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* ── Container ───────────────────────────────────────────── */
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--space-xl);
+}
+
+.container--narrow {
+  max-width: var(--max-width-narrow);
+}
+
+/* ── Section base ────────────────────────────────────────── */
+.section {
+  position: relative;
+  padding: var(--section-padding);
+}
+
+.section__header {
+  text-align: center;
+  margin-bottom: var(--space-3xl);
+}
+
+.section__eyebrow {
+  display: block;
+  font-family: var(--font-body);
+  font-size: var(--font-size-xs);
+  letter-spacing: var(--letter-spacing-widest);
+  text-transform: uppercase;
+  color: var(--color-copper-light);
+  margin-bottom: var(--space-md);
+}
+
+.section__title {
+  font-family: var(--font-heading);
+  font-weight: 300;
+  color: var(--color-text-dark);
+  margin-bottom: var(--space-lg);
+}
+
+.section__subtitle {
+  font-size: var(--font-size-md);
+  color: var(--color-text-light);
+  max-width: 60ch;
+  margin: 0 auto;
+  line-height: var(--line-height-loose);
+}
+
+/* Section divider — thin gold line */
+.section__divider {
+  width: 60px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
+  margin: var(--space-lg) auto;
+}
+
+/* ── HERO SECTION ────────────────────────────────────────── */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-earth-dark);
+  overflow: hidden;
+}
+
+.hero__canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.hero__content {
+  position: relative;
+  z-index: var(--z-content);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-xl);
+  padding: var(--space-xl);
+}
+
+.hero__logo-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero__logo {
+  width: clamp(160px, 28vw, 320px);
+  height: auto;
+  position: relative;
+  z-index: 2;
+}
+
+.hero__tagline {
+  font-family: var(--font-heading);
+  font-size: clamp(var(--font-size-lg), 3vw, var(--font-size-2xl));
+  font-weight: 300;
+  color: var(--color-cream);
+  letter-spacing: var(--letter-spacing-wide);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity var(--duration-slow) var(--ease-out-expo),
+              transform var(--duration-slow) var(--ease-out-expo);
+}
+
+.hero__tagline.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hero__sub {
+  font-size: var(--font-size-sm);
+  letter-spacing: var(--letter-spacing-wider);
+  text-transform: uppercase;
+  color: var(--color-gold);
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity var(--duration-slow) 300ms var(--ease-out-expo),
+              transform var(--duration-slow) 300ms var(--ease-out-expo);
+}
+
+.hero__sub.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hero__scroll-hint {
+  position: absolute;
+  bottom: var(--space-xl);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+  opacity: 0.5;
+  z-index: var(--z-content);
+}
+
+.hero__scroll-line {
+  width: 1px;
+  height: 48px;
+  background: linear-gradient(to bottom, var(--color-gold), transparent);
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.3; transform: scaleY(0.8); }
+  50%       { opacity: 1;   transform: scaleY(1); }
+}
+
+/* ── STORY SECTION ───────────────────────────────────────── */
+.story {
+  position: relative;
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background-color: var(--color-earth-dark);
+}
+
+.story__bg {
+  position: absolute;
+  inset: 0;
+  background-image: url('../assets/images/backdrop.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed; /* parallax on desktop */
+  opacity: 0;
+  transition: opacity 1.2s var(--ease-out-expo);
+  transform: scale(1.05);
+  transition: opacity 1.4s var(--ease-out-expo), transform 1.4s var(--ease-out-expo);
+}
+
+.story__bg.is-visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.story__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(26, 18, 8, 0.82) 0%,
+    rgba(26, 18, 8, 0.55) 50%,
+    rgba(26, 18, 8, 0.72) 100%
+  );
+}
+
+.story__content {
+  position: relative;
+  z-index: var(--z-content);
+  max-width: 680px;
+  padding: var(--space-3xl) var(--space-xl);
+}
+
+.story__eyebrow {
+  display: block;
+  font-size: var(--font-size-xs);
+  letter-spacing: var(--letter-spacing-widest);
+  text-transform: uppercase;
+  color: var(--color-gold);
+  margin-bottom: var(--space-lg);
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity var(--duration-slow) var(--ease-out-expo),
+              transform var(--duration-slow) var(--ease-out-expo);
+}
+
+.story__title {
+  font-size: clamp(var(--font-size-2xl), 5vw, var(--font-size-3xl));
+  color: var(--color-cream);
+  font-weight: 300;
+  margin-bottom: var(--space-lg);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity var(--duration-slow) 150ms var(--ease-out-expo),
+              transform var(--duration-slow) 150ms var(--ease-out-expo);
+}
+
+.story__body {
+  font-size: var(--font-size-md);
+  color: rgba(247, 240, 230, 0.85);
+  line-height: var(--line-height-loose);
+  margin-bottom: var(--space-2xl);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity var(--duration-slow) 300ms var(--ease-out-expo),
+              transform var(--duration-slow) 300ms var(--ease-out-expo);
+}
+
+.story__eyebrow.is-visible,
+.story__title.is-visible,
+.story__body.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── MISSION SECTION ─────────────────────────────────────── */
+.mission {
+  background-color: var(--color-cream);
+  text-align: center;
+}
+
+.mission__cost-note {
+  font-size: var(--font-size-sm);
+  letter-spacing: var(--letter-spacing-wide);
+  text-transform: uppercase;
+  color: var(--color-copper);
+  margin-bottom: var(--space-3xl);
+}
+
+/* ── PRODUCTS SECTION ────────────────────────────────────── */
+.products {
+  background-color: var(--color-linen);
+}
+
+.products__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-xl);
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .products__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .products__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── FOOTER ──────────────────────────────────────────────── */
+.footer {
+  background-color: var(--color-earth-dark);
+  padding: var(--space-3xl) var(--space-xl);
+  text-align: center;
+}
+
+.footer__logo {
+  width: 80px;
+  height: auto;
+  margin: 0 auto var(--space-xl);
+  opacity: 0.85;
+  filter: brightness(1.1);
+}
+
+.footer__tagline {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-lg);
+  color: var(--color-cream);
+  font-weight: 300;
+  letter-spacing: var(--letter-spacing-wide);
+  margin-bottom: var(--space-2xl);
+  opacity: 0.8;
+}
+
+.footer__links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-lg);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-2xl);
+}
+
+.footer__copyright {
+  font-size: var(--font-size-xs);
+  letter-spacing: var(--letter-spacing-wide);
+  color: rgba(247, 240, 230, 0.3);
+  text-transform: uppercase;
+}
+
+/* ── Responsive container ────────────────────────────────── */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 var(--space-lg);
+  }
+
+  .story__bg {
+    background-attachment: scroll; /* no fixed on mobile */
+  }
+
+  .story__content {
+    padding: var(--space-2xl) var(--space-lg);
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 var(--space-md);
+  }
+}

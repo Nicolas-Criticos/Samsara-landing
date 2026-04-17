@@ -1,0 +1,197 @@
+/* ============================================================
+   BASE.CSS — Reset, Custom Properties, Typography
+   Samsara Olive Oil Landing Page
+   ============================================================ */
+
+/* ── Google Fonts loaded via index.html ─────────────────── */
+
+/* ── CSS Custom Properties ──────────────────────────────── */
+:root {
+  /* Colors — earth palette drawn from the Samsara logo */
+  --color-earth-dark:     #1a1208;   /* deep rich soil */
+  --color-earth-mid:      #2e1f0e;   /* warm dark brown */
+  --color-earth-warm:     #4a2c0a;   /* terracotta brown */
+  --color-copper:         #8b4513;   /* saddle brown / copper */
+  --color-copper-light:   #b5651d;   /* lighter copper */
+  --color-gold:           #c9a040;   /* warm harvest gold */
+  --color-gold-light:     #e8c96a;   /* pale gold */
+  --color-olive:          #6b7c3a;   /* muted olive green */
+  --color-olive-light:    #8fa44e;   /* fresh olive */
+  --color-cream:          #f7f0e6;   /* warm cream background */
+  --color-cream-dark:     #ede3d4;   /* slightly deeper cream */
+  --color-linen:          #faf4eb;   /* near-white linen */
+  --color-text-dark:      #1e140a;   /* near-black text */
+  --color-text-mid:       #4a3728;   /* mid brown text */
+  --color-text-light:     #8a6e52;   /* light body text */
+  --color-white:          #ffffff;
+
+  /* Glow / ambient colors */
+  --glow-gold:            rgba(201, 160, 64, 0.35);
+  --glow-copper:          rgba(139, 69, 19, 0.3);
+  --glow-warm:            rgba(180, 120, 40, 0.2);
+
+  /* Typography */
+  --font-heading:         'Cormorant Garamond', 'Georgia', serif;
+  --font-body:            'Lato', 'Helvetica Neue', sans-serif;
+
+  --font-size-xs:         0.75rem;    /* 12px */
+  --font-size-sm:         0.875rem;   /* 14px */
+  --font-size-base:       1rem;       /* 16px */
+  --font-size-md:         1.125rem;   /* 18px */
+  --font-size-lg:         1.5rem;     /* 24px */
+  --font-size-xl:         2rem;       /* 32px */
+  --font-size-2xl:        2.75rem;    /* 44px */
+  --font-size-3xl:        3.5rem;     /* 56px */
+  --font-size-4xl:        5rem;       /* 80px */
+
+  --line-height-tight:    1.15;
+  --line-height-normal:   1.6;
+  --line-height-loose:    1.85;
+
+  --letter-spacing-wide:  0.08em;
+  --letter-spacing-wider: 0.18em;
+  --letter-spacing-widest:0.28em;
+
+  /* Spacing */
+  --space-xs:   0.25rem;
+  --space-sm:   0.5rem;
+  --space-md:   1rem;
+  --space-lg:   1.5rem;
+  --space-xl:   2.5rem;
+  --space-2xl:  4rem;
+  --space-3xl:  6rem;
+  --space-4xl:  9rem;
+
+  /* Border radius */
+  --radius-sm:  4px;
+  --radius-md:  8px;
+  --radius-lg:  16px;
+  --radius-pill:9999px;
+
+  /* Timing — all animations ref these */
+  --duration-fast:    200ms;
+  --duration-normal:  400ms;
+  --duration-slow:    700ms;
+  --duration-breath:  4000ms;
+  --duration-drift:   1200ms;
+
+  --ease-out-expo:    cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-sine: cubic-bezier(0.37, 0, 0.63, 1);
+  --ease-breath:      cubic-bezier(0.45, 0.05, 0.55, 0.95);
+
+  /* Layout */
+  --max-width:       1200px;
+  --max-width-narrow: 720px;
+  --section-padding: var(--space-3xl) var(--space-xl);
+
+  /* Z-index layers */
+  --z-base:       1;
+  --z-content:    10;
+  --z-overlay:    100;
+  --z-modal:      200;
+  --z-toast:      300;
+}
+
+/* ── Reset ───────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-normal);
+  color: var(--color-text-dark);
+  background-color: var(--color-cream);
+  overflow-x: hidden;
+}
+
+img, svg {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+button {
+  cursor: pointer;
+  font-family: inherit;
+  border: none;
+  background: none;
+}
+
+input, select, textarea {
+  font-family: inherit;
+}
+
+/* ── Typography Scale ────────────────────────────────────── */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  line-height: var(--line-height-tight);
+  color: var(--color-text-dark);
+}
+
+h1 { font-size: var(--font-size-4xl); }
+h2 { font-size: var(--font-size-3xl); }
+h3 { font-size: var(--font-size-2xl); }
+h4 { font-size: var(--font-size-xl); }
+h5 { font-size: var(--font-size-lg); }
+h6 { font-size: var(--font-size-md); }
+
+p {
+  color: var(--color-text-mid);
+  line-height: var(--line-height-loose);
+}
+
+/* ── Utility classes ─────────────────────────────────────── */
+.u-text-center  { text-align: center; }
+.u-text-gold    { color: var(--color-gold); }
+.u-text-copper  { color: var(--color-copper-light); }
+.u-text-cream   { color: var(--color-cream); }
+.u-serif        { font-family: var(--font-heading); }
+
+.u-visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* ── Responsive type ─────────────────────────────────────── */
+@media (max-width: 768px) {
+  h1 { font-size: var(--font-size-3xl); }
+  h2 { font-size: var(--font-size-2xl); }
+  h3 { font-size: var(--font-size-xl); }
+
+  :root {
+    --section-padding: var(--space-2xl) var(--space-lg);
+  }
+}
+
+@media (max-width: 480px) {
+  h1 { font-size: var(--font-size-2xl); }
+  h2 { font-size: var(--font-size-xl); }
+
+  :root {
+    --section-padding: var(--space-xl) var(--space-md);
+  }
+}

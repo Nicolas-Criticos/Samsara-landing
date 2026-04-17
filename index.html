@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Samsara Olive Oil — Cold-pressed extra virgin olive oil from hand-rehabilitated Karoo olive trees. Rooted in the Swartberg. Grown with purpose." />
+  <meta name="theme-color" content="#1a1208" />
+
+  <!-- Open Graph -->
+  <meta property="og:title"       content="Samsara Olive Oil" />
+  <meta property="og:description" content="Rooted in the Karoo. Grown with purpose." />
+  <meta property="og:image"       content="assets/images/backdrop.jpg" />
+  <meta property="og:type"        content="website" />
+
+  <title>Samsara Olive Oil — Rooted in the Karoo</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+
+  <!-- Stylesheets (order matters) -->
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+</head>
+
+<body class="site">
+
+  <!-- ═══════════════════════════════════════════════════════
+       SECTION 1 — HERO: The Heartbeat
+       ═══════════════════════════════════════════════════════ -->
+  <section class="hero" data-section="hero" aria-label="Hero">
+
+    <!-- Particle canvas — ambient light dots -->
+    <canvas id="hero-canvas" class="hero__canvas" aria-hidden="true"></canvas>
+
+    <!-- CSS fallback ambient glow -->
+    <div class="hero__ambient-fallback" aria-hidden="true"></div>
+
+    <!-- Breathing pulse rings -->
+    <div class="pulse-ring pulse-ring--1" aria-hidden="true"></div>
+    <div class="pulse-ring pulse-ring--2" aria-hidden="true"></div>
+    <div class="pulse-ring pulse-ring--3" aria-hidden="true"></div>
+
+    <!-- Main content -->
+    <div class="hero__content">
+      <div class="hero__logo-wrap">
+        <img
+          src="assets/images/logo.png"
+          alt="Samsara Olive Oil"
+          class="hero__logo hero__logo--breathing"
+          width="280"
+          height="280"
+          loading="eager"
+        />
+      </div>
+
+      <p class="hero__tagline">
+        Rooted in the Karoo.<br>Grown with Purpose.
+      </p>
+
+      <span class="hero__sub">
+        Extra Virgin · Organic · Cold Pressed
+      </span>
+
+      <a href="#products" class="btn btn--primary reveal reveal--delay-5">
+        Shop Now
+      </a>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="hero__scroll-hint" aria-hidden="true">
+      <div class="hero__scroll-line"></div>
+    </div>
+
+  </section><!-- /hero -->
+
+
+  <!-- ═══════════════════════════════════════════════════════
+       SECTION 2 — THE STORY: Sunset Waft-in
+       ═══════════════════════════════════════════════════════ -->
+  <section class="story section" id="story" data-section="story" aria-label="Our Story">
+
+    <!-- Background image with parallax + scroll fade -->
+    <div class="story__bg" aria-hidden="true"></div>
+    <!-- Darkening overlay -->
+    <div class="story__overlay" aria-hidden="true"></div>
+
+    <div class="container">
+      <div class="story__content">
+
+        <span class="story__eyebrow">The Story</span>
+
+        <h2 class="story__title">
+          16,000 trees.<br>
+          One family.<br>
+          <em>One purpose.</em>
+        </h2>
+
+        <p class="story__body">
+          Nestled in the ancient Swartberg Karoo — where the mountains meet
+          the desert sky — we found 16,000 olive trees, long forgotten.
+          Neglected for years, they still held life in their roots.
+          <br><br>
+          We made a vow: to bring them back, one by one, by hand.
+          No shortcuts. No shortcuts. Only patience, soil, sun, and intention.
+          <br><br>
+          This oil is the fruit of that work. Every bottle carries the story
+          of a tree returned to the earth.
+        </p>
+
+        <!-- TODO: Link to About page or external project page when ready -->
+        <a href="#mission" class="btn btn--secondary">
+          Learn More About The Project
+        </a>
+
+      </div>
+    </div>
+
+  </section><!-- /story -->
+
+
+  <!-- ═══════════════════════════════════════════════════════
+       SECTION 3 — THE MISSION: Tree Rehabilitation Slider
+       ═══════════════════════════════════════════════════════ -->
+  <section class="mission section" id="mission" data-section="mission" aria-label="Our Mission">
+    <div class="container container--narrow">
+
+      <header class="section__header reveal">
+        <span class="section__eyebrow">Your Impact</span>
+        <h2 class="section__title">Every purchase<br>plants roots</h2>
+        <div class="section__divider draw-line"></div>
+        <p class="section__subtitle">
+          It costs <strong>R450</strong> to rehabilitate one olive tree —
+          clearing, pruning, feeding, and bringing it back to full life.
+          Your purchase goes directly to this work.
+        </p>
+      </header>
+
+      <!-- Slider widget -->
+      <div class="rehab-slider reveal reveal--delay-2">
+
+        <!-- Amount display -->
+        <div class="rehab-slider__display">
+          <div
+            id="slider-amount-display"
+            class="rehab-slider__amount"
+            aria-live="polite"
+            aria-label="Purchase amount"
+          >R&nbsp;0</div>
+          <div class="rehab-slider__label">Your purchase amount</div>
+        </div>
+
+        <!-- Range input -->
+        <div class="rehab-slider__track-wrap">
+          <label for="rehab-range" class="u-visually-hidden">
+            Select a purchase amount
+          </label>
+          <input
+            type="range"
+            id="rehab-range"
+            class="rehab-slider__input"
+            min="0"
+            max="10000"
+            step="50"
+            value="0"
+            aria-valuemin="0"
+            aria-valuemax="10000"
+          />
+        </div>
+
+        <!-- Result panel -->
+        <div class="rehab-slider__result">
+          <p id="slider-result-text" class="rehab-slider__result-text">
+            Move the slider to see your impact 🌱
+          </p>
+          <div
+            id="slider-tree-count"
+            class="rehab-slider__tree-count"
+            data-count="0"
+            aria-live="polite"
+            aria-label="Trees rehabilitated"
+          >0</div>
+          <div class="rehab-slider__trees-label">trees rehabilitated 🌿</div>
+
+          <!-- Tree icons -->
+          <div
+            id="slider-tree-icons"
+            class="rehab-slider__tree-icons"
+            aria-hidden="true"
+          ></div>
+        </div>
+
+      </div><!-- /rehab-slider -->
+
+    </div>
+  </section><!-- /mission -->
+
+
+  <!-- ═══════════════════════════════════════════════════════
+       SECTION 4 — PRODUCTS
+       ═══════════════════════════════════════════════════════ -->
+  <section class="products section" id="products" data-section="products" aria-label="Products">
+    <div class="container">
+
+      <header class="section__header reveal">
+        <span class="section__eyebrow">The Collection</span>
+        <h2 class="section__title">From our grove<br>to your kitchen</h2>
+        <div class="section__divider draw-line"></div>
+        <p class="section__subtitle">
+          Each product is made in small batches from our hand-rehabilitated
+          Karoo olive trees. No additives. No compromise.
+        </p>
+      </header>
+
+      <div class="products__grid">
+
+        <!-- ─── PRODUCT A: 5L Extra Virgin Olive Oil ─── -->
+        <article
+          class="product-card"
+          data-product-id="5l-evoo"
+          data-product-name="5L Extra Virgin Olive Oil"
+          aria-label="5L Extra Virgin Organic Olive Oil"
+        >
+          <div class="product-card__image-wrap">
+            <!-- Using the options.jpeg for the 5L product shot -->
+            <img
+              src="assets/images/options.jpeg"
+              alt="Samsara 5L Extra Virgin Olive Oil — tin and plastic options"
+              class="product-card__image"
+              loading="lazy"
+            />
+          </div>
+
+          <div class="product-card__body">
+            <span class="product-card__badge">5 Litre</span>
+            <h3 class="product-card__name">Extra Virgin<br>Organic Olive Oil</h3>
+            <p class="product-card__description">
+              Cold-pressed from hand-rehabilitated Karoo olive trees.
+              Single-origin. No blending. Unfiltered liquid gold from the Swartberg.
+            </p>
+
+            <div class="product-card__footer">
+              <!-- Variant selector -->
+              <div class="product-card__variants" aria-label="Choose container">
+                <button
+                  class="variant-btn is-active"
+                  data-variant="tin"
+                  data-price="1780"
+                  aria-pressed="true"
+                >Tin</button>
+                <button
+                  class="variant-btn"
+                  data-variant="plastic"
+                  data-price="1780"
+                  aria-pressed="false"
+                >Plastic</button>
+              </div>
+
+              <div>
+                <span class="product-card__price">
+                  R&nbsp;<span class="product-card__price-value">1,780</span>
+                </span>
+                <span class="product-card__price-note">per 5L</span>
+              </div>
+
+              <!-- TODO: Celium checkout integration — replace onclick with celium.cart.add() -->
+              <button
+                class="btn btn--cart"
+                data-product-id="5l-evoo"
+                data-product-name="5L Extra Virgin Olive Oil"
+                data-price="1780"
+                data-variant="tin"
+                aria-label="Add 5L Extra Virgin Olive Oil to cart"
+              >
+                Add to Cart
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- ─── PRODUCT B: 250ml Infused Olive Oil ─── -->
+        <article
+          class="product-card"
+          data-product-id="250ml-infused"
+          data-product-name="250ml Infused Olive Oil"
+          aria-label="250ml Infused Extra Virgin Olive Oil"
+        >
+          <div class="product-card__image-wrap">
+            <!-- Placeholder — professional shots to be added -->
+            <div class="product-card__image-placeholder">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+              <span>Photo coming soon</span>
+            </div>
+          </div>
+
+          <div class="product-card__body">
+            <span class="product-card__badge">250 ml</span>
+            <h3 class="product-card__name">Infused Extra Virgin<br>Olive Oil</h3>
+            <p class="product-card__description">
+              Small-batch cold-pressed oil infused with organic herbs grown
+              right here on the farm. A finishing oil for those who love flavour
+              with intention.
+            </p>
+
+            <div class="product-card__footer">
+              <div class="product-card__variants" aria-label="Choose flavour">
+                <button
+                  class="variant-btn is-active"
+                  data-variant="rosemary"
+                  data-price="240"
+                  aria-pressed="true"
+                >Rosemary</button>
+                <button
+                  class="variant-btn"
+                  data-variant="oregano"
+                  data-price="240"
+                  aria-pressed="false"
+                >Oregano</button>
+              </div>
+
+              <div>
+                <span class="product-card__price">
+                  R&nbsp;<span class="product-card__price-value">240</span>
+                </span>
+                <span class="product-card__price-note">per 250ml bottle</span>
+              </div>
+
+              <!-- TODO: Celium checkout integration -->
+              <button
+                class="btn btn--cart"
+                data-product-id="250ml-infused"
+                data-product-name="250ml Infused Olive Oil"
+                data-price="240"
+                data-variant="rosemary"
+                aria-label="Add 250ml Infused Olive Oil to cart"
+              >
+                Add to Cart
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- ─── PRODUCT C: Ritual Health Shot ─── -->
+        <article
+          class="product-card"
+          data-product-id="ritual-shot"
+          data-product-name="Ritual Health Shot Box"
+          aria-label="Ritual Health Shot — Box of 14"
+        >
+          <div class="product-card__image-wrap">
+            <!-- Placeholder — professional shots to be added -->
+            <div class="product-card__image-placeholder">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+              <span>Photo coming soon</span>
+            </div>
+          </div>
+
+          <div class="product-card__body">
+            <span class="product-card__badge">Box of 14</span>
+            <h3 class="product-card__name">Ritual<br>Health Shot</h3>
+            <p class="product-card__description">
+              Olive oil, lemon &amp; salt — a daily wellness ritual drawn
+              from the oldest traditions. Start each morning rooted. One shot,
+              fourteen days of clarity.
+            </p>
+
+            <div class="product-card__footer">
+              <div>
+                <span class="product-card__price">
+                  R&nbsp;<span class="product-card__price-value">462</span>
+                </span>
+                <span class="product-card__price-note">box of 14 shots · R33/day</span>
+              </div>
+
+              <!-- TODO: Celium checkout integration -->
+              <button
+                class="btn btn--cart"
+                data-product-id="ritual-shot"
+                data-product-name="Ritual Health Shot Box"
+                data-price="462"
+                data-variant="box-14"
+                aria-label="Add Ritual Health Shot box to cart"
+              >
+                Add to Cart
+              </button>
+            </div>
+          </div>
+        </article>
+
+      </div><!-- /products__grid -->
+    </div>
+  </section><!-- /products -->
+
+
+  <!-- ═══════════════════════════════════════════════════════
+       SECTION 5 — FOOTER
+       ═══════════════════════════════════════════════════════ -->
+  <footer class="footer" data-section="footer" aria-label="Footer">
+
+    <img
+      src="assets/images/logo.png"
+      alt="Samsara Olive Oil"
+      class="footer__logo reveal"
+      width="80"
+      height="80"
+      loading="lazy"
+    />
+
+    <p class="footer__tagline reveal reveal--delay-1">
+      Every purchase plants roots in the Karoo
+    </p>
+
+    <div class="section__divider draw-line" style="max-width:200px;margin:0 auto var(--space-2xl);"></div>
+
+    <nav class="footer__links reveal reveal--delay-2" aria-label="Social links">
+
+      <!-- Instagram -->
+      <a
+        href="https://www.instagram.com/niccris_samsara"
+        class="social-link"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Follow us on Instagram @niccris_samsara"
+      >
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+          <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+        </svg>
+        @niccris_samsara
+      </a>
+
+      <!-- WhatsApp -->
+      <a
+        href="https://wa.me/27828244145?text=Hi%20Samsara%2C%20I%27d%20like%20to%20order%20some%20olive%20oil%20%F0%9F%AB%92"
+        class="social-link social-link--whatsapp"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Contact us on WhatsApp"
+      >
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+        Order on WhatsApp
+      </a>
+
+    </nav>
+
+    <p class="footer__copyright reveal reveal--delay-3">
+      &copy; 2026 Samsara · VrischGewagt Boutique Olive Farm · Swartberg Karoo, South Africa
+    </p>
+
+  </footer><!-- /footer -->
+
+
+  <!-- ═══════════════════════════════════════════════════════
+       Ghost message container (fixed, outside normal flow)
+       ═══════════════════════════════════════════════════════ -->
+  <div
+    id="ghost-messages"
+    class="ghost-message"
+    aria-live="polite"
+    aria-label="Cart notifications"
+  ></div>
+
+  <!-- Site nav dots (fixed right side) -->
+  <nav class="site-nav" aria-label="Page sections">
+    <button class="site-nav__dot" title="Hero" aria-label="Go to top"></button>
+    <button class="site-nav__dot" title="Story" aria-label="Go to story section"></button>
+    <button class="site-nav__dot" title="Mission" aria-label="Go to mission section"></button>
+    <button class="site-nav__dot" title="Products" aria-label="Go to products"></button>
+  </nav>
+
+
+  <!-- ── Scripts (ES modules) ────────────────────────────── -->
+  <script type="module" src="js/app.js"></script>
+
+</body>
+</html>

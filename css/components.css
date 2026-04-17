@@ -1,0 +1,531 @@
+/* ============================================================
+   COMPONENTS.CSS — Buttons, Cards, Slider, Modals, Nav
+   Samsara Olive Oil Landing Page
+   ============================================================ */
+
+/* ── Buttons ─────────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  font-family: var(--font-body);
+  font-size: var(--font-size-sm);
+  letter-spacing: var(--letter-spacing-wider);
+  text-transform: uppercase;
+  border-radius: var(--radius-pill);
+  padding: 0.85em 2.2em;
+  cursor: pointer;
+  transition:
+    background-color var(--duration-normal) var(--ease-out-expo),
+    color            var(--duration-normal) var(--ease-out-expo),
+    box-shadow       var(--duration-normal) var(--ease-out-expo),
+    transform        var(--duration-fast)   ease;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid transparent;
+}
+
+.btn:hover  { transform: translateY(-2px); }
+.btn:active { transform: translateY(0); }
+
+/* Primary — gold on dark */
+.btn--primary {
+  background-color: var(--color-gold);
+  color: var(--color-earth-dark);
+  border-color: var(--color-gold);
+}
+
+.btn--primary:hover {
+  background-color: var(--color-gold-light);
+  box-shadow: 0 0 24px var(--glow-gold), 0 4px 20px rgba(0,0,0,0.3);
+}
+
+/* Secondary — outline */
+.btn--secondary {
+  background-color: transparent;
+  color: var(--color-cream);
+  border-color: rgba(247, 240, 230, 0.45);
+}
+
+.btn--secondary:hover {
+  background-color: rgba(247, 240, 230, 0.08);
+  border-color: var(--color-gold);
+  color: var(--color-gold);
+  box-shadow: 0 0 20px var(--glow-gold);
+}
+
+/* Earth — warm copper tone */
+.btn--earth {
+  background-color: var(--color-copper);
+  color: var(--color-cream);
+  border-color: var(--color-copper);
+}
+
+.btn--earth:hover {
+  background-color: var(--color-copper-light);
+  box-shadow: 0 0 24px var(--glow-copper), 0 4px 20px rgba(0,0,0,0.2);
+}
+
+/* Cart add — smaller, product card use */
+.btn--cart {
+  background-color: var(--color-earth-warm);
+  color: var(--color-cream);
+  border-color: var(--color-earth-warm);
+  font-size: var(--font-size-xs);
+  padding: 0.7em 1.6em;
+  width: 100%;
+}
+
+.btn--cart:hover {
+  background-color: var(--color-copper);
+  box-shadow: 0 0 20px var(--glow-copper);
+}
+
+/* ── Product Card ────────────────────────────────────────── */
+.product-card {
+  background-color: var(--color-white);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: 0 2px 16px rgba(26, 18, 8, 0.08);
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow var(--duration-normal) var(--ease-out-expo),
+              transform  var(--duration-normal) var(--ease-out-expo);
+
+  /* Scroll fade-in initial state */
+  opacity: 0;
+  transform: translateY(32px);
+}
+
+.product-card.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity var(--duration-slow) var(--ease-out-expo),
+              transform var(--duration-slow) var(--ease-out-expo),
+              box-shadow var(--duration-normal) var(--ease-out-expo);
+}
+
+.product-card:hover {
+  box-shadow: 0 8px 40px rgba(139, 69, 19, 0.2), 0 2px 12px rgba(0,0,0,0.1);
+  transform: translateY(-4px);
+}
+
+.product-card.is-visible:hover {
+  transform: translateY(-4px);
+}
+
+/* Image placeholder */
+.product-card__image-wrap {
+  position: relative;
+  width: 100%;
+  padding-top: 70%; /* aspect ratio */
+  overflow: hidden;
+  background-color: var(--color-cream-dark);
+}
+
+.product-card__image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--duration-slow) var(--ease-out-expo);
+}
+
+.product-card:hover .product-card__image {
+  transform: scale(1.04);
+}
+
+/* Placeholder state (no photo yet) */
+.product-card__image-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  border: 1px dashed var(--color-copper-light);
+  color: var(--color-text-light);
+}
+
+.product-card__image-placeholder svg {
+  width: 32px;
+  height: 32px;
+  opacity: 0.4;
+}
+
+.product-card__image-placeholder span {
+  font-size: var(--font-size-xs);
+  letter-spacing: var(--letter-spacing-wide);
+  text-transform: uppercase;
+  opacity: 0.5;
+}
+
+/* Content area */
+.product-card__body {
+  padding: var(--space-lg) var(--space-lg) var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: var(--space-sm);
+}
+
+.product-card__badge {
+  align-self: flex-start;
+  font-size: var(--font-size-xs);
+  letter-spacing: var(--letter-spacing-wide);
+  text-transform: uppercase;
+  color: var(--color-copper-light);
+  background-color: rgba(181, 101, 29, 0.08);
+  padding: 0.2em 0.8em;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(181, 101, 29, 0.2);
+}
+
+.product-card__name {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-xl);
+  font-weight: 400;
+  color: var(--color-text-dark);
+  line-height: 1.2;
+}
+
+.product-card__description {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-light);
+  line-height: var(--line-height-loose);
+  flex: 1;
+}
+
+.product-card__footer {
+  margin-top: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.product-card__price {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-2xl);
+  color: var(--color-copper);
+  font-weight: 600;
+}
+
+.product-card__price-note {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-light);
+  display: block;
+  margin-top: -var(--space-xs);
+}
+
+/* Variant selector */
+.product-card__variants {
+  display: flex;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+}
+
+.variant-btn {
+  font-size: var(--font-size-xs);
+  letter-spacing: var(--letter-spacing-wide);
+  text-transform: uppercase;
+  padding: 0.4em 1em;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--color-cream-dark);
+  background: var(--color-cream);
+  color: var(--color-text-mid);
+  transition: border-color var(--duration-fast),
+              background   var(--duration-fast),
+              color        var(--duration-fast);
+}
+
+.variant-btn.is-active,
+.variant-btn:hover {
+  border-color: var(--color-copper);
+  background-color: rgba(139, 69, 19, 0.07);
+  color: var(--color-copper);
+}
+
+/* ── Ghost Message (tree counter popup) ──────────────────── */
+.ghost-message {
+  position: fixed;
+  bottom: var(--space-xl);
+  right: var(--space-xl);
+  z-index: var(--z-toast);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  pointer-events: none;
+}
+
+.ghost-message__item {
+  background: rgba(26, 18, 8, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(201, 160, 64, 0.25);
+  border-radius: var(--radius-lg);
+  padding: var(--space-md) var(--space-lg);
+  color: var(--color-cream);
+  font-size: var(--font-size-sm);
+  line-height: 1.4;
+  max-width: 280px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+
+  /* animation */
+  opacity: 0;
+  transform: translateY(16px);
+  animation: ghostIn 0.4s var(--ease-out-expo) forwards,
+             ghostOut 0.5s var(--ease-out-expo) 2.5s forwards;
+}
+
+@keyframes ghostIn {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes ghostOut {
+  to { opacity: 0; transform: translateY(-12px); }
+}
+
+.ghost-message__emoji {
+  font-size: var(--font-size-lg);
+  display: block;
+  margin-bottom: var(--space-xs);
+}
+
+.ghost-message__text {
+  color: var(--color-cream);
+  font-size: var(--font-size-sm);
+}
+
+.ghost-message__count {
+  color: var(--color-gold);
+  font-family: var(--font-heading);
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+}
+
+/* ── Tree Rehabilitation Slider ──────────────────────────── */
+.rehab-slider {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: var(--space-2xl) 0;
+}
+
+.rehab-slider__display {
+  text-align: center;
+  margin-bottom: var(--space-2xl);
+}
+
+.rehab-slider__amount {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-4xl);
+  color: var(--color-text-dark);
+  font-weight: 300;
+  line-height: 1;
+  transition: color var(--duration-normal);
+}
+
+.rehab-slider__label {
+  font-size: var(--font-size-xs);
+  letter-spacing: var(--letter-spacing-widest);
+  text-transform: uppercase;
+  color: var(--color-text-light);
+  margin-top: var(--space-sm);
+}
+
+/* The range input */
+.rehab-slider__track-wrap {
+  position: relative;
+  padding: var(--space-lg) 0;
+}
+
+.rehab-slider__input {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(
+    to right,
+    var(--color-gold) 0%,
+    var(--color-gold) var(--slider-progress, 0%),
+    rgba(74, 44, 10, 0.2) var(--slider-progress, 0%),
+    rgba(74, 44, 10, 0.2) 100%
+  );
+  border-radius: var(--radius-pill);
+  outline: none;
+  cursor: pointer;
+}
+
+/* Thumb */
+.rehab-slider__input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--color-gold);
+  box-shadow: 0 0 12px var(--glow-gold), 0 0 0 3px rgba(201, 160, 64, 0.2);
+  transition: box-shadow var(--duration-fast), transform var(--duration-fast);
+}
+
+.rehab-slider__input::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--color-gold);
+  border: none;
+  box-shadow: 0 0 12px var(--glow-gold);
+  transition: box-shadow var(--duration-fast);
+}
+
+.rehab-slider__input:hover::-webkit-slider-thumb,
+.rehab-slider__input:focus::-webkit-slider-thumb {
+  box-shadow: 0 0 24px var(--glow-gold), 0 0 0 6px rgba(201, 160, 64, 0.15);
+  transform: scale(1.2);
+}
+
+/* Tree counter result */
+.rehab-slider__result {
+  margin-top: var(--space-2xl);
+  padding: var(--space-xl);
+  background: var(--color-cream-dark);
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(201, 160, 64, 0.2);
+  text-align: center;
+  transition: box-shadow var(--duration-normal);
+}
+
+.rehab-slider__result:has(.rehab-slider__tree-count:not([data-count="0"])) {
+  box-shadow: 0 0 32px var(--glow-warm);
+}
+
+.rehab-slider__result-text {
+  font-size: var(--font-size-md);
+  color: var(--color-text-mid);
+  margin-bottom: var(--space-md);
+  line-height: var(--line-height-loose);
+}
+
+.rehab-slider__tree-count {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-4xl);
+  color: var(--color-olive);
+  font-weight: 600;
+  line-height: 1;
+  transition: color var(--duration-normal);
+}
+
+.rehab-slider__trees-label {
+  font-size: var(--font-size-sm);
+  letter-spacing: var(--letter-spacing-wide);
+  text-transform: uppercase;
+  color: var(--color-olive-light);
+  margin-top: var(--space-sm);
+}
+
+/* Tree icons row */
+.rehab-slider__tree-icons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+  justify-content: center;
+  margin-top: var(--space-lg);
+  min-height: 40px;
+  transition: all var(--duration-normal);
+}
+
+.tree-icon {
+  font-size: 1.4rem;
+  opacity: 0;
+  transform: scale(0.3) translateY(8px);
+  transition: opacity 0.3s var(--ease-out-expo),
+              transform 0.3s var(--ease-out-expo);
+  display: inline-block;
+}
+
+.tree-icon.is-active {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+/* ── Nav / Progress dots (optional) ─────────────────────── */
+.site-nav {
+  position: fixed;
+  right: var(--space-lg);
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: var(--z-overlay);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  opacity: 0;
+  transition: opacity var(--duration-normal);
+}
+
+.site-nav.is-visible {
+  opacity: 1;
+}
+
+.site-nav__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(247, 240, 230, 0.4);
+  transition: background var(--duration-normal), transform var(--duration-normal);
+  cursor: pointer;
+}
+
+.site-nav__dot.is-active {
+  background: var(--color-gold);
+  transform: scale(1.5);
+}
+
+/* ── Social link buttons (footer) ───────────────────────── */
+.social-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: var(--font-size-sm);
+  letter-spacing: var(--letter-spacing-wide);
+  text-transform: uppercase;
+  color: rgba(247, 240, 230, 0.7);
+  padding: 0.6em 1.4em;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(247, 240, 230, 0.2);
+  transition: color var(--duration-normal),
+              border-color var(--duration-normal),
+              box-shadow var(--duration-normal),
+              background-color var(--duration-normal),
+              transform var(--duration-fast);
+}
+
+.social-link:hover {
+  color: var(--color-gold);
+  border-color: var(--color-gold);
+  box-shadow: 0 0 20px var(--glow-gold);
+  transform: translateY(-2px);
+}
+
+.social-link--whatsapp:hover {
+  color: #25d366;
+  border-color: #25d366;
+  box-shadow: 0 0 20px rgba(37, 211, 102, 0.25);
+}
+
+/* ── Responsive adjustments ──────────────────────────────── */
+@media (max-width: 768px) {
+  .ghost-message {
+    right: var(--space-md);
+    bottom: var(--space-md);
+  }
+
+  .ghost-message__item {
+    max-width: 240px;
+  }
+
+  .site-nav {
+    display: none;
+  }
+}
