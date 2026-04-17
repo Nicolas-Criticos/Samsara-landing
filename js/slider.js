@@ -111,9 +111,9 @@ function renderTreeIcons(container, count) {
 /**
  * Main slider init.
  */
-export function initSlider() {
+window.initSlider = function() {
   const slider     = document.getElementById('rehab-range');
-  const amountEl   = document.getElementById('slider-amount');
+  const amountEl   = document.getElementById('slider-amount-display');
   const treeCountEl= document.getElementById('slider-tree-count');
   const iconWrap   = document.getElementById('slider-tree-icons');
   const resultText = document.getElementById('slider-result-text');

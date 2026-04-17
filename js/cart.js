@@ -203,13 +203,11 @@ function initCartButtons() {
 }
 
 /* ── Export ──────────────────────────────────────────────── */
-export function initCart() {
+window.initCart = function() {
   initVariantButtons();
   initCartButtons();
 
   // Expose for debugging
   // TODO: Remove in production
   window.__samsaraCart = cartState;
-}
-
-export { addToCart, showGhostMessage };
+};

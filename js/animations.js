@@ -229,7 +229,7 @@ function initSiteNav() {
 
 /* ── Init ────────────────────────────────────────────────── */
 
-export function initAnimations() {
+window.initAnimations = function() {
   initParticleCanvas();
   initScrollReveal();
   initParallax();

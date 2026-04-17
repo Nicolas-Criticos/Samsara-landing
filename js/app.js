@@ -8,10 +8,6 @@
 
 'use strict';
 
-import { initAnimations } from './animations.js';
-import { initSlider }     from './slider.js';
-import { initCart }       from './cart.js';
-
 /* ── Smooth scroll for anchor links ─────────────────────── */
 function initSmoothScroll() {
   document.querySelectorAll('a[href^="#"]').forEach(link => {
@@ -34,9 +30,9 @@ function initPageEntry() {
 function boot() {
   initPageEntry();
   initSmoothScroll();
-  initAnimations();
-  initSlider();
-  initCart();
+  window.initAnimations();
+  window.initSlider();
+  window.initCart();
 
   console.log(
     '%c🌿 Samsara Olive Oil — rooted in the Karoo',

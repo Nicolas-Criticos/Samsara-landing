@@ -24,9 +24,9 @@
   top: 50%;
   left: 50%;
   translate: -50% -50%;
-  border: 1px solid rgba(201, 160, 64, 0.12);
-  box-shadow: 0 0 60px 20px rgba(201, 160, 64, 0.06);
-  animation: breatheRing1 var(--duration-breath) var(--ease-breath) infinite;
+  border: 1px solid rgba(139, 90, 43, 0.06);
+  box-shadow: 0 0 40px 12px rgba(139, 90, 43, 0.03);
+  animation: breatheRing1 6s var(--ease-breath) infinite;
 }
 
 .pulse-ring--2 {
@@ -35,10 +35,10 @@
   top: 50%;
   left: 50%;
   translate: -50% -50%;
-  border: 1px solid rgba(201, 160, 64, 0.18);
-  box-shadow: 0 0 40px 10px rgba(201, 160, 64, 0.08);
-  animation: breatheRing2 var(--duration-breath) var(--ease-breath) infinite;
-  animation-delay: -0.6s;
+  border: 1px solid rgba(139, 90, 43, 0.08);
+  box-shadow: 0 0 30px 8px rgba(139, 90, 43, 0.04);
+  animation: breatheRing2 6s var(--ease-breath) infinite;
+  animation-delay: -0.8s;
 }
 
 .pulse-ring--3 {
@@ -47,10 +47,10 @@
   top: 50%;
   left: 50%;
   translate: -50% -50%;
-  border: 1px solid rgba(201, 160, 64, 0.22);
-  box-shadow: 0 0 24px 6px rgba(201, 160, 64, 0.12);
-  animation: breatheRing3 var(--duration-breath) var(--ease-breath) infinite;
-  animation-delay: -1.2s;
+  border: 1px solid rgba(139, 90, 43, 0.10);
+  box-shadow: 0 0 20px 4px rgba(139, 90, 43, 0.05);
+  animation: breatheRing3 6s var(--ease-breath) infinite;
+  animation-delay: -1.6s;
 }
 
 /* The logo itself breathes */
@@ -64,50 +64,50 @@
 @keyframes breatheRing1 {
   0%, 100% {
     transform: scale(1);
-    opacity: 0.5;
-    box-shadow: 0 0 60px 20px rgba(201, 160, 64, 0.04);
+    opacity: 0.3;
+    box-shadow: 0 0 40px 12px rgba(139, 90, 43, 0.02);
   }
   50% {
-    transform: scale(1.18);
-    opacity: 1;
-    box-shadow: 0 0 100px 40px rgba(201, 160, 64, 0.10);
+    transform: scale(1.08);
+    opacity: 0.6;
+    box-shadow: 0 0 60px 20px rgba(139, 90, 43, 0.05);
   }
 }
 
 @keyframes breatheRing2 {
   0%, 100% {
     transform: scale(1);
-    opacity: 0.6;
-    box-shadow: 0 0 40px 10px rgba(201, 160, 64, 0.06);
+    opacity: 0.35;
+    box-shadow: 0 0 30px 8px rgba(139, 90, 43, 0.03);
   }
   50% {
-    transform: scale(1.15);
-    opacity: 1;
-    box-shadow: 0 0 70px 24px rgba(201, 160, 64, 0.14);
+    transform: scale(1.06);
+    opacity: 0.65;
+    box-shadow: 0 0 45px 14px rgba(139, 90, 43, 0.06);
   }
 }
 
 @keyframes breatheRing3 {
   0%, 100% {
     transform: scale(1);
-    opacity: 0.7;
-    box-shadow: 0 0 24px 6px rgba(201, 160, 64, 0.08);
+    opacity: 0.4;
+    box-shadow: 0 0 20px 4px rgba(139, 90, 43, 0.04);
   }
   50% {
-    transform: scale(1.12);
-    opacity: 1;
-    box-shadow: 0 0 48px 16px rgba(201, 160, 64, 0.18);
+    transform: scale(1.04);
+    opacity: 0.7;
+    box-shadow: 0 0 32px 10px rgba(139, 90, 43, 0.08);
   }
 }
 
 @keyframes breatheLogo {
   0%, 100% {
     transform: scale(1);
-    filter: drop-shadow(0 0 8px rgba(201, 160, 64, 0.1));
+    filter: drop-shadow(0 0 6px rgba(139, 90, 43, 0.08));
   }
   50% {
-    transform: scale(1.035);
-    filter: drop-shadow(0 0 28px rgba(201, 160, 64, 0.45));
+    transform: scale(1.015);
+    filter: drop-shadow(0 0 14px rgba(139, 90, 43, 0.18));
   }
 }
 
