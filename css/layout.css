@@ -333,8 +333,16 @@
   background-image: url('../assets/images/header.jpg');
   background-size: cover;
   background-position: center;
-  opacity: 0.35;
+  opacity: 0;
+  transform: scale(1.08);
   pointer-events: none;
+  transition: opacity 1.6s var(--ease-out-expo),
+              transform 3s var(--ease-out-expo);
+}
+
+.footer__bg.is-visible {
+  opacity: 0.35;
+  transform: scale(1);
 }
 
 /* Soft overlay so text stays legible over the image */

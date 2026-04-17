@@ -111,8 +111,8 @@ function initParticleCanvas() {
 function initScrollReveal() {
   const revealEls = document.querySelectorAll(
     '.reveal, .product-card, .story__eyebrow, .story__title, .story__body, ' +
-    '.hero__tagline, .hero__sub, .story__bg, .section__header, .mission, ' +
-    '.draw-line, .footer__logo'
+    '.hero__tagline, .hero__sub, .story__bg, .footer__bg, .section__header, ' +
+    '.mission, .draw-line, .footer__logo'
   );
 
   if (!('IntersectionObserver' in window)) {
