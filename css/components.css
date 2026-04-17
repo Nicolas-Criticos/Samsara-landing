@@ -376,15 +376,20 @@
   transform: translateY(-2px);
 }
 
-/* Dark variant for light backgrounds */
+/* Dark variant for light backgrounds / over images */
 .social-link--dark {
-  color: var(--color-text-light);
-  border-color: rgba(30, 20, 10, 0.15);
+  color: var(--color-earth-dark);
+  border-color: rgba(26, 18, 8, 0.5);
+  background: rgba(250, 244, 235, 0.6);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  font-weight: 700;
 }
 
 .social-link--dark:hover {
   color: var(--color-copper);
   border-color: var(--color-copper);
+  background: rgba(250, 244, 235, 0.8);
   box-shadow: 0 0 16px var(--glow-copper);
 }
 

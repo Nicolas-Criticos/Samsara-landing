@@ -378,8 +378,9 @@
 }
 
 .footer__tagline--dark {
-  color: var(--color-text-mid);
-  opacity: 0.6;
+  color: var(--color-earth-dark);
+  opacity: 0.9;
+  text-shadow: 0 1px 8px rgba(250, 244, 235, 0.6);
 }
 
 /* Ensure footer content sits above bg image */
@@ -405,7 +406,8 @@
 }
 
 .footer__copyright--dark {
-  color: rgba(30, 20, 10, 0.25);
+  color: rgba(30, 20, 10, 0.7);
+  text-shadow: 0 1px 6px rgba(250, 244, 235, 0.5);
 }
 
 /* ── Responsive container ────────────────────────────────── */
