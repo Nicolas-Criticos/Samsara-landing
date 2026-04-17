@@ -333,8 +333,21 @@
   background-image: url('../assets/images/header.jpg');
   background-size: cover;
   background-position: center;
-  opacity: 0.08;
+  opacity: 0.35;
   pointer-events: none;
+}
+
+/* Soft overlay so text stays legible over the image */
+.footer__bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(250, 244, 235, 0.5) 0%,
+    rgba(250, 244, 235, 0.25) 50%,
+    rgba(250, 244, 235, 0.6) 100%
+  );
 }
 
 .footer__logo {
