@@ -42,6 +42,11 @@
   margin-bottom: var(--space-md);
 }
 
+/* Dark eyebrow for light backgrounds */
+.section__eyebrow--dark {
+  color: var(--color-earth-warm);
+}
+
 .section__title {
   font-family: var(--font-heading);
   font-weight: 300;
@@ -63,6 +68,11 @@
   height: 1px;
   background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
   margin: var(--space-lg) auto;
+}
+
+/* Dark divider for light backgrounds */
+.section__divider--dark {
+  background: linear-gradient(90deg, transparent, var(--color-copper), transparent);
 }
 
 /* ── HERO SECTION ────────────────────────────────────────── */
@@ -108,6 +118,10 @@
   height: auto;
   position: relative;
   z-index: 2;
+  /* Soften the hard edges of the logo */
+  filter: drop-shadow(0 0 2px rgba(139, 90, 43, 0.1));
+  -webkit-mask-image: radial-gradient(ellipse 95% 95% at 50% 50%, black 70%, transparent 100%);
+  mask-image: radial-gradient(ellipse 95% 95% at 50% 50%, black 70%, transparent 100%);
 }
 
 .hero__tagline {
@@ -258,7 +272,7 @@
 
 /* ── Light section variant (inverted from hero) ─────────── */
 .section--light {
-  background-color: var(--color-cream);
+  background-color: var(--color-linen);
 }
 
 .section__eyebrow--light {
@@ -271,7 +285,14 @@
 
 /* ── PRODUCTS SECTION ────────────────────────────────────── */
 .products {
-  background-color: var(--color-cream);
+  background-color: var(--color-linen);
+  position: relative;
+  overflow: hidden;
+}
+
+.products > .container {
+  position: relative;
+  z-index: var(--z-content);
 }
 
 .products__grid {
@@ -302,7 +323,18 @@
 
 .footer--light {
   background-color: var(--color-linen);
-  border-top: 1px solid var(--color-cream-dark);
+  position: relative;
+  overflow: hidden;
+}
+
+.footer__bg {
+  position: absolute;
+  inset: 0;
+  background-image: url('../assets/images/header.jpg');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.08;
+  pointer-events: none;
 }
 
 .footer__logo {
@@ -310,6 +342,8 @@
   height: auto;
   margin: 0 auto var(--space-xl);
   opacity: 0.85;
+  -webkit-mask-image: radial-gradient(ellipse 95% 95% at 50% 50%, black 65%, transparent 100%);
+  mask-image: radial-gradient(ellipse 95% 95% at 50% 50%, black 65%, transparent 100%);
 }
 
 .footer__tagline {
@@ -325,6 +359,12 @@
 .footer__tagline--dark {
   color: var(--color-text-mid);
   opacity: 0.6;
+}
+
+/* Ensure footer content sits above bg image */
+.footer--light > *:not(.footer__bg):not(.pulse-ring) {
+  position: relative;
+  z-index: var(--z-content);
 }
 
 .footer__links {
