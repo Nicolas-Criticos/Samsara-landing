@@ -74,10 +74,10 @@
     .hero__bg {
       position: absolute;
       inset: 0;
-      background-image: url('assets/images/backdrop.jpg');
+      background-image: url('assets/images/header.jpg');
       background-size: cover;
       background-position: center;
-      opacity: 0.08;
+      opacity: 0.18;
       z-index: 0;
     }
 
@@ -218,7 +218,7 @@
       background-image: url('assets/images/story.jpg');
       background-size: cover;
       background-position: center;
-      opacity: 0.12;
+      opacity: 0.45;
     }
 
     .story .section__inner { position: relative; z-index: 1; }
@@ -271,8 +271,16 @@
 
     .products__grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: repeat(3, 1fr);
       gap: 2rem;
+    }
+
+    @media (max-width: 900px) {
+      .products__grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 580px) {
+      .products__grid { grid-template-columns: 1fr; }
     }
 
     .product-card {
@@ -982,7 +990,7 @@
     .footer__bg {
       position: absolute;
       inset: 0;
-      background-image: url('assets/images/header.jpg');
+      background-image: url('assets/images/backdrop.jpg');
       background-size: cover;
       background-position: center;
       opacity: 0.06;
@@ -1645,7 +1653,8 @@
     if (!form.checkValidity()) { form.reportValidity(); return; }
     if (!cart.items.length)    { errEl.textContent = 'Your cart is empty.'; errEl.classList.add('show'); return; }
 
-    submitBtn.disabled   = true;
+    var btnOrigText = 'Pay R' + total.toLocaleString('en-ZA') + ' with PayFast';
+    submitBtn.disabled    = true;
     submitBtn.textContent = 'Processing...';
 
     var total   = cart.total + DELIVERY_FEE;
@@ -1667,20 +1676,20 @@
 
     var sb = window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY) : null;
 
+    var doPayFast = function (orderId) {
+      submitToPayFast(orderId, payload.customer_name, payload.customer_email, total);
+    };
+
     if (sb) {
       sb.from('orders').insert(payload).select('id').single().then(function (res) {
-        if (res.error) throw res.error;
-        submitToPayFast(res.data.id, payload.customer_name, payload.customer_email, total);
+        if (res.error) { console.warn('Supabase error:', res.error); doPayFast('no-db-' + Date.now()); return; }
+        doPayFast(res.data.id);
       }).catch(function (err) {
         console.error('Order error:', err);
-        errEl.textContent = 'Something went wrong. Please try again or contact us directly.';
-        errEl.classList.add('show');
-        submitBtn.disabled   = false;
-        submitBtn.textContent = 'Pay R' + total.toLocaleString('en-ZA') + ' with PayFast';
+        doPayFast('no-db-' + Date.now());
       });
     } else {
-      // Fallback: proceed to PayFast without Supabase (order won't be saved)
-      submitToPayFast('no-db-' + Date.now(), payload.customer_name, payload.customer_email, total);
+      doPayFast('no-db-' + Date.now());
     }
   }
 
