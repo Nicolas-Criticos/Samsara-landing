@@ -11,11 +11,11 @@ var PAYFAST_SANDBOX      = true;
 var PAYFAST_URL_SANDBOX  = 'https://sandbox.payfast.co.za/eng/process';
 var PAYFAST_URL_LIVE     = 'https://www.payfast.co.za/eng/process';
 
-// Sandbox test credentials (official PayFast sandbox)
-// Replace with your live credentials when going live
-var PAYFAST_MERCHANT_ID  = '10000100';
-var PAYFAST_MERCHANT_KEY = '46f0cd694581a';
-var PAYFAST_PASSPHRASE   = 'jt7NOE43FZPn';
+// PayFast sandbox credentials
+// Replace PAYFAST_SANDBOX with false and update these when going live
+var PAYFAST_MERCHANT_ID  = '10047984';
+var PAYFAST_MERCHANT_KEY = '1funhqjegwd3f';
+var PAYFAST_PASSPHRASE   = 'saltpassphrase';
 
 /* ── Minimal MD5 (no deps, public domain) ────────────────── */
 function md5(s) {
