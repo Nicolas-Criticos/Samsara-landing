@@ -4,444 +4,1878 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Samsara Olive Oil — Cold-pressed extra virgin olive oil from hand-rehabilitated Karoo olive trees. Rooted in the Swartberg. Grown with purpose." />
-  <meta name="theme-color" content="#1a1208" />
-
-  <!-- Open Graph -->
-  <meta property="og:title"       content="Samsara Olive Oil" />
+  <meta name="theme-color" content="#f6f3ee" />
+  <meta property="og:title" content="Samsara Olive Oil" />
   <meta property="og:description" content="Rooted in the Karoo. Grown with purpose." />
-  <meta property="og:image"       content="assets/images/backdrop.jpg" />
-  <meta property="og:type"        content="website" />
-
+  <meta property="og:image" content="assets/images/backdrop.jpg" />
   <title>Samsara Olive Oil — Rooted in the Karoo</title>
-
-  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
 
-  <!-- Stylesheets (order matters) -->
-  <link rel="stylesheet" href="css/base.css" />
-  <link rel="stylesheet" href="css/layout.css" />
-  <link rel="stylesheet" href="css/components.css" />
-  <link rel="stylesheet" href="css/animations.css" />
+  <style>
+    /* ── Reset ─────────────────────────────────────────────── */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg:        #f6f3ee;
+      --bg-dark:   #1a1208;
+      --text:      #2b2b2b;
+      --muted:     #6f6a63;
+      --olive:     #6b7f5e;
+      --gold:      #c2a66d;
+      --earth:     #8a7f6d;
+      --cream:     #faf4eb;
+      --portal-c:  240,235,220;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', system-ui, sans-serif;
+      line-height: 1.8;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    body.no-scroll { overflow: hidden; }
+
+    /* ── Particles canvas ──────────────────────────────────── */
+    #particle-canvas {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.35;
+    }
+
+    /* ── HERO ──────────────────────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      background: radial-gradient(
+        circle at center,
+        rgba(var(--portal-c),1) 0%,
+        rgba(var(--portal-c),0.995) 20%,
+        rgba(240,237,226,0.99) 50%,
+        rgba(238,234,222,0.98) 100%
+      );
+      animation: portalPulse 20s ease-in-out infinite alternate;
+    }
+
+    .hero__bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('assets/images/backdrop.jpg');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.08;
+      z-index: 0;
+    }
+
+    .hero__content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .hero__logo {
+      width: 180px;
+      height: auto;
+      opacity: 0;
+      animation: fadeUp 2s ease forwards;
+      filter: drop-shadow(0 0 20px rgba(194,166,109,0.2));
+    }
+
+    .hero__title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3rem, 8vw, 6rem);
+      font-weight: 300;
+      letter-spacing: 0.06em;
+      color: var(--text);
+      opacity: 0;
+      animation: fadeUp 2s ease 0.3s forwards;
+      line-height: 1.1;
+    }
+
+    .hero__subtitle {
+      font-size: 0.85rem;
+      color: var(--muted);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      opacity: 0;
+      animation: fadeUp 2s ease 0.6s forwards;
+    }
+
+    .hero__divider {
+      width: 60px;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--earth), transparent);
+      opacity: 0;
+      animation: fadeUp 2s ease 0.8s forwards;
+    }
+
+    .hero__tagline {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1rem, 2.5vw, 1.3rem);
+      font-style: italic;
+      color: var(--muted);
+      opacity: 0;
+      animation: fadeUp 2s ease 1s forwards;
+      max-width: 480px;
+    }
+
+    .hero__cta {
+      opacity: 0;
+      animation: fadeUp 2s ease 1.3s forwards;
+    }
+
+    .hero__scroll {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+      opacity: 0;
+      animation: fadeUp 2s ease 2s forwards;
+    }
+
+    .hero__scroll span {
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .hero__scroll-line {
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, var(--earth), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+
+    /* ── SECTION BASE ──────────────────────────────────────── */
+    .section {
+      position: relative;
+      padding: clamp(4rem, 10vw, 8rem) clamp(1.5rem, 5vw, 3rem);
+    }
+
+    .section__inner {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .section__eyebrow {
+      display: block;
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--earth);
+      margin-bottom: 1rem;
+    }
+
+    .section__title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 300;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+    }
+
+    .section__divider {
+      width: 60px;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--earth), transparent);
+      margin: 1.5rem 0;
+      opacity: 0.4;
+    }
+
+    /* ── STORY ─────────────────────────────────────────────── */
+    .story {
+      background: var(--bg-dark);
+      color: var(--cream);
+    }
+
+    .story__bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('assets/images/story.jpg');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.12;
+    }
+
+    .story .section__inner { position: relative; z-index: 1; }
+
+    .story .section__title { color: var(--cream); }
+
+    .story__text {
+      font-size: 1.05rem;
+      line-height: 2;
+      color: rgba(250,244,235,0.75);
+      max-width: 640px;
+    }
+
+    .story__text + .story__text { margin-top: 1.25rem; }
+
+    .story__stat {
+      display: inline-flex;
+      flex-direction: column;
+      margin-top: 2.5rem;
+      padding: 1.25rem 2rem;
+      border: 1px solid rgba(194,166,109,0.2);
+      border-radius: 4px;
+    }
+
+    .story__stat-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.8rem;
+      font-weight: 300;
+      color: var(--gold);
+      line-height: 1;
+    }
+
+    .story__stat-label {
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(250,244,235,0.5);
+      margin-top: 0.4rem;
+    }
+
+    /* ── PRODUCTS ──────────────────────────────────────────── */
+    .products {
+      background: var(--bg);
+    }
+
+    .products__header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .products__grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .product-card {
+      background: #fff;
+      border: 1px solid rgba(138,127,109,0.12);
+      border-radius: 8px;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+    }
+
+    .product-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(138,127,109,0.14);
+    }
+
+    .product-card__img-wrap {
+      position: relative;
+      height: 220px;
+      background: radial-gradient(circle at center, rgba(var(--portal-c),1), rgba(238,233,220,0.8));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .product-card__img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .product-card__placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--earth);
+      opacity: 0.4;
+    }
+
+    .product-card__placeholder svg { width: 48px; height: 48px; }
+    .product-card__placeholder span { font-size: 0.75rem; letter-spacing: 0.1em; }
+
+    .product-card__badge {
+      position: absolute;
+      top: 0.75rem;
+      left: 0.75rem;
+      background: var(--bg-dark);
+      color: var(--gold);
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.7rem;
+      border-radius: 20px;
+    }
+
+    .product-card__body {
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .product-card__name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 400;
+      line-height: 1.25;
+      color: var(--text);
+    }
+
+    .product-card__desc {
+      font-size: 0.875rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .product-card__trees {
+      font-size: 0.78rem;
+      color: var(--olive);
+      letter-spacing: 0.04em;
+    }
+
+    .product-card__footer {
+      margin-top: auto;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(138,127,109,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .product-card__price {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      font-weight: 400;
+      color: var(--text);
+      line-height: 1;
+    }
+
+    .product-card__price small {
+      font-size: 0.75rem;
+      font-family: 'Inter', sans-serif;
+      color: var(--muted);
+      display: block;
+      margin-top: 0.2rem;
+    }
+
+    /* Variant buttons */
+    .variants {
+      display: flex;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+
+    .variant-btn {
+      font-size: 0.75rem;
+      padding: 0.3rem 0.75rem;
+      border: 1px solid rgba(138,127,109,0.3);
+      border-radius: 20px;
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .variant-btn.is-active,
+    .variant-btn:hover {
+      background: var(--bg-dark);
+      color: var(--gold);
+      border-color: var(--bg-dark);
+    }
+
+    /* ── BUTTONS ───────────────────────────────────────────── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border-radius: 4px;
+      padding: 0.75em 1.8em;
+      cursor: pointer;
+      border: none;
+      transition: transform 0.15s ease, box-shadow 0.2s ease, background 0.2s ease;
+      text-decoration: none;
+    }
+
+    .btn:active { transform: scale(0.97); }
+
+    .btn-primary {
+      background: var(--bg-dark);
+      color: var(--gold);
+      box-shadow: 0 4px 16px rgba(26,18,8,0.15);
+    }
+
+    .btn-primary:hover {
+      background: #2a1e0e;
+      box-shadow: 0 6px 24px rgba(26,18,8,0.25);
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid rgba(138,127,109,0.4);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--bg-dark);
+      color: var(--bg-dark);
+      transform: translateY(-2px);
+    }
+
+    .btn-cart {
+      background: var(--bg-dark);
+      color: var(--gold);
+      font-size: 0.75rem;
+      padding: 0.65em 1.4em;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+
+    .btn-cart:hover { background: #2a1e0e; transform: translateY(-1px); }
+    .btn-cart.added { background: var(--olive); color: #fff; }
+
+    /* ── GHOST TOAST ───────────────────────────────────────── */
+    #ghost-container {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 3000;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      pointer-events: none;
+    }
+
+    .ghost-toast {
+      background: var(--bg-dark);
+      color: var(--cream);
+      border: 1px solid rgba(194,166,109,0.25);
+      border-radius: 6px;
+      padding: 0.75rem 1.2rem;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      animation: toastIn 0.4s ease forwards;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    }
+
+    .ghost-toast.out { animation: toastOut 0.4s ease forwards; }
+
+    /* ── CART ICON ─────────────────────────────────────────── */
+    #cart-btn {
+      position: fixed;
+      top: 1.25rem;
+      right: 1.25rem;
+      z-index: 900;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--bg-dark);
+      border: 1px solid rgba(194,166,109,0.3);
+      color: var(--cream);
+      font-size: 1.2rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+    }
+
+    #cart-btn:hover {
+      transform: scale(1.08);
+      box-shadow: 0 4px 20px rgba(194,166,109,0.25);
+    }
+
+    #cart-count {
+      position: absolute;
+      top: -4px;
+      right: -4px;
+      background: var(--gold);
+      color: var(--bg-dark);
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      font-size: 0.68rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Inter', sans-serif;
+      opacity: 0;
+      transform: scale(0);
+      transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    #cart-count.visible {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    /* ── CART DRAWER ───────────────────────────────────────── */
+    #cart-drawer {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      visibility: hidden;
+    }
+
+    #cart-drawer.open { visibility: visible; }
+
+    .drawer-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.45);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      cursor: pointer;
+    }
+
+    #cart-drawer.open .drawer-backdrop { opacity: 1; }
+
+    .drawer-panel {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: min(420px, 100vw);
+      background: var(--bg-dark);
+      border-left: 1px solid rgba(194,166,109,0.15);
+      display: flex;
+      flex-direction: column;
+      transform: translateX(100%);
+      transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+    }
+
+    #cart-drawer.open .drawer-panel { transform: translateX(0); }
+
+    .drawer-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.5rem;
+      border-bottom: 1px solid rgba(194,166,109,0.12);
+    }
+
+    .drawer-head h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 400;
+      color: var(--cream);
+    }
+
+    .drawer-close {
+      background: none;
+      border: none;
+      color: rgba(250,244,235,0.6);
+      font-size: 1.5rem;
+      cursor: pointer;
+      line-height: 1;
+      padding: 0.2rem 0.4rem;
+      transition: color 0.2s;
+    }
+
+    .drawer-close:hover { color: var(--cream); }
+
+    .drawer-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 1.25rem 1.5rem;
+    }
+
+    .drawer-empty {
+      text-align: center;
+      padding: 3rem 1rem;
+      color: rgba(250,244,235,0.4);
+    }
+
+    .drawer-empty p { font-size: 0.9rem; margin-top: 0.5rem; }
+
+    #drawer-items { list-style: none; display: flex; flex-direction: column; gap: 1rem; }
+
+    .drawer-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid rgba(194,166,109,0.1);
+    }
+
+    .drawer-item__info { flex: 1; }
+
+    .drawer-item__name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      color: var(--cream);
+      line-height: 1.3;
+    }
+
+    .drawer-item__variant {
+      font-size: 0.75rem;
+      color: rgba(250,244,235,0.45);
+      margin-top: 0.15rem;
+    }
+
+    .drawer-item__controls {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+
+    .qty-btn {
+      width: 26px;
+      height: 26px;
+      border-radius: 4px;
+      background: rgba(194,166,109,0.12);
+      border: 1px solid rgba(194,166,109,0.25);
+      color: var(--cream);
+      cursor: pointer;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.15s;
+    }
+
+    .qty-btn:hover { background: rgba(194,166,109,0.25); }
+
+    .qty-val {
+      color: var(--cream);
+      font-size: 0.9rem;
+      min-width: 20px;
+      text-align: center;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .drawer-item__price {
+      color: var(--gold);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      white-space: nowrap;
+    }
+
+    .drawer-item__remove {
+      background: none;
+      border: none;
+      color: rgba(250,244,235,0.3);
+      cursor: pointer;
+      font-size: 1.1rem;
+      line-height: 1;
+      padding: 0;
+      transition: color 0.2s;
+      margin-top: 0.1rem;
+    }
+
+    .drawer-item__remove:hover { color: #e07070; }
+
+    .drawer-foot {
+      padding: 1.25rem 1.5rem 1.5rem;
+      border-top: 1px solid rgba(194,166,109,0.12);
+    }
+
+    .drawer-subtotal {
+      display: flex;
+      justify-content: space-between;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      color: var(--cream);
+      margin-bottom: 0.25rem;
+    }
+
+    .drawer-delivery-note {
+      font-size: 0.75rem;
+      color: rgba(250,244,235,0.4);
+      margin-bottom: 1rem;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .drawer-checkout-btn {
+      width: 100%;
+      padding: 0.9rem;
+      background: var(--gold);
+      color: var(--bg-dark);
+      border: none;
+      border-radius: 4px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .drawer-checkout-btn:hover { background: #d4b87a; transform: translateY(-1px); }
+
+    /* ── CHECKOUT MODAL ────────────────────────────────────── */
+    #checkout-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 1100;
+      visibility: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+
+    #checkout-modal.open { visibility: visible; }
+
+    .modal-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      cursor: pointer;
+    }
+
+    #checkout-modal.open .modal-backdrop { opacity: 1; }
+
+    .modal-panel {
+      position: relative;
+      background: var(--bg-dark);
+      border: 1px solid rgba(194,166,109,0.2);
+      border-radius: 8px;
+      width: min(580px, 100%);
+      max-height: 92vh;
+      overflow-y: auto;
+      padding: 2rem;
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    #checkout-modal.open .modal-panel {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: none;
+      border: none;
+      color: rgba(250,244,235,0.5);
+      font-size: 1.5rem;
+      cursor: pointer;
+      line-height: 1;
+      transition: color 0.2s;
+    }
+
+    .modal-close:hover { color: var(--cream); }
+
+    .modal-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      font-weight: 400;
+      color: var(--cream);
+      margin-bottom: 1.5rem;
+    }
+
+    /* Order summary in modal */
+    .order-summary {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(194,166,109,0.12);
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .order-summary h3 {
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(250,244,235,0.45);
+      margin-bottom: 0.75rem;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .summary-item {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.875rem;
+      color: var(--cream);
+      padding: 0.2rem 0;
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.82rem;
+      color: rgba(250,244,235,0.55);
+      padding: 0.2rem 0;
+      border-top: 1px solid rgba(194,166,109,0.08);
+      margin-top: 0.4rem;
+    }
+
+    .summary-row.total {
+      font-size: 1rem;
+      color: var(--cream);
+      font-weight: 500;
+      border-top: 1px solid rgba(194,166,109,0.25);
+      margin-top: 0.5rem;
+      padding-top: 0.5rem;
+    }
+
+    /* Form */
+    .checkout-form { display: flex; flex-direction: column; gap: 1rem; }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    .form-group label {
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(250,244,235,0.5);
+      font-family: 'Inter', sans-serif;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(194,166,109,0.2);
+      border-radius: 4px;
+      color: var(--cream);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      padding: 0.65rem 0.9rem;
+      width: 100%;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder { color: rgba(250,244,235,0.25); }
+
+    .form-group select option { background: #1a1208; }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--gold);
+      box-shadow: 0 0 0 2px rgba(194,166,109,0.12);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .form-error {
+      background: rgba(200,70,70,0.12);
+      border: 1px solid rgba(200,70,70,0.3);
+      border-radius: 4px;
+      color: #f0a0a0;
+      font-size: 0.85rem;
+      padding: 0.75rem 1rem;
+      display: none;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .form-error.show { display: block; }
+
+    .submit-btn {
+      width: 100%;
+      padding: 1rem;
+      background: var(--gold);
+      color: var(--bg-dark);
+      border: none;
+      border-radius: 4px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+      margin-top: 0.5rem;
+    }
+
+    .submit-btn:hover:not(:disabled) { background: #d4b87a; transform: translateY(-1px); }
+    .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+    /* ── PAYMENT BANNER ────────────────────────────────────── */
+    #payment-banner {
+      position: fixed;
+      top: 1.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2000;
+      padding: 0.9rem 2rem;
+      border-radius: 30px;
+      font-size: 0.875rem;
+      font-family: 'Inter', sans-serif;
+      text-align: center;
+      max-width: calc(100vw - 2rem);
+      box-shadow: 0 4px 24px rgba(0,0,0,0.25);
+      display: none;
+      transition: opacity 0.5s;
+    }
+
+    #payment-banner.success {
+      background: rgba(60,120,75,0.96);
+      color: #d4f5d4;
+      border: 1px solid rgba(80,200,100,0.3);
+      display: block;
+    }
+
+    #payment-banner.cancelled {
+      background: rgba(26,18,8,0.96);
+      color: var(--cream);
+      border: 1px solid rgba(194,166,109,0.3);
+      display: block;
+    }
+
+    /* ── FOOTER ────────────────────────────────────────────── */
+    .footer {
+      background: var(--bg-dark);
+      color: rgba(250,244,235,0.55);
+      padding: 3rem clamp(1.5rem, 5vw, 3rem);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .footer__bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('assets/images/header.jpg');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.06;
+    }
+
+    .footer__inner { position: relative; z-index: 1; }
+
+    .footer__logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      font-weight: 300;
+      color: var(--gold);
+      letter-spacing: 0.1em;
+      margin-bottom: 0.5rem;
+    }
+
+    .footer__tagline {
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+    }
+
+    .footer__links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+
+    .footer__link {
+      color: rgba(250,244,235,0.55);
+      text-decoration: none;
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      transition: color 0.2s;
+    }
+
+    .footer__link:hover { color: var(--gold); }
+
+    .footer__copy {
+      font-size: 0.72rem;
+      opacity: 0.4;
+    }
+
+    /* ── REVEAL ANIMATIONS ─────────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── KEYFRAMES ─────────────────────────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes portalPulse {
+      0%   { filter: brightness(1); }
+      50%  { filter: brightness(1.012); }
+      100% { filter: brightness(1); }
+    }
+
+    @keyframes scrollPulse {
+      0%   { opacity: 0.3; transform: scaleY(0.8); }
+      50%  { opacity: 1;   transform: scaleY(1); }
+      100% { opacity: 0.3; transform: scaleY(0.8); }
+    }
+
+    @keyframes toastIn {
+      from { opacity: 0; transform: translateX(20px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes toastOut {
+      from { opacity: 1; transform: translateX(0); }
+      to   { opacity: 0; transform: translateX(20px); }
+    }
+
+    /* ── RESPONSIVE ────────────────────────────────────────── */
+    @media (max-width: 520px) {
+      .form-row { grid-template-columns: 1fr; }
+      .modal-panel { padding: 1.5rem; }
+      #checkout-modal {
+        align-items: flex-end;
+        padding: 0;
+      }
+      .modal-panel {
+        border-radius: 12px 12px 0 0;
+        width: 100%;
+        max-height: 92vh;
+        transform: translateY(100%);
+      }
+      #checkout-modal.open .modal-panel { transform: translateY(0); }
+      #ghost-container { right: 1rem; bottom: 1rem; }
+    }
+  </style>
 </head>
+<body>
 
-<body class="site">
+<!-- Particle canvas -->
+<canvas id="particle-canvas"></canvas>
 
-  <!-- ═══════════════════════════════════════════════════════
-       SECTION 1 — HERO: The Heartbeat
-       ═══════════════════════════════════════════════════════ -->
-  <section class="hero" data-section="hero" aria-label="Hero">
+<!-- Payment banner -->
+<div id="payment-banner"></div>
 
-    <!-- Particle canvas — ambient light dots -->
-    <canvas id="hero-canvas" class="hero__canvas" aria-hidden="true"></canvas>
+<!-- Cart button -->
+<button id="cart-btn" aria-label="Open cart">
+  🛒
+  <span id="cart-count">0</span>
+</button>
 
-    <!-- CSS fallback ambient glow -->
-    <div class="hero__ambient-fallback" aria-hidden="true"></div>
+<!-- Ghost toast container -->
+<div id="ghost-container"></div>
 
-    <!-- Breathing pulse rings -->
-    <div class="pulse-ring pulse-ring--1" aria-hidden="true"></div>
-    <div class="pulse-ring pulse-ring--2" aria-hidden="true"></div>
-    <div class="pulse-ring pulse-ring--3" aria-hidden="true"></div>
+<!-- ═══════════════════════════════════════════════════════
+     HERO
+════════════════════════════════════════════════════════ -->
+<section class="hero">
+  <div class="hero__bg"></div>
+  <div class="hero__content">
+    <img src="assets/images/logo.png" alt="Samsara" class="hero__logo" width="160" height="160" />
+    <h1 class="hero__title">Samsara<br>Olive Oil</h1>
+    <p class="hero__subtitle">Extra Virgin · Organic · Cold Pressed</p>
+    <div class="hero__divider"></div>
+    <p class="hero__tagline">16,000 trees. One family. One purpose.</p>
+    <div class="hero__cta">
+      <a href="#products" class="btn btn-primary">Shop Now</a>
+    </div>
+  </div>
+  <div class="hero__scroll">
+    <div class="hero__scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
 
-    <!-- Main content -->
-    <div class="hero__content">
-      <div class="hero__logo-wrap">
-        <img
-          src="assets/images/logo.png"
-          alt="Samsara Olive Oil"
-          class="hero__logo hero__logo--breathing"
-          width="280"
-          height="280"
-          loading="eager"
-        />
-      </div>
+<!-- ═══════════════════════════════════════════════════════
+     STORY
+════════════════════════════════════════════════════════ -->
+<section class="section story" id="story">
+  <div class="story__bg"></div>
+  <div class="section__inner">
+    <span class="section__eyebrow reveal">The Story</span>
+    <h2 class="section__title reveal">16,000 trees.<br>One family.<br><em>One purpose.</em></h2>
+    <div class="section__divider reveal"></div>
+    <p class="story__text reveal">
+      Deep in the Swartberg Karoo, 16,000 olive trees were planted thirteen years ago with a vision for
+      abundance. Years of drought, neglect, and hardship left them struggling — less than 1% bearing fruit.
+    </p>
+    <p class="story__text reveal">
+      We are bringing them back. Block by block, tree by tree. Hand-rehabilitating each one
+      through restored irrigation, soil care, and patient attention. Every bottle you buy
+      directly funds this restoration.
+    </p>
+    <div class="story__stat reveal">
+      <span class="story__stat-number">16,000</span>
+      <span class="story__stat-label">Olive trees being restored</span>
+    </div>
+  </div>
+</section>
 
-      <p class="hero__tagline">
-        Rooted in the Karoo.<br>Grown with Purpose.
+<!-- ═══════════════════════════════════════════════════════
+     PRODUCTS
+════════════════════════════════════════════════════════ -->
+<section class="section products" id="products">
+  <div class="section__inner">
+    <div class="products__header reveal">
+      <span class="section__eyebrow">The Collection</span>
+      <h2 class="section__title">From our grove<br>to your kitchen</h2>
+      <div class="section__divider" style="margin: 1rem auto;"></div>
+      <p style="color:var(--muted); font-size:0.9rem; max-width:500px; margin:0 auto;">
+        Small-batch, cold-pressed, single-origin. No additives. No compromise.
       </p>
-
-      <span class="hero__sub">
-        Extra Virgin · Organic · Cold Pressed
-      </span>
-
-      <a href="#products" class="btn btn--primary reveal reveal--delay-5">
-        Shop Now
-      </a>
     </div>
 
-    <!-- Scroll indicator -->
-    <div class="hero__scroll-hint" aria-hidden="true">
-      <div class="hero__scroll-line"></div>
+    <div class="products__grid">
+
+      <!-- Product A: 5L EVOO -->
+      <article class="product-card reveal">
+        <div class="product-card__img-wrap">
+          <img src="assets/images/options.jpeg" alt="5L Extra Virgin Olive Oil" class="product-card__img" loading="lazy" />
+          <span class="product-card__badge">5 Litre</span>
+        </div>
+        <div class="product-card__body">
+          <h3 class="product-card__name">Extra Virgin<br>Organic Olive Oil</h3>
+          <p class="product-card__desc">Cold-pressed from hand-rehabilitated Karoo olive trees. Single-origin. Unfiltered liquid gold from the Swartberg.</p>
+          <p class="product-card__trees">🌿 Helps rehabilitate 4 trees</p>
+          <div class="variants">
+            <span class="variant-btn is-active">Tin</span>
+          </div>
+          <div class="product-card__footer">
+            <div class="product-card__price">
+              R1,780
+              <small>per 5L</small>
+            </div>
+            <button
+              class="btn btn-cart"
+              data-product-id="5l-evoo"
+              data-product-name="5L Extra Virgin Olive Oil"
+              data-price="1780"
+              data-variant="Tin"
+              data-trees="4"
+            >Add to Cart</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Product B: 250ml Infused -->
+      <article class="product-card reveal">
+        <div class="product-card__img-wrap">
+          <div class="product-card__placeholder">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1"><path stroke-linecap="round" stroke-linejoin="round" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" /></svg>
+            <span>Photo coming soon</span>
+          </div>
+          <span class="product-card__badge">250ml</span>
+        </div>
+        <div class="product-card__body">
+          <h3 class="product-card__name">Infused Extra Virgin<br>Olive Oil</h3>
+          <p class="product-card__desc">Small-batch cold-pressed oil infused with organic herbs grown right here on the farm. A finishing oil for those who love flavour with intention.</p>
+          <p class="product-card__trees">🌿 Contributes towards half a tree</p>
+          <div class="variants" data-group="infused">
+            <button class="variant-btn is-active" data-variant="Rosemary" data-price="240">Rosemary</button>
+            <button class="variant-btn" data-variant="Oregano" data-price="240">Oregano</button>
+          </div>
+          <div class="product-card__footer">
+            <div class="product-card__price">
+              R<span class="price-display">240</span>
+              <small>per 250ml</small>
+            </div>
+            <button
+              class="btn btn-cart"
+              data-product-id="250ml-infused"
+              data-product-name="250ml Infused Olive Oil"
+              data-price="240"
+              data-variant="Rosemary"
+              data-trees="0.5"
+            >Add to Cart</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Product C: Ritual Health Shot -->
+      <article class="product-card reveal">
+        <div class="product-card__img-wrap">
+          <div class="product-card__placeholder">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1"><path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+            <span>Photo coming soon</span>
+          </div>
+          <span class="product-card__badge">Box of 14</span>
+        </div>
+        <div class="product-card__body">
+          <h3 class="product-card__name">Ritual<br>Health Shot</h3>
+          <p class="product-card__desc">14 daily ritual shots — olive oil, lemon, ginger, turmeric. Cold-pressed and raw. A morning practice in a box.</p>
+          <p class="product-card__trees">🌿 Helps rehabilitate 1 tree</p>
+          <div class="product-card__footer">
+            <div class="product-card__price">
+              R390
+              <small>box of 14</small>
+            </div>
+            <button
+              class="btn btn-cart"
+              data-product-id="ritual-shot"
+              data-product-name="Ritual Health Shot Box"
+              data-price="390"
+              data-variant=""
+              data-trees="1"
+            >Add to Cart</button>
+          </div>
+        </div>
+      </article>
+
     </div>
+  </div>
+</section>
 
-  </section><!-- /hero -->
+<!-- ═══════════════════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════════════════════ -->
+<footer class="footer">
+  <div class="footer__bg"></div>
+  <div class="footer__inner">
+    <p class="footer__logo">Samsara</p>
+    <p class="footer__tagline">Rooted in the Karoo · Grown with Purpose</p>
+    <div class="footer__links">
+      <a href="#story" class="footer__link">Our Story</a>
+      <a href="#products" class="footer__link">Shop</a>
+      <a href="https://www.instagram.com/niccris_samsara" target="_blank" class="footer__link">Instagram</a>
+      <a href="mailto:nicolas.criticos98@gmail.com" class="footer__link">Contact</a>
+    </div>
+    <p class="footer__copy">© 2026 Samsara · VrischGewagt Boutique Olive Farm · Swartberg Karoo, South Africa</p>
+  </div>
+</footer>
 
-
-  <!-- ═══════════════════════════════════════════════════════
-       SECTION 2 — THE STORY: Sunset Waft-in
-       ═══════════════════════════════════════════════════════ -->
-  <section class="story section" id="story" data-section="story" aria-label="Our Story">
-
-    <!-- Background image with parallax + scroll fade -->
-    <div class="story__bg" aria-hidden="true"></div>
-    <!-- Darkening overlay -->
-    <div class="story__overlay" aria-hidden="true"></div>
-
-    <div class="container">
-      <div class="story__content">
-
-        <span class="story__eyebrow">The Story</span>
-
-        <h2 class="story__title">
-          16,000 trees.<br>
-          One family.<br>
-          <em>One purpose.</em>
-        </h2>
-
-        <p class="story__body">
-          Nestled in the ancient Swartberg Karoo — where the mountains meet
-          the desert sky — we found 16,000 olive trees, long forgotten.
-          Neglected for years, they still held life in their roots.
-          <br><br>
-          We made a vow: to bring them back, one by one, by hand.
-          No shortcuts. Only patience, soil, sun, and intention.
-          <br><br>
-          This oil is the fruit of that work. Every bottle carries the story
-          of a tree returned to the earth.
-        </p>
-
-        <!-- TODO: Link to About page or external project page when ready -->
-        <a href="#" class="btn btn--secondary">
-          Learn More About The Project
-        </a>
-
+<!-- ═══════════════════════════════════════════════════════
+     CART DRAWER
+════════════════════════════════════════════════════════ -->
+<div id="cart-drawer">
+  <div class="drawer-backdrop" id="drawer-backdrop"></div>
+  <div class="drawer-panel">
+    <div class="drawer-head">
+      <h2>Your Cart</h2>
+      <button class="drawer-close" id="drawer-close">&times;</button>
+    </div>
+    <div class="drawer-body">
+      <div class="drawer-empty" id="drawer-empty">
+        <div style="font-size:2rem;">🌿</div>
+        <p>Your cart is empty.</p>
       </div>
+      <ul id="drawer-items"></ul>
+    </div>
+    <div class="drawer-foot" id="drawer-foot" style="display:none;">
+      <div class="drawer-subtotal">
+        <span>Subtotal</span>
+        <span id="drawer-subtotal-val">R0</span>
+      </div>
+      <p class="drawer-delivery-note">+ R100 delivery · calculated at checkout</p>
+      <button class="drawer-checkout-btn" id="drawer-checkout-btn">Proceed to Checkout</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     CHECKOUT MODAL
+════════════════════════════════════════════════════════ -->
+<div id="checkout-modal">
+  <div class="modal-backdrop" id="modal-backdrop"></div>
+  <div class="modal-panel">
+    <button class="modal-close" id="modal-close">&times;</button>
+    <h2 class="modal-title">Complete Your Order</h2>
+
+    <div class="order-summary">
+      <h3>Order Summary</h3>
+      <div id="summary-items"></div>
+      <div class="summary-row"><span>Subtotal</span><span id="summary-subtotal">R0</span></div>
+      <div class="summary-row"><span>Delivery</span><span>R100</span></div>
+      <div class="summary-row total"><span>Total</span><span id="summary-total">R0</span></div>
     </div>
 
-  </section><!-- /story -->
+    <form class="checkout-form" id="checkout-form" novalidate>
+      <div class="form-group">
+        <label for="cf-name">Full Name *</label>
+        <input type="text" id="cf-name" name="name" required autocomplete="name" placeholder="Jane Smith" />
+      </div>
+      <div class="form-group">
+        <label for="cf-email">Email *</label>
+        <input type="email" id="cf-email" name="email" required autocomplete="email" placeholder="jane@example.com" />
+      </div>
+      <div class="form-group">
+        <label for="cf-phone">Phone *</label>
+        <input type="tel" id="cf-phone" name="phone" required autocomplete="tel" placeholder="+27 82 000 0000" />
+      </div>
+      <div class="form-group">
+        <label for="cf-address">Street Address *</label>
+        <input type="text" id="cf-address" name="address" required autocomplete="street-address" placeholder="12 Main Road" />
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="cf-city">City *</label>
+          <input type="text" id="cf-city" name="city" required autocomplete="address-level2" placeholder="Cape Town" />
+        </div>
+        <div class="form-group">
+          <label for="cf-postal">Postal Code *</label>
+          <input type="text" id="cf-postal" name="postal" required autocomplete="postal-code" placeholder="8001" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="cf-province">Province *</label>
+        <select id="cf-province" name="province" required>
+          <option value="">Select province...</option>
+          <option>Western Cape</option>
+          <option>Eastern Cape</option>
+          <option>Northern Cape</option>
+          <option>Gauteng</option>
+          <option>KwaZulu-Natal</option>
+          <option>Free State</option>
+          <option>Limpopo</option>
+          <option>Mpumalanga</option>
+          <option>North West</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="cf-notes">Notes (optional)</label>
+        <textarea id="cf-notes" name="notes" rows="2" placeholder="Special instructions..."></textarea>
+      </div>
+      <div class="form-error" id="form-error"></div>
+      <button type="submit" class="submit-btn" id="submit-btn">
+        Pay R<span id="pay-amount">0</span> with PayFast
+      </button>
+    </form>
+  </div>
+</div>
 
+<!-- Supabase -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 
-  <!-- ═══════════════════════════════════════════════════════
-       SECTION 3 — PRODUCTS
-       ═══════════════════════════════════════════════════════ -->
-  <section class="products section section--light" id="products" data-section="products" aria-label="Products">
+<script>
+(function () {
+  'use strict';
 
-    <!-- Breathing pulse rings (dark variant for light bg) -->
-    <div class="pulse-ring pulse-ring--1 pulse-ring--dark" aria-hidden="true"></div>
-    <div class="pulse-ring pulse-ring--2 pulse-ring--dark" aria-hidden="true"></div>
-    <div class="pulse-ring pulse-ring--3 pulse-ring--dark" aria-hidden="true"></div>
+  /* ══════════════════════════════════════════════════════════
+     CONFIG
+  ══════════════════════════════════════════════════════════ */
+  var SUPABASE_URL      = 'https://recqyhjooukkdwsrjslp.supabase.co';
+  var SUPABASE_KEY      = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJlY3F5aGpvb3Vra2R3c3Jqc2xwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjgxMjkzMTAsImV4cCI6MjA4MzcwNTMxMH0.vN0bzTBBrtSBzicjniXXyCUAdn9YIWKHmXIKMJKb0rg';
+  var PAYFAST_SANDBOX   = true;
+  var PAYFAST_URL       = PAYFAST_SANDBOX ? 'https://sandbox.payfast.co.za/eng/process' : 'https://www.payfast.co.za/eng/process';
+  var MERCHANT_ID       = '10047984';
+  var MERCHANT_KEY      = '1funhqjegwd3f';
+  var PASSPHRASE        = 'saltpassphrase';
+  var DELIVERY_FEE      = 100;
+  var SITE_URL          = 'https://samsara-landing-psi.vercel.app';
 
-    <div class="container">
+  /* ══════════════════════════════════════════════════════════
+     CART STATE
+  ══════════════════════════════════════════════════════════ */
+  var cart = { items: [], total: 0, totalTrees: 0 };
 
-      <header class="section__header reveal">
-        <span class="section__eyebrow section__eyebrow--dark">The Collection</span>
-        <h2 class="section__title section__title--dark">From our grove<br>to your kitchen</h2>
-        <div class="section__divider section__divider--dark draw-line"></div>
-        <p class="section__subtitle">
-          Each product is made in small batches from our hand-rehabilitated
-          Karoo olive trees. No additives. No compromise.
-        </p>
-      </header>
+  function cartQty() {
+    return cart.items.reduce(function (s, i) { return s + i.qty; }, 0);
+  }
 
-      <div class="products__grid">
+  function addItem(id, name, price, variant, trees) {
+    var found = null;
+    for (var i = 0; i < cart.items.length; i++) {
+      if (cart.items[i].id === id && cart.items[i].variant === variant) { found = cart.items[i]; break; }
+    }
+    if (found) {
+      found.qty++;
+    } else {
+      cart.items.push({ id: id, name: name, price: price, variant: variant, trees: trees, qty: 1 });
+    }
+    cart.total      += price;
+    cart.totalTrees += trees;
+    updateBadge();
+    renderDrawer();
+    showToast(trees);
+  }
 
-        <!-- ─── PRODUCT A: 5L Extra Virgin Olive Oil ─── -->
-        <article
-          class="product-card"
-          data-product-id="5l-evoo"
-          data-product-name="5L Extra Virgin Olive Oil"
-          data-trees="3.96"
-          aria-label="5L Extra Virgin Organic Olive Oil"
-        >
-          <div class="product-card__image-wrap">
-            <img
-              src="assets/images/options.jpeg"
-              alt="Samsara 5L Extra Virgin Olive Oil — tin"
-              class="product-card__image"
-              loading="lazy"
-            />
-          </div>
+  function changeQty(idx, delta) {
+    var item = cart.items[idx];
+    if (!item) return;
+    if (delta === 0 || (item.qty + delta < 1)) {
+      cart.total      -= item.price * item.qty;
+      cart.totalTrees -= item.trees * item.qty;
+      cart.items.splice(idx, 1);
+    } else {
+      item.qty        += delta;
+      cart.total      += item.price * delta;
+      cart.totalTrees += item.trees * delta;
+    }
+    if (cart.total < 0) cart.total = 0;
+    updateBadge();
+    renderDrawer();
+  }
 
-          <div class="product-card__body">
-            <span class="product-card__badge">5 Litre</span>
-            <h3 class="product-card__name">Extra Virgin<br>Organic Olive Oil</h3>
-            <p class="product-card__description">
-              Cold-pressed from hand-rehabilitated Karoo olive trees.
-              Single-origin. No blending. Unfiltered liquid gold from the Swartberg.
-            </p>
+  /* ══════════════════════════════════════════════════════════
+     BADGE
+  ══════════════════════════════════════════════════════════ */
+  function updateBadge() {
+    var el = document.getElementById('cart-count');
+    var qty = cartQty();
+    el.textContent = qty;
+    if (qty > 0) el.classList.add('visible');
+    else el.classList.remove('visible');
+  }
 
-            <p class="product-card__trees-note">
-              This purchase helps rehabilitate 4 trees 🌿
-            </p>
+  /* ══════════════════════════════════════════════════════════
+     GHOST TOAST
+  ══════════════════════════════════════════════════════════ */
+  function showToast(trees) {
+    var container = document.getElementById('ghost-container');
+    var toast = document.createElement('div');
+    toast.className = 'ghost-toast';
+    var treeText = cart.totalTrees < 1 ? '½ a tree' : Math.floor(cart.totalTrees) + (Math.floor(cart.totalTrees) === 1 ? ' tree' : ' trees');
+    toast.innerHTML = '<span>🌿</span><span>You\'re helping restore <strong>' + treeText + '</strong></span>';
+    container.appendChild(toast);
+    setTimeout(function () {
+      toast.classList.add('out');
+      setTimeout(function () { toast.remove(); }, 400);
+    }, 3500);
+  }
 
-            <div class="product-card__footer">
-              <!-- Single variant: Tin -->
-              <div class="product-card__variants" aria-label="Container type">
-                <span class="variant-btn is-active" aria-label="Tin container">Tin</span>
-              </div>
+  /* ══════════════════════════════════════════════════════════
+     CART DRAWER
+  ══════════════════════════════════════════════════════════ */
+  function openDrawer() {
+    document.getElementById('cart-drawer').classList.add('open');
+    document.body.classList.add('no-scroll');
+    renderDrawer();
+  }
 
-              <div>
-                <span class="product-card__price">
-                  R&nbsp;<span class="product-card__price-value">1,780</span>
-                </span>
-                <span class="product-card__price-note">per 5L</span>
-              </div>
+  function closeDrawer() {
+    document.getElementById('cart-drawer').classList.remove('open');
+    document.body.classList.remove('no-scroll');
+  }
 
-              <!-- TODO: Celium checkout integration — replace onclick with celium.cart.add() -->
-              <button
-                class="btn btn--cart"
-                data-product-id="5l-evoo"
-                data-product-name="5L Extra Virgin Olive Oil"
-                data-price="1780"
-                data-variant="tin"
-                data-trees="4"
-                aria-label="Add 5L Extra Virgin Olive Oil to cart"
-              >
-                Add to Cart
-              </button>
-            </div>
-          </div>
-        </article>
+  function renderDrawer() {
+    var emptyEl  = document.getElementById('drawer-empty');
+    var itemsEl  = document.getElementById('drawer-items');
+    var footEl   = document.getElementById('drawer-foot');
+    var subEl    = document.getElementById('drawer-subtotal-val');
 
-        <!-- ─── PRODUCT B: 250ml Infused Olive Oil ─── -->
-        <article
-          class="product-card"
-          data-product-id="250ml-infused"
-          data-product-name="250ml Infused Olive Oil"
-          data-trees="0.53"
-          aria-label="250ml Infused Extra Virgin Olive Oil"
-        >
-          <div class="product-card__image-wrap">
-            <!-- Placeholder — professional shots to be added -->
-            <div class="product-card__image-placeholder">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
-                <path stroke-linecap="round" stroke-linejoin="round" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
-              </svg>
-              <span>Photo coming soon</span>
-            </div>
-          </div>
+    if (cart.items.length === 0) {
+      emptyEl.style.display  = 'block';
+      itemsEl.innerHTML      = '';
+      footEl.style.display   = 'none';
+      return;
+    }
 
-          <div class="product-card__body">
-            <span class="product-card__badge">250 ml</span>
-            <h3 class="product-card__name">Infused Extra Virgin<br>Olive Oil</h3>
-            <p class="product-card__description">
-              Small-batch cold-pressed oil infused with organic herbs grown
-              right here on the farm. A finishing oil for those who love flavour
-              with intention.
-            </p>
+    emptyEl.style.display = 'none';
+    footEl.style.display  = 'block';
+    if (subEl) subEl.textContent = 'R' + cart.total.toLocaleString('en-ZA');
 
-            <p class="product-card__trees-note">
-              This purchase contributes towards half a tree 🌿
-            </p>
+    itemsEl.innerHTML = cart.items.map(function (item, idx) {
+      return '<li class="drawer-item">' +
+        '<div class="drawer-item__info">' +
+          '<div class="drawer-item__name">' + item.name + '</div>' +
+          (item.variant ? '<div class="drawer-item__variant">' + item.variant + '</div>' : '') +
+          '<div class="drawer-item__controls">' +
+            '<button class="qty-btn" data-idx="' + idx + '" data-delta="-1">&#8722;</button>' +
+            '<span class="qty-val">' + item.qty + '</span>' +
+            '<button class="qty-btn" data-idx="' + idx + '" data-delta="1">&#43;</button>' +
+          '</div>' +
+        '</div>' +
+        '<div style="display:flex;flex-direction:column;align-items:flex-end;gap:0.4rem;">' +
+          '<div class="drawer-item__price">R' + (item.price * item.qty).toLocaleString('en-ZA') + '</div>' +
+          '<button class="drawer-item__remove" data-idx="' + idx + '" data-delta="0">&times;</button>' +
+        '</div>' +
+      '</li>';
+    }).join('');
+  }
 
-            <div class="product-card__footer">
-              <div class="product-card__variants" aria-label="Choose flavour">
-                <button
-                  class="variant-btn is-active"
-                  data-variant="rosemary"
-                  data-price="240"
-                  aria-pressed="true"
-                >Rosemary</button>
-                <button
-                  class="variant-btn"
-                  data-variant="oregano"
-                  data-price="240"
-                  aria-pressed="false"
-                >Oregano</button>
-              </div>
+  /* ══════════════════════════════════════════════════════════
+     CHECKOUT MODAL
+  ══════════════════════════════════════════════════════════ */
+  function openCheckout() {
+    closeDrawer();
+    setTimeout(function () {
+      populateSummary();
+      document.getElementById('checkout-modal').classList.add('open');
+      document.body.classList.add('no-scroll');
+    }, 320);
+  }
 
-              <div>
-                <span class="product-card__price">
-                  R&nbsp;<span class="product-card__price-value">240</span>
-                </span>
-                <span class="product-card__price-note">per 250ml bottle</span>
-              </div>
+  function closeCheckout() {
+    document.getElementById('checkout-modal').classList.remove('open');
+    document.body.classList.remove('no-scroll');
+  }
 
-              <!-- TODO: Celium checkout integration -->
-              <button
-                class="btn btn--cart"
-                data-product-id="250ml-infused"
-                data-product-name="250ml Infused Olive Oil"
-                data-price="240"
-                data-variant="rosemary"
-                data-trees="0.5"
-                aria-label="Add 250ml Infused Olive Oil to cart"
-              >
-                Add to Cart
-              </button>
-            </div>
-          </div>
-        </article>
+  function populateSummary() {
+    var itemsEl = document.getElementById('summary-items');
+    var subEl   = document.getElementById('summary-subtotal');
+    var totEl   = document.getElementById('summary-total');
+    var payEl   = document.getElementById('pay-amount');
+    var total   = cart.total + DELIVERY_FEE;
 
-        <!-- ─── PRODUCT C: Ritual Health Shot ─── -->
-        <article
-          class="product-card"
-          data-product-id="ritual-shot"
-          data-product-name="Ritual Health Shot Box"
-          data-trees="1.03"
-          aria-label="Ritual Health Shot — Box of 14"
-        >
-          <div class="product-card__image-wrap">
-            <!-- Placeholder — professional shots to be added -->
-            <div class="product-card__image-placeholder">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
-                <path stroke-linecap="round" stroke-linejoin="round" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
-              </svg>
-              <span>Photo coming soon</span>
-            </div>
-          </div>
+    itemsEl.innerHTML = cart.items.map(function (item) {
+      return '<div class="summary-item">' +
+        '<span>' + item.name + (item.variant ? ' (' + item.variant + ')' : '') + ' &times; ' + item.qty + '</span>' +
+        '<span>R' + (item.price * item.qty).toLocaleString('en-ZA') + '</span>' +
+      '</div>';
+    }).join('');
 
-          <div class="product-card__body">
-            <span class="product-card__badge">Box of 14</span>
-            <h3 class="product-card__name">Ritual<br>Health Shot</h3>
-            <p class="product-card__description">
-              Olive oil, lemon &amp; salt — a daily wellness ritual drawn
-              from the oldest traditions. Start each morning rooted. One shot,
-              fourteen days of clarity.
-            </p>
+    if (subEl) subEl.textContent = 'R' + cart.total.toLocaleString('en-ZA');
+    if (totEl) totEl.textContent = 'R' + total.toLocaleString('en-ZA');
+    if (payEl) payEl.textContent = total.toLocaleString('en-ZA');
+  }
 
-            <p class="product-card__trees-note">
-              This purchase helps rehabilitate 1 tree 🌿
-            </p>
+  /* ══════════════════════════════════════════════════════════
+     MD5 (public domain)
+  ══════════════════════════════════════════════════════════ */
+  function md5(s) {
+    var hc='0123456789abcdef';
+    function rh(n){var j,r='';for(j=0;j<=3;j++)r+=hc.charAt((n>>(j*8+4))&0xF)+hc.charAt((n>>(j*8))&0xF);return r;}
+    function ad(x,y){var l=(x&0xFFFF)+(y&0xFFFF),m=(x>>16)+(y>>16)+(l>>16);return(m<<16)|(l&0xFFFF);}
+    function rl(n,c){return(n<<c)|(n>>>(32-c));}
+    function cm(q,a,b,x,s,t){return ad(rl(ad(ad(a,q),ad(x,t)),s),b);}
+    function ff(a,b,c,d,x,s,t){return cm((b&c)|(~b&d),a,b,x,s,t);}
+    function gg(a,b,c,d,x,s,t){return cm((b&d)|(c&~d),a,b,x,s,t);}
+    function hh(a,b,c,d,x,s,t){return cm(b^c^d,a,b,x,s,t);}
+    function ii(a,b,c,d,x,s,t){return cm(c^(b|~d),a,b,x,s,t);}
+    function sb(x){var i,nb=((x.length+8)>>6)+1,bl=new Array(nb*16);for(i=0;i<nb*16;i++)bl[i]=0;for(i=0;i<x.length;i++)bl[i>>2]|=x.charCodeAt(i)<<((i%4)*8);bl[i>>2]|=0x80<<((i%4)*8);bl[nb*16-2]=x.length*8;return bl;}
+    var i,x=sb(s),a=1732584193,b=-271733879,c=-1732584194,d=271733878,oa,ob,oc,od;
+    for(i=0;i<x.length;i+=16){oa=a;ob=b;oc=c;od=d;
+      a=ff(a,b,c,d,x[i],7,-680876936);d=ff(d,a,b,c,x[i+1],12,-389564586);c=ff(c,d,a,b,x[i+2],17,606105819);b=ff(b,c,d,a,x[i+3],22,-1044525330);
+      a=ff(a,b,c,d,x[i+4],7,-176418897);d=ff(d,a,b,c,x[i+5],12,1200080426);c=ff(c,d,a,b,x[i+6],17,-1473231341);b=ff(b,c,d,a,x[i+7],22,-45705983);
+      a=ff(a,b,c,d,x[i+8],7,1770035416);d=ff(d,a,b,c,x[i+9],12,-1958414417);c=ff(c,d,a,b,x[i+10],17,-42063);b=ff(b,c,d,a,x[i+11],22,-1990404162);
+      a=ff(a,b,c,d,x[i+12],7,1804603682);d=ff(d,a,b,c,x[i+13],12,-40341101);c=ff(c,d,a,b,x[i+14],17,-1502002290);b=ff(b,c,d,a,x[i+15],22,1236535329);
+      a=gg(a,b,c,d,x[i+1],5,-165796510);d=gg(d,a,b,c,x[i+6],9,-1069501632);c=gg(c,d,a,b,x[i+11],14,643717713);b=gg(b,c,d,a,x[i],20,-373897302);
+      a=gg(a,b,c,d,x[i+5],5,-701558691);d=gg(d,a,b,c,x[i+10],9,38016083);c=gg(c,d,a,b,x[i+15],14,-660478335);b=gg(b,c,d,a,x[i+4],20,-405537848);
+      a=gg(a,b,c,d,x[i+9],5,568446438);d=gg(d,a,b,c,x[i+14],9,-1019803690);c=gg(c,d,a,b,x[i+3],14,-187363961);b=gg(b,c,d,a,x[i+8],20,1163531501);
+      a=gg(a,b,c,d,x[i+13],5,-1444681467);d=gg(d,a,b,c,x[i+2],9,-51403784);c=gg(c,d,a,b,x[i+7],14,1735328473);b=gg(b,c,d,a,x[i+12],20,-1926607734);
+      a=hh(a,b,c,d,x[i+5],4,-378558);d=hh(d,a,b,c,x[i+8],11,-2022574463);c=hh(c,d,a,b,x[i+11],16,1839030562);b=hh(b,c,d,a,x[i+14],23,-35309556);
+      a=hh(a,b,c,d,x[i+1],4,-1530992060);d=hh(d,a,b,c,x[i+4],11,1272893353);c=hh(c,d,a,b,x[i+7],16,-155497632);b=hh(b,c,d,a,x[i+10],23,-1094730640);
+      a=hh(a,b,c,d,x[i+13],4,681279174);d=hh(d,a,b,c,x[i],11,-358537222);c=hh(c,d,a,b,x[i+3],16,-722521979);b=hh(b,c,d,a,x[i+6],23,76029189);
+      a=hh(a,b,c,d,x[i+9],4,-640364487);d=hh(d,a,b,c,x[i+12],11,-421815835);c=hh(c,d,a,b,x[i+15],16,530742520);b=hh(b,c,d,a,x[i+2],23,-995338651);
+      a=ii(a,b,c,d,x[i],6,-198630844);d=ii(d,a,b,c,x[i+7],10,1126891415);c=ii(c,d,a,b,x[i+14],15,-1416354905);b=ii(b,c,d,a,x[i+5],21,-57434055);
+      a=ii(a,b,c,d,x[i+12],6,1700485571);d=ii(d,a,b,c,x[i+3],10,-1894986606);c=ii(c,d,a,b,x[i+10],15,-1051523);b=ii(b,c,d,a,x[i+1],21,-2054922799);
+      a=ii(a,b,c,d,x[i+8],6,1873313359);d=ii(d,a,b,c,x[i+15],10,-30611744);c=ii(c,d,a,b,x[i+6],15,-1560198380);b=ii(b,c,d,a,x[i+13],21,1309151649);
+      a=ii(a,b,c,d,x[i+4],6,-145523070);d=ii(d,a,b,c,x[i+11],10,-1120210379);c=ii(c,d,a,b,x[i+2],15,718787259);b=ii(b,c,d,a,x[i+9],21,-343485551);
+      a=ad(a,oa);b=ad(b,ob);c=ad(c,oc);d=ad(d,od);
+    }
+    return rh(a)+rh(b)+rh(c)+rh(d);
+  }
 
-            <div class="product-card__footer">
-              <div>
-                <span class="product-card__price">
-                  R&nbsp;<span class="product-card__price-value">462</span>
-                </span>
-                <span class="product-card__price-note">box of 14 shots · R33/day</span>
-              </div>
+  /* ══════════════════════════════════════════════════════════
+     PAYFAST
+  ══════════════════════════════════════════════════════════ */
+  function submitToPayFast(orderId, name, email, total) {
+    var params = {
+      merchant_id:   MERCHANT_ID,
+      merchant_key:  MERCHANT_KEY,
+      return_url:    SITE_URL + '/?payment=success',
+      cancel_url:    SITE_URL + '/?payment=cancelled',
+      m_payment_id:  orderId,
+      amount:        parseFloat(total).toFixed(2),
+      item_name:     'Samsara Olive Oil Order',
+      name_first:    (name.split(' ')[0] || name).substring(0, 100),
+      name_last:     (name.split(' ').slice(1).join(' ') || '-').substring(0, 100),
+      email_address: email,
+    };
+    var keys  = Object.keys(params).sort();
+    var parts = keys.map(function (k) {
+      return encodeURIComponent(k) + '=' + encodeURIComponent(params[k]).replace(/%20/g, '+');
+    });
+    if (PASSPHRASE) parts.push('passphrase=' + encodeURIComponent(PASSPHRASE).replace(/%20/g, '+'));
+    params.signature = md5(parts.join('&'));
 
-              <!-- TODO: Celium checkout integration -->
-              <button
-                class="btn btn--cart"
-                data-product-id="ritual-shot"
-                data-product-name="Ritual Health Shot Box"
-                data-price="462"
-                data-variant="box-14"
-                data-trees="1"
-                aria-label="Add Ritual Health Shot box to cart"
-              >
-                Add to Cart
-              </button>
-            </div>
-          </div>
-        </article>
+    var form = document.createElement('form');
+    form.method = 'POST';
+    form.action = PAYFAST_URL;
+    form.style.display = 'none';
+    Object.keys(params).forEach(function (k) {
+      var inp = document.createElement('input');
+      inp.type = 'hidden'; inp.name = k; inp.value = params[k];
+      form.appendChild(inp);
+    });
+    document.body.appendChild(form);
+    form.submit();
+  }
 
-      </div><!-- /products__grid -->
-    </div>
-  </section><!-- /products -->
+  /* ══════════════════════════════════════════════════════════
+     FORM SUBMIT
+  ══════════════════════════════════════════════════════════ */
+  function handleSubmit(e) {
+    e.preventDefault();
+    var form    = document.getElementById('checkout-form');
+    var errEl   = document.getElementById('form-error');
+    var submitBtn = document.getElementById('submit-btn');
 
+    errEl.classList.remove('show');
 
-  <!-- ═══════════════════════════════════════════════════════
-       SECTION 4 — FOOTER
-       ═══════════════════════════════════════════════════════ -->
-  <footer class="footer footer--light" data-section="footer" aria-label="Footer">
+    if (!form.checkValidity()) { form.reportValidity(); return; }
+    if (!cart.items.length)    { errEl.textContent = 'Your cart is empty.'; errEl.classList.add('show'); return; }
 
-    <!-- Background image -->
-    <div class="footer__bg" aria-hidden="true"></div>
+    submitBtn.disabled   = true;
+    submitBtn.textContent = 'Processing...';
 
-    <!-- Breathing pulse rings (dark variant for light bg) -->
-    <div class="pulse-ring pulse-ring--1 pulse-ring--dark" aria-hidden="true"></div>
-    <div class="pulse-ring pulse-ring--2 pulse-ring--dark" aria-hidden="true"></div>
-    <div class="pulse-ring pulse-ring--3 pulse-ring--dark" aria-hidden="true"></div>
+    var total   = cart.total + DELIVERY_FEE;
+    var payload = {
+      customer_name:        form.name.value.trim(),
+      customer_email:       form.email.value.trim(),
+      customer_phone:       form.phone.value.trim(),
+      delivery_address:     form.address.value.trim(),
+      delivery_city:        form.city.value.trim(),
+      delivery_province:    form.province.value,
+      delivery_postal_code: form.postal.value.trim(),
+      items:                cart.items,
+      subtotal:             cart.total,
+      delivery_fee:         DELIVERY_FEE,
+      total:                total,
+      notes:                form.notes.value.trim() || null,
+      status:               'pending',
+    };
 
-    <img
-      src="assets/images/logo.png"
-      alt="Samsara Olive Oil"
-      class="footer__logo reveal"
-      width="80"
-      height="80"
-      loading="lazy"
-    />
+    var sb = window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY) : null;
 
-    <p class="footer__tagline footer__tagline--dark reveal reveal--delay-1">
-      Every purchase plants roots in the Karoo
-    </p>
+    if (sb) {
+      sb.from('orders').insert(payload).select('id').single().then(function (res) {
+        if (res.error) throw res.error;
+        submitToPayFast(res.data.id, payload.customer_name, payload.customer_email, total);
+      }).catch(function (err) {
+        console.error('Order error:', err);
+        errEl.textContent = 'Something went wrong. Please try again or contact us directly.';
+        errEl.classList.add('show');
+        submitBtn.disabled   = false;
+        submitBtn.textContent = 'Pay R' + total.toLocaleString('en-ZA') + ' with PayFast';
+      });
+    } else {
+      // Fallback: proceed to PayFast without Supabase (order won't be saved)
+      submitToPayFast('no-db-' + Date.now(), payload.customer_name, payload.customer_email, total);
+    }
+  }
 
-    <div class="section__divider draw-line" style="max-width:200px;margin:0 auto var(--space-2xl);"></div>
+  /* ══════════════════════════════════════════════════════════
+     PAYMENT RESULT
+  ══════════════════════════════════════════════════════════ */
+  function checkPaymentResult() {
+    var params  = new URLSearchParams(window.location.search);
+    var payment = params.get('payment');
+    if (!payment) return;
 
-    <nav class="footer__links reveal reveal--delay-2" aria-label="Social links">
+    var banner = document.getElementById('payment-banner');
+    if (payment === 'success') {
+      banner.textContent = '🌿 Order received! We\'ll be in touch shortly with your tracking details.';
+      banner.className   = 'success';
+      cart = { items: [], total: 0, totalTrees: 0 };
+      updateBadge();
+    } else if (payment === 'cancelled') {
+      banner.textContent = '🕊️ Payment cancelled. Your cart is still here whenever you\'re ready.';
+      banner.className   = 'cancelled';
+    }
 
-      <!-- Instagram -->
-      <a
-        href="https://www.instagram.com/niccris_samsara"
-        class="social-link social-link--dark"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Follow us on Instagram @niccris_samsara"
-      >
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
-          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
-          <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
-        </svg>
-        @niccris_samsara
-      </a>
+    window.history.replaceState({}, '', window.location.pathname);
+    setTimeout(function () {
+      banner.style.opacity = '0';
+      setTimeout(function () { banner.className = ''; banner.style.opacity = ''; }, 500);
+    }, 8000);
+  }
 
-      <!-- WhatsApp -->
-      <a
-        href="https://wa.me/27828244145?text=Hi%20Samsara%2C%20I%27d%20like%20to%20order%20some%20olive%20oil%20%F0%9F%AB%92"
-        class="social-link social-link--dark social-link--whatsapp"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Contact us on WhatsApp"
-      >
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-        </svg>
-        Order on WhatsApp
-      </a>
+  /* ══════════════════════════════════════════════════════════
+     PARTICLES
+  ══════════════════════════════════════════════════════════ */
+  function initParticles() {
+    var canvas = document.getElementById('particle-canvas');
+    if (!canvas) return;
+    var ctx = canvas.getContext('2d');
+    var W, H, particles;
 
-    </nav>
+    function resize() {
+      W = canvas.width  = window.innerWidth;
+      H = canvas.height = window.innerHeight;
+    }
 
-    <p class="footer__copyright footer__copyright--dark reveal reveal--delay-3">
-      &copy; 2026 Samsara · VrischGewagt Boutique Olive Farm · Swartberg Karoo, South Africa
-    </p>
+    function mkParticles() {
+      particles = [];
+      for (var i = 0; i < 30; i++) {
+        particles.push({
+          x: Math.random() * W,
+          y: Math.random() * H,
+          r: Math.random() * 1.5 + 0.5,
+          dx: (Math.random() - 0.5) * 0.3,
+          dy: -Math.random() * 0.4 - 0.1,
+          o: Math.random() * 0.4 + 0.1,
+        });
+      }
+    }
 
-  </footer><!-- /footer -->
+    function draw() {
+      ctx.clearRect(0, 0, W, H);
+      particles.forEach(function (p) {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(194,166,109,' + p.o + ')';
+        ctx.fill();
+        p.x += p.dx;
+        p.y += p.dy;
+        if (p.y < -10) { p.y = H + 10; p.x = Math.random() * W; }
+        if (p.x < 0 || p.x > W) p.dx *= -1;
+      });
+      requestAnimationFrame(draw);
+    }
 
+    resize();
+    mkParticles();
+    draw();
+    window.addEventListener('resize', function () { resize(); mkParticles(); });
+  }
 
-  <!-- ═══════════════════════════════════════════════════════
-       Ghost message container (fixed, outside normal flow)
-       ═══════════════════════════════════════════════════════ -->
-  <div
-    id="ghost-messages"
-    class="ghost-message"
-    aria-live="polite"
-    aria-label="Cart notifications"
-  ></div>
+  /* ══════════════════════════════════════════════════════════
+     SCROLL REVEAL
+  ══════════════════════════════════════════════════════════ */
+  function initReveal() {
+    var els = document.querySelectorAll('.reveal');
+    var io  = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.12 });
+    els.forEach(function (el) { io.observe(el); });
+  }
 
-  <!-- Site nav dots (fixed right side) -->
-  <nav class="site-nav" aria-label="Page sections">
-    <button class="site-nav__dot" title="Hero" aria-label="Go to top"></button>
-    <button class="site-nav__dot" title="Story" aria-label="Go to story section"></button>
-    <button class="site-nav__dot" title="Products" aria-label="Go to products"></button>
-  </nav>
+  /* ══════════════════════════════════════════════════════════
+     VARIANT BUTTONS
+  ══════════════════════════════════════════════════════════ */
+  function initVariants() {
+    document.querySelectorAll('.variants').forEach(function (group) {
+      var btns = group.querySelectorAll('.variant-btn[data-variant]');
+      btns.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          btns.forEach(function (b) { b.classList.remove('is-active'); });
+          btn.classList.add('is-active');
+          var card    = btn.closest('.product-card');
+          var cartBtn = card && card.querySelector('.btn-cart');
+          var priceEl = card && card.querySelector('.price-display');
+          if (cartBtn) {
+            cartBtn.dataset.variant = btn.dataset.variant;
+            if (btn.dataset.price) cartBtn.dataset.price = btn.dataset.price;
+          }
+          if (priceEl && btn.dataset.price) {
+            priceEl.textContent = parseInt(btn.dataset.price).toLocaleString('en-ZA');
+          }
+        });
+      });
+    });
+  }
 
+  /* ══════════════════════════════════════════════════════════
+     ADD TO CART BUTTONS
+  ══════════════════════════════════════════════════════════ */
+  function initCartButtons() {
+    document.querySelectorAll('.btn-cart').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var id     = btn.dataset.productId;
+        var name   = btn.dataset.productName;
+        var price  = parseFloat(btn.dataset.price);
+        var variant = btn.dataset.variant || '';
+        var trees  = parseFloat(btn.dataset.trees) || 0;
 
-  <!-- Payment banner (fixed, top-centre) -->
-  <div id="payment-banner" class="payment-banner" hidden></div>
+        addItem(id, name, price, variant, trees);
 
-  <!-- Cart icon button (fixed, top-right) -->
-  <button id="cart-icon-btn" class="cart-icon-btn" aria-label="Open cart">
-    🛒
-    <span id="cart-badge" class="cart-icon-btn__badge" hidden>0</span>
-  </button>
+        // Button feedback
+        var orig = btn.textContent;
+        btn.textContent = '✓ Added';
+        btn.classList.add('added');
+        btn.disabled = true;
+        setTimeout(function () {
+          btn.textContent = orig;
+          btn.classList.remove('added');
+          btn.disabled = false;
+        }, 1800);
+      });
+    });
+  }
 
-  <!-- ── Scripts ─────────────────────────────────────────── -->
-  <script src="js/animations.js"></script>
-  <script src="js/slider.js"></script>
-  <script src="js/cart.js"></script>
-  <script src="js/cart-drawer.js"></script>
-  <script src="js/payfast.js"></script>
-  <script src="js/checkout.js"></script>
-  <script src="js/app.js"></script>
-  <!-- Supabase JS SDK — loaded last so it doesn't block cart init -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  /* ══════════════════════════════════════════════════════════
+     EVENT LISTENERS
+  ══════════════════════════════════════════════════════════ */
+  function initEvents() {
+    // Cart open
+    document.getElementById('cart-btn').addEventListener('click', openDrawer);
+
+    // Drawer close
+    document.getElementById('drawer-close').addEventListener('click', closeDrawer);
+    document.getElementById('drawer-backdrop').addEventListener('click', closeDrawer);
+
+    // Drawer qty/remove (event delegation)
+    document.getElementById('drawer-items').addEventListener('click', function (e) {
+      var btn = e.target.closest('[data-idx]');
+      if (!btn) return;
+      var idx   = parseInt(btn.dataset.idx, 10);
+      var delta = parseInt(btn.dataset.delta, 10);
+      changeQty(idx, delta);
+    });
+
+    // Drawer checkout
+    document.getElementById('drawer-checkout-btn').addEventListener('click', openCheckout);
+
+    // Modal close
+    document.getElementById('modal-close').addEventListener('click', closeCheckout);
+    document.getElementById('modal-backdrop').addEventListener('click', closeCheckout);
+
+    // Checkout form submit
+    document.getElementById('checkout-form').addEventListener('submit', handleSubmit);
+
+    // ESC key
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') { closeDrawer(); closeCheckout(); }
+    });
+  }
+
+  /* ══════════════════════════════════════════════════════════
+     BOOT
+  ══════════════════════════════════════════════════════════ */
+  document.addEventListener('DOMContentLoaded', function () {
+    initParticles();
+    initReveal();
+    initVariants();
+    initCartButtons();
+    initEvents();
+    checkPaymentResult();
+    console.log('%c🌿 Samsara Olive Oil', 'color:#c2a66d;font-family:Georgia,serif;font-size:14px;');
+  });
+
+})();
+</script>
 
 </body>
 </html>
