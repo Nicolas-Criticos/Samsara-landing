@@ -30,11 +30,22 @@ function initPageEntry() {
 function boot() {
   initPageEntry();
   initSmoothScroll();
-  window.initAnimations();
-  window.initSlider();
-  window.initCart();
-  window.initCartDrawer();
-  window.initCheckout();
+
+  var steps = [
+    ['initAnimations', window.initAnimations],
+    ['initSlider',     window.initSlider],
+    ['initCart',       window.initCart],
+    ['initCartDrawer', window.initCartDrawer],
+    ['initCheckout',   window.initCheckout],
+  ];
+
+  steps.forEach(function(step) {
+    try {
+      if (typeof step[1] === 'function') step[1]();
+    } catch (err) {
+      console.error('[Samsara] ' + step[0] + ' failed:', err);
+    }
+  });
 
   console.log(
     '%c🌿 Samsara Olive Oil — rooted in the Karoo',
