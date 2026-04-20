@@ -219,13 +219,16 @@
     .story__bg {
       position: absolute;
       inset: 0;
-      background: var(--bg-dark);
+      background-image: url('assets/images/backdrop.jpg');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.45;
     }
 
     .story__overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(105deg, rgba(26,18,8,0.95) 0%, rgba(26,18,8,0.75) 55%, rgba(26,18,8,0.25) 100%);
+      background: linear-gradient(105deg, rgba(26,18,8,0.92) 0%, rgba(26,18,8,0.72) 55%, rgba(26,18,8,0.25) 100%);
       z-index: 1;
     }
 
@@ -1019,7 +1022,7 @@
     .footer__bg {
       position: absolute;
       inset: 0;
-      background-image: url('assets/images/story.jpg');
+      background-image: url('assets/images/backdrop.jpg');
       background-size: cover;
       background-position: center;
       opacity: 0.06;
