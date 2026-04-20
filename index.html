@@ -4,10 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Samsara Olive Oil — Cold-pressed extra virgin olive oil from hand-rehabilitated Karoo olive trees. Rooted in the Swartberg. Grown with purpose." />
-  <meta name="theme-color" content="#f6f3ee" />
-  <meta property="og:title" content="Samsara Olive Oil" />
-  <meta property="og:description" content="Rooted in the Karoo. Grown with purpose." />
-  <meta property="og:image" content="assets/images/backdrop.jpg" />
+  <meta name="theme-color" content="#1a1208" />
+  <meta property="og:title" content="Samsara Olive Oil — Rooted in the Karoo" />
+  <meta property="og:description" content="Cold-pressed extra virgin olive oil from 16,000 hand-rehabilitated Karoo olive trees. Single-origin. No additives. Grown with purpose." />
+  <meta property="og:image" content="assets/images/story.jpg" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://samsara-landing-psi.vercel.app/" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="assets/images/logo.png" type="image/png" />
   <title>Samsara Olive Oil — Rooted in the Karoo</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -215,48 +219,73 @@
     .story__bg {
       position: absolute;
       inset: 0;
-      background-image: url('assets/images/backdrop.jpg');
-      background-size: cover;
-      background-position: center;
-      opacity: 0.45;
+      background: var(--bg-dark);
     }
 
-    .story .section__inner { position: relative; z-index: 1; }
+    .story__overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(105deg, rgba(26,18,8,0.95) 0%, rgba(26,18,8,0.75) 55%, rgba(26,18,8,0.25) 100%);
+      z-index: 1;
+    }
 
+    .story .section__inner { position: relative; z-index: 2; }
     .story .section__title { color: var(--cream); }
 
-    .story__text {
-      font-size: 1.05rem;
-      line-height: 2;
-      color: rgba(250,244,235,0.75);
-      max-width: 640px;
+    .story__layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
     }
 
-    .story__text + .story__text { margin-top: 1.25rem; }
+    .story__text-col { display: flex; flex-direction: column; }
 
-    .story__stat {
-      display: inline-flex;
-      flex-direction: column;
-      margin-top: 2.5rem;
-      padding: 1.25rem 2rem;
-      border: 1px solid rgba(194,166,109,0.2);
+    .story__photo {
+      width: 100%;
+      height: 480px;
+      object-fit: cover;
       border-radius: 4px;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.5);
     }
+
+    .story__text {
+      font-size: 1rem;
+      line-height: 2;
+      color: rgba(250,244,235,0.72);
+    }
+
+    .story__text + .story__text { margin-top: 1rem; }
+
+    .story__stats {
+      display: flex;
+      gap: 2rem;
+      margin-top: 2.5rem;
+      flex-wrap: wrap;
+    }
+
+    .story__stat { display: flex; flex-direction: column; }
 
     .story__stat-number {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 2.8rem;
+      font-size: 2.4rem;
       font-weight: 300;
       color: var(--gold);
       line-height: 1;
     }
 
     .story__stat-label {
-      font-size: 0.78rem;
+      font-size: 0.72rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: rgba(250,244,235,0.5);
-      margin-top: 0.4rem;
+      color: rgba(250,244,235,0.45);
+      margin-top: 0.3rem;
+    }
+
+    @media (max-width: 768px) {
+      .story__layout { grid-template-columns: 1fr; gap: 2rem; }
+      .story__photo { height: 260px; }
+      .story__img-col { order: -1; }
     }
 
     /* ── PRODUCTS ──────────────────────────────────────────── */
@@ -1136,22 +1165,33 @@
 ════════════════════════════════════════════════════════ -->
 <section class="section story" id="story">
   <div class="story__bg"></div>
+  <div class="story__overlay"></div>
   <div class="section__inner">
-    <span class="section__eyebrow reveal">The Story</span>
-    <h2 class="section__title reveal">16,000 trees.<br>One family.<br><em>One purpose.</em></h2>
-    <div class="section__divider reveal"></div>
-    <p class="story__text reveal">
-      Deep in the Swartberg Karoo, 16,000 olive trees were planted thirteen years ago with a vision for
-      abundance. Years of drought, neglect, and hardship left them struggling — less than 1% bearing fruit.
-    </p>
-    <p class="story__text reveal">
-      We are bringing them back. Block by block, tree by tree. Hand-rehabilitating each one
-      through restored irrigation, soil care, and patient attention. Every bottle you buy
-      directly funds this restoration.
-    </p>
-    <div class="story__stat reveal">
-      <span class="story__stat-number">16,000</span>
-      <span class="story__stat-label">Olive trees being restored</span>
+    <div class="story__layout">
+      <div class="story__text-col">
+        <span class="section__eyebrow reveal">The Story</span>
+        <h2 class="section__title reveal">16,000 trees.<br>One family.<br><em>One purpose.</em></h2>
+        <div class="section__divider reveal"></div>
+        <p class="story__text reveal">Deep in the Swartberg Karoo, 16,000 olive trees were planted thirteen years ago with a vision for abundance. Years of drought, neglect, and hardship left them struggling — less than 1% bearing fruit.</p>
+        <p class="story__text reveal">We are bringing them back. Block by block, tree by tree. Every bottle you buy directly funds this restoration.</p>
+        <div class="story__stats reveal">
+          <div class="story__stat">
+            <span class="story__stat-number">16,000</span>
+            <span class="story__stat-label">Olive trees</span>
+          </div>
+          <div class="story__stat">
+            <span class="story__stat-number">13</span>
+            <span class="story__stat-label">Years of history</span>
+          </div>
+          <div class="story__stat">
+            <span class="story__stat-number">1</span>
+            <span class="story__stat-label">Farm. One family.</span>
+          </div>
+        </div>
+      </div>
+      <div class="story__img-col reveal">
+        <img src="assets/images/story.jpg" alt="Sunset over the Samsara olive farm" class="story__photo" loading="lazy" />
+      </div>
     </div>
   </div>
 </section>
@@ -1641,50 +1681,72 @@
   ══════════════════════════════════════════════════════════ */
   function handleSubmit(e) {
     e.preventDefault();
-    var form    = document.getElementById('checkout-form');
-    var errEl   = document.getElementById('form-error');
-    var submitBtn = document.getElementById('submit-btn');
 
+    var errEl     = document.getElementById('form-error');
+    var submitBtn = document.getElementById('submit-btn');
     errEl.classList.remove('show');
 
-    if (!form.checkValidity()) { form.reportValidity(); return; }
-    if (!cart.items.length)    { errEl.textContent = 'Your cart is empty.'; errEl.classList.add('show'); return; }
+    if (!cart.items.length) {
+      errEl.textContent = 'Your cart is empty.';
+      errEl.classList.add('show');
+      return;
+    }
 
-    var btnOrigText = 'Pay R' + total.toLocaleString('en-ZA') + ' with PayFast';
+    // Read fields by ID to avoid form.name collision with HTMLFormElement.name
+    var customerName  = document.getElementById('cf-name').value.trim();
+    var customerEmail = document.getElementById('cf-email').value.trim();
+    var customerPhone = document.getElementById('cf-phone').value.trim();
+    var address       = document.getElementById('cf-address').value.trim();
+    var city          = document.getElementById('cf-city').value.trim();
+    var province      = document.getElementById('cf-province').value;
+    var postal        = document.getElementById('cf-postal').value.trim();
+    var notes         = document.getElementById('cf-notes').value.trim();
+
+    if (!customerName || !customerEmail || !customerPhone || !address || !city || !province || !postal) {
+      errEl.textContent = 'Please fill in all required fields.';
+      errEl.classList.add('show');
+      return;
+    }
+
+    // Declare total BEFORE using it
+    var total = cart.total + DELIVERY_FEE;
+
     submitBtn.disabled    = true;
     submitBtn.textContent = 'Processing...';
 
-    var total   = cart.total + DELIVERY_FEE;
     var payload = {
-      customer_name:        form.name.value.trim(),
-      customer_email:       form.email.value.trim(),
-      customer_phone:       form.phone.value.trim(),
-      delivery_address:     form.address.value.trim(),
-      delivery_city:        form.city.value.trim(),
-      delivery_province:    form.province.value,
-      delivery_postal_code: form.postal.value.trim(),
-      items:                cart.items,
+      customer_name:        customerName,
+      customer_email:       customerEmail,
+      customer_phone:       customerPhone,
+      delivery_address:     address,
+      delivery_city:        city,
+      delivery_province:    province,
+      delivery_postal_code: postal,
+      items:                JSON.parse(JSON.stringify(cart.items)),
       subtotal:             cart.total,
       delivery_fee:         DELIVERY_FEE,
       total:                total,
-      notes:                form.notes.value.trim() || null,
+      notes:                notes || null,
       status:               'pending',
     };
 
-    var sb = window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY) : null;
-
     var doPayFast = function (orderId) {
-      submitToPayFast(orderId, payload.customer_name, payload.customer_email, total);
+      submitToPayFast(orderId, customerName, customerEmail, total);
     };
 
+    var resetBtn = function () {
+      submitBtn.disabled    = false;
+      submitBtn.textContent = 'Pay R' + total.toLocaleString('en-ZA') + ' with PayFast';
+    };
+
+    var sb = window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY) : null;
     if (sb) {
-      sb.from('orders').insert(payload).select('id').single().then(function (res) {
-        if (res.error) { console.warn('Supabase error:', res.error); doPayFast('no-db-' + Date.now()); return; }
-        doPayFast(res.data.id);
-      }).catch(function (err) {
-        console.error('Order error:', err);
-        doPayFast('no-db-' + Date.now());
-      });
+      sb.from('orders').insert(payload).select('id').single()
+        .then(function (res) {
+          if (res.error) { console.warn('DB warn:', res.error.message); doPayFast('no-db-' + Date.now()); }
+          else { doPayFast(res.data.id); }
+        })
+        .catch(function () { doPayFast('no-db-' + Date.now()); });
     } else {
       doPayFast('no-db-' + Date.now());
     }
