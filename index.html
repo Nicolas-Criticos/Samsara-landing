@@ -235,34 +235,18 @@
     .story .section__inner { position: relative; z-index: 2; }
     .story .section__title { color: var(--cream); }
 
-    .story__layout {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: center;
-    }
-
-    .story__text-col { display: flex; flex-direction: column; }
-
-    .story__photo {
-      width: 100%;
-      height: 480px;
-      object-fit: cover;
-      border-radius: 4px;
-      box-shadow: 0 24px 60px rgba(0,0,0,0.5);
-    }
-
     .story__text {
       font-size: 1rem;
       line-height: 2;
-      color: rgba(250,244,235,0.72);
+      color: rgba(250,244,235,0.75);
+      max-width: 620px;
     }
 
     .story__text + .story__text { margin-top: 1rem; }
 
     .story__stats {
       display: flex;
-      gap: 2rem;
+      gap: 2.5rem;
       margin-top: 2.5rem;
       flex-wrap: wrap;
     }
@@ -283,12 +267,6 @@
       text-transform: uppercase;
       color: rgba(250,244,235,0.45);
       margin-top: 0.3rem;
-    }
-
-    @media (max-width: 768px) {
-      .story__layout { grid-template-columns: 1fr; gap: 2rem; }
-      .story__photo { height: 260px; }
-      .story__img-col { order: -1; }
     }
 
     /* ── PRODUCTS ──────────────────────────────────────────── */
@@ -1170,30 +1148,23 @@
   <div class="story__bg"></div>
   <div class="story__overlay"></div>
   <div class="section__inner">
-    <div class="story__layout">
-      <div class="story__text-col">
-        <span class="section__eyebrow reveal">The Story</span>
-        <h2 class="section__title reveal">16,000 trees.<br>One family.<br><em>One purpose.</em></h2>
-        <div class="section__divider reveal"></div>
-        <p class="story__text reveal">Deep in the Swartberg Karoo, 16,000 olive trees were planted thirteen years ago with a vision for abundance. Years of drought, neglect, and hardship left them struggling — less than 1% bearing fruit.</p>
-        <p class="story__text reveal">We are bringing them back. Block by block, tree by tree. Every bottle you buy directly funds this restoration.</p>
-        <div class="story__stats reveal">
-          <div class="story__stat">
-            <span class="story__stat-number">16,000</span>
-            <span class="story__stat-label">Olive trees</span>
-          </div>
-          <div class="story__stat">
-            <span class="story__stat-number">13</span>
-            <span class="story__stat-label">Years of history</span>
-          </div>
-          <div class="story__stat">
-            <span class="story__stat-number">1</span>
-            <span class="story__stat-label">Farm. One family.</span>
-          </div>
-        </div>
+    <span class="section__eyebrow reveal">The Story</span>
+    <h2 class="section__title reveal">16,000 trees.<br>One family.<br><em>One purpose.</em></h2>
+    <div class="section__divider reveal"></div>
+    <p class="story__text reveal">Deep in the Swartberg Karoo, 16,000 olive trees were planted thirteen years ago with a vision for abundance. Years of drought, neglect, and hardship left them struggling — less than 1% bearing fruit.</p>
+    <p class="story__text reveal">We are bringing them back. Block by block, tree by tree. Every bottle you buy directly funds this restoration.</p>
+    <div class="story__stats reveal">
+      <div class="story__stat">
+        <span class="story__stat-number">16,000</span>
+        <span class="story__stat-label">Olive trees</span>
       </div>
-      <div class="story__img-col reveal">
-        <img src="assets/images/story.jpg" alt="Sunset over the Samsara olive farm" class="story__photo" loading="lazy" />
+      <div class="story__stat">
+        <span class="story__stat-number">13</span>
+        <span class="story__stat-label">Years of history</span>
+      </div>
+      <div class="story__stat">
+        <span class="story__stat-number">1</span>
+        <span class="story__stat-label">Farm. One family.</span>
       </div>
     </div>
   </div>
