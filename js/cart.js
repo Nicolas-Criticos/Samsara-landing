@@ -162,10 +162,12 @@ function initVariantButtons() {
 /* ── Init all add-to-cart buttons ────────────────────────── */
 function initCartButtons() {
   var buttons = document.querySelectorAll('.btn--cart');
+  console.log('[Samsara] cart buttons found:', buttons.length);
 
   buttons.forEach(function(btn) {
     btn.addEventListener('click', function(e) {
       e.preventDefault();
+      console.log('[Samsara] cart button clicked:', btn.dataset.productName);
 
       var card        = btn.closest('.product-card');
       var productId   = btn.dataset.productId   || (card ? card.dataset.productId : 'unknown');
