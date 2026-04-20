@@ -499,7 +499,7 @@
   border-bottom: 1px solid rgba(201, 160, 64, 0.15);
 }
 .cart-drawer__title {
-  font-family: var(--font-display);
+  font-family: var(--font-heading);
   font-size: 1.4rem;
   font-weight: 400;
   color: var(--color-cream);
@@ -550,7 +550,7 @@
   margin-bottom: 0.5rem;
 }
 .cart-item__name {
-  font-family: var(--font-display);
+  font-family: var(--font-heading);
   font-size: 0.95rem;
   color: var(--color-cream);
 }
@@ -605,7 +605,7 @@
 .cart-drawer__subtotal {
   display: flex;
   justify-content: space-between;
-  font-family: var(--font-display);
+  font-family: var(--font-heading);
   font-size: 1.1rem;
   color: var(--color-cream);
   margin-bottom: 0.25rem;
@@ -672,7 +672,7 @@
 .checkout-modal__close:hover { opacity: 1; }
 
 .checkout-modal__title {
-  font-family: var(--font-display);
+  font-family: var(--font-heading);
   font-size: 1.6rem;
   font-weight: 400;
   color: var(--color-cream);
@@ -692,7 +692,7 @@
   padding: 1rem 1.25rem;
 }
 .checkout-summary__heading {
-  font-family: var(--font-display);
+  font-family: var(--font-heading);
   font-size: 1rem;
   font-weight: 400;
   color: rgba(250, 244, 235, 0.7);
