@@ -68,8 +68,8 @@ window.submitToPayFast = function (order) {
   var params = {
     merchant_id:   PAYFAST_MERCHANT_ID,
     merchant_key:  PAYFAST_MERCHANT_KEY,
-    return_url:    window.location.origin + window.location.pathname + '?payment=success',
-    cancel_url:    window.location.origin + window.location.pathname + '?payment=cancelled',
+    return_url:    'https://samsara-landing-psi.vercel.app/?payment=success',
+    cancel_url:    'https://samsara-landing-psi.vercel.app/?payment=cancelled',
     m_payment_id:  order.id,
     amount:        parseFloat(order.total).toFixed(2),
     item_name:     'Samsara Olive Oil Order',
