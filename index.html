@@ -423,10 +423,24 @@
   </nav>
 
 
+  <!-- Payment banner (fixed, top-centre) -->
+  <div id="payment-banner" class="payment-banner" hidden></div>
+
+  <!-- Cart icon button (fixed, top-right) -->
+  <button id="cart-icon-btn" class="cart-icon-btn" aria-label="Open cart">
+    🛒
+    <span id="cart-badge" class="cart-icon-btn__badge" hidden>0</span>
+  </button>
+
   <!-- ── Scripts ─────────────────────────────────────────── -->
+  <!-- Supabase JS SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <script src="js/animations.js"></script>
   <script src="js/slider.js"></script>
   <script src="js/cart.js"></script>
+  <script src="js/cart-drawer.js"></script>
+  <script src="js/payfast.js"></script>
+  <script src="js/checkout.js"></script>
   <script src="js/app.js"></script>
 
 </body>

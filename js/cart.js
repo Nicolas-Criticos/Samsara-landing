@@ -104,6 +104,9 @@ function addToCart(productId, productName, price, variant, trees) {
   // Visual feedback — show cumulative trees
   showGhostMessage(cartState.totalTrees);
 
+  // Update cart drawer badge
+  if (window.updateCartDrawer) window.updateCartDrawer();
+
   return { success: true, totalTrees: cartState.totalTrees };
 }
 
@@ -182,7 +185,6 @@ window.initCart = function() {
   initVariantButtons();
   initCartButtons();
 
-  // Expose for debugging
-  // TODO: Remove in production
+  // Expose cart state for drawer + checkout
   window.__samsaraCart = cartState;
 };

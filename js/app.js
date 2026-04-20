@@ -33,6 +33,8 @@ function boot() {
   window.initAnimations();
   window.initSlider();
   window.initCart();
+  window.initCartDrawer();
+  window.initCheckout();
 
   console.log(
     '%c🌿 Samsara Olive Oil — rooted in the Karoo',
