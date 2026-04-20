@@ -41,7 +41,9 @@ function boot() {
 
   steps.forEach(function(step) {
     try {
+      console.log('[Samsara] running:', step[0], typeof step[1]);
       if (typeof step[1] === 'function') step[1]();
+      else console.warn('[Samsara] ' + step[0] + ' is not a function — skipping');
     } catch (err) {
       console.error('[Samsara] ' + step[0] + ' failed:', err);
     }
