@@ -139,17 +139,37 @@
 
     .row__text p + p { margin-top: 0.75rem; }
 
-    /* ── DARK SECTION (story-style from landing) ── */
-    .section--dark {
+    /* ── STORY SECTION (matches landing) ── */
+    .section--story {
       background: var(--bg-dark);
       color: var(--cream);
+      position: relative;
+      overflow: hidden;
     }
 
-    .section--dark .section__eyebrow { color: var(--gold); }
-    .section--dark .section__title { color: var(--cream); }
-    .section--dark .row__text { color: rgba(250,244,235,0.7); }
+    .section--story .story__bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('assets/images/backdrop.jpg');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.45;
+    }
 
-    .section--dark .section__divider {
+    .section--story .story__overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(105deg, rgba(26,18,8,0.92) 0%, rgba(26,18,8,0.72) 55%, rgba(26,18,8,0.25) 100%);
+      z-index: 1;
+    }
+
+    .section--story .section__inner { position: relative; z-index: 2; }
+
+    .section--story .section__eyebrow { color: var(--gold); }
+    .section--story .section__title { color: var(--cream); }
+    .section--story .row__text { color: rgba(250,244,235,0.75); }
+
+    .section--story .section__divider {
       background: linear-gradient(to right, transparent, rgba(194,166,109,0.4), transparent);
     }
 
@@ -402,7 +422,9 @@
 </nav>
 
 <!-- ═══ SECTION 1: About me — image left, text right ═══ -->
-<section class="section">
+<section class="section section--story">
+  <div class="story__bg"></div>
+  <div class="story__overlay"></div>
   <div class="section__inner">
     <div class="row reveal">
       <img src="assets/images/nicris-1.jpg" alt="Nicolas among the olive trees" class="row__img" />
@@ -415,8 +437,10 @@
   </div>
 </section>
 
-<!-- ═══ SECTION 2: The work — text left, image right (dark) ═══ -->
-<section class="section section--dark">
+<!-- ═══ SECTION 2: The work — text left, image right ═══ -->
+<section class="section section--story">
+  <div class="story__bg"></div>
+  <div class="story__overlay"></div>
   <div class="section__inner">
     <div class="row row--reverse reveal">
       <img src="assets/images/nicris-2.jpg" alt="Working in the grove" class="row__img" />
