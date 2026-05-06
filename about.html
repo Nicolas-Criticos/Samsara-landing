@@ -39,9 +39,7 @@
     /* ── NAV ── */
     .nav {
       position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
+      top: 0; left: 0; right: 0;
       z-index: 100;
       display: flex;
       align-items: center;
@@ -62,9 +60,6 @@
     }
 
     .nav__back {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
       font-size: 0.78rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
@@ -75,422 +70,239 @@
 
     .nav__back:hover { color: var(--text); }
 
-    /* ── HERO ── */
-    .hero {
-      min-height: 65vh;
-      background: var(--bg-dark);
-      display: flex;
-      align-items: flex-end;
-      position: relative;
-      overflow: hidden;
-      padding: clamp(6rem, 14vw, 10rem) clamp(1.5rem, 5vw, 3rem) clamp(3rem, 6vw, 5rem);
-    }
-
-    .hero__photos {
-      position: absolute;
-      inset: 0;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-    }
-
-    .hero__photo {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center top;
-      opacity: 0.45;
-    }
-
-    .hero__overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(
-        to bottom,
-        rgba(26,18,8,0.3) 0%,
-        rgba(26,18,8,0.55) 40%,
-        rgba(26,18,8,0.88) 100%
-      );
-    }
-
-    .hero__content {
-      position: relative;
-      z-index: 2;
-      max-width: 700px;
-    }
-
-    .hero__eyebrow {
-      display: block;
-      font-size: 0.72rem;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 1rem;
-    }
-
-    .hero__title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2.5rem, 7vw, 5rem);
-      font-weight: 300;
-      color: var(--cream);
-      line-height: 1.1;
-      margin-bottom: 1.5rem;
-    }
-
-    .hero__subtitle {
-      font-size: 1rem;
-      color: rgba(250,244,235,0.7);
-      max-width: 500px;
-      line-height: 1.9;
-    }
-
-    /* ── SECTIONS ── */
-    .section {
-      padding: clamp(4rem, 8vw, 7rem) clamp(1.5rem, 5vw, 3rem);
-    }
-
-    .section__inner {
-      max-width: 860px;
+    /* ── CONTENT WRAPPER ── */
+    .page {
+      max-width: 720px;
       margin: 0 auto;
+      padding: 7rem 1.5rem 4rem;
     }
 
-    .section__eyebrow {
+    /* ── TYPOGRAPHY ── */
+    .eyebrow {
       display: block;
       font-size: 0.72rem;
       letter-spacing: 0.22em;
       text-transform: uppercase;
       color: var(--earth);
-      margin-bottom: 1rem;
+      margin-bottom: 0.75rem;
     }
 
-    .section__title {
+    .heading {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1.8rem, 4vw, 3rem);
+      font-size: clamp(2rem, 5vw, 3.2rem);
       font-weight: 300;
-      line-height: 1.2;
+      line-height: 1.15;
       margin-bottom: 1.5rem;
     }
 
-    .section__divider {
-      width: 60px;
+    .heading--sm {
+      font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+      margin-bottom: 1.2rem;
+    }
+
+    .divider {
+      width: 50px;
       height: 1px;
       background: linear-gradient(to right, transparent, var(--earth), transparent);
       margin: 1.5rem 0;
       opacity: 0.4;
     }
 
-    .body-text {
-      font-size: 1rem;
+    .text {
+      font-size: 0.95rem;
       color: var(--muted);
-      line-height: 2;
-      max-width: 640px;
+      line-height: 1.9;
     }
 
-    .body-text + .body-text { margin-top: 1rem; }
+    .text + .text { margin-top: 0.8rem; }
 
-    /* ── STATS BAND ── */
-    .stats-band {
-      background: var(--bg-dark);
-      padding: clamp(3rem, 6vw, 5rem) clamp(1.5rem, 5vw, 3rem);
+    /* ── PHOTO ── */
+    .photo-wrap {
+      margin: 2.5rem 0;
+      border-radius: 8px;
+      overflow: hidden;
     }
 
-    .stats-band__inner {
-      max-width: 860px;
-      margin: 0 auto;
+    .photo-wrap img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 8px;
+    }
+
+    /* ── STATS ROW ── */
+    .stats {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 2rem;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin: 2.5rem 0;
+      padding: 2rem 0;
+      border-top: 1px solid rgba(138,127,109,0.12);
+      border-bottom: 1px solid rgba(138,127,109,0.12);
     }
 
-    @media (max-width: 680px) {
-      .stats-band__inner { grid-template-columns: repeat(2, 1fr); }
-    }
-
-    .stat {
-      display: flex;
-      flex-direction: column;
-      gap: 0.3rem;
+    @media (max-width: 480px) {
+      .stats { grid-template-columns: 1fr; gap: 1.2rem; }
     }
 
     .stat__num {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 2.5rem;
+      font-size: 2.2rem;
       font-weight: 300;
-      color: var(--gold);
+      color: var(--text);
       line-height: 1;
     }
 
     .stat__label {
       font-size: 0.72rem;
-      letter-spacing: 0.14em;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: rgba(250,244,235,0.45);
-    }
-
-    /* ── WHAT IT TAKES ── */
-    .dark-section {
-      background: var(--bg-dark);
-      padding: clamp(4rem, 8vw, 7rem) clamp(1.5rem, 5vw, 3rem);
-    }
-
-    .dark-section .section__title { color: var(--cream); }
-    .dark-section .body-text { color: rgba(250,244,235,0.65); }
-    .dark-section .section__eyebrow { color: var(--gold); }
-
-    .rehab-steps {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1.5rem;
-      margin-top: 2.5rem;
-    }
-
-    @media (max-width: 620px) {
-      .rehab-steps { grid-template-columns: 1fr; }
-    }
-
-    .rehab-step {
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(194,166,109,0.12);
-      border-radius: 8px;
-      padding: 1.5rem;
-    }
-
-    .rehab-step__icon { font-size: 1.5rem; margin-bottom: 0.75rem; }
-
-    .rehab-step__title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.1rem;
-      color: var(--cream);
-      margin-bottom: 0.5rem;
-    }
-
-    .rehab-step__desc {
-      font-size: 0.875rem;
-      color: rgba(250,244,235,0.55);
-      line-height: 1.7;
-    }
-
-    /* ── PHASE TIMELINE ── */
-    .timeline {
-      margin-top: 3rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-      position: relative;
-    }
-
-    .timeline::before {
-      content: '';
-      position: absolute;
-      left: 1.1rem;
-      top: 0;
-      bottom: 0;
-      width: 1px;
-      background: rgba(194,166,109,0.2);
-    }
-
-    .timeline-item {
-      display: flex;
-      gap: 1.5rem;
-      padding-bottom: 2rem;
-      position: relative;
-    }
-
-    .timeline-item:last-child { padding-bottom: 0; }
-
-    .timeline-dot {
-      width: 2.2rem;
-      height: 2.2rem;
-      border-radius: 50%;
-      background: rgba(194,166,109,0.12);
-      border: 1px solid rgba(194,166,109,0.3);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.9rem;
-      flex-shrink: 0;
-      position: relative;
-      z-index: 1;
-    }
-
-    .timeline-body { padding-top: 0.2rem; }
-
-    .timeline-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1rem;
-      color: var(--cream);
-      margin-bottom: 0.3rem;
-    }
-
-    .timeline-desc {
-      font-size: 0.85rem;
-      color: rgba(250,244,235,0.5);
-      line-height: 1.7;
+      color: var(--muted);
+      margin-top: 0.25rem;
     }
 
     /* ── BLOCK GRID ── */
-    .block-section {
-      padding: clamp(4rem, 8vw, 7rem) clamp(1.5rem, 5vw, 3rem);
-    }
-
-    .block-section__inner {
-      max-width: 860px;
-      margin: 0 auto;
-    }
-
     .block-grid {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
-      gap: 0.75rem;
-      margin-top: 2.5rem;
+      gap: 0.6rem;
+      margin: 2rem 0 0.75rem;
     }
 
-    @media (max-width: 720px) {
+    @media (max-width: 600px) {
       .block-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-
-    @media (max-width: 400px) {
-      .block-grid { grid-template-columns: 1fr; }
     }
 
     .block-card {
       background: #fff;
-      border: 1px solid rgba(138,127,109,0.14);
-      border-radius: 10px;
-      padding: 1.1rem 1rem;
-      cursor: default;
+      border: 1px solid rgba(138,127,109,0.12);
+      border-radius: 8px;
+      padding: 0.9rem 0.8rem;
       position: relative;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-      overflow: visible;
+      transition: transform 0.2s, box-shadow 0.2s;
+      cursor: default;
     }
 
     .block-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 12px 32px rgba(138,127,109,0.18);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(138,127,109,0.15);
       z-index: 10;
     }
 
-    .block-card__header {
+    .block-card__head {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.35rem;
     }
 
     .block-card__name {
-      font-size: 0.72rem;
+      font-size: 0.68rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
       color: var(--muted);
       font-weight: 500;
     }
 
-    .block-card__status-dot {
-      width: 8px;
-      height: 8px;
+    .block-card__dot {
+      width: 7px; height: 7px;
       border-radius: 50%;
       flex-shrink: 0;
     }
 
-    .status-restored  { background: #6b9e6b; }
-    .status-active    { background: #c2a66d; }
-    .status-unknown   { background: #ccc; }
+    .dot-green  { background: #6b9e6b; }
+    .dot-grey   { background: #ccc; }
 
     .block-card__emoji {
-      font-size: 1.6rem;
+      font-size: 1.4rem;
       display: block;
-      margin: 0.25rem 0 0.4rem;
+      margin-bottom: 0.3rem;
     }
 
-    .block-card__health {
+    .block-card__pips {
       display: flex;
       gap: 2px;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.35rem;
     }
 
-    .health-pip {
-      width: 14px;
-      height: 4px;
+    .pip {
+      width: 12px; height: 3px;
       border-radius: 2px;
       background: rgba(138,127,109,0.15);
     }
 
-    .health-pip.filled { background: var(--olive); }
+    .pip.on { background: var(--olive); }
 
     .block-card__trees {
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       color: var(--muted);
     }
 
-    /* Hover tooltip */
-    .block-card__tooltip {
+    /* Tooltip */
+    .block-card__tip {
       display: none;
       position: absolute;
-      bottom: calc(100% + 10px);
+      bottom: calc(100% + 8px);
       left: 50%;
       transform: translateX(-50%);
       background: var(--bg-dark);
       color: var(--cream);
-      border: 1px solid rgba(194,166,109,0.2);
+      border: 1px solid rgba(194,166,109,0.18);
       border-radius: 8px;
-      padding: 1rem 1.1rem;
-      width: 220px;
-      font-size: 0.82rem;
-      line-height: 1.6;
+      padding: 0.9rem 1rem;
+      width: 210px;
+      font-size: 0.8rem;
+      line-height: 1.55;
       z-index: 50;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.25);
       pointer-events: none;
     }
 
-    .block-card__tooltip::after {
+    .block-card__tip::after {
       content: '';
       position: absolute;
-      top: 100%;
-      left: 50%;
+      top: 100%; left: 50%;
       transform: translateX(-50%);
       border: 6px solid transparent;
-      border-top-color: rgba(194,166,109,0.3);
+      border-top-color: rgba(194,166,109,0.25);
     }
 
-    .block-card:hover .block-card__tooltip { display: block; }
+    .block-card:hover .block-card__tip { display: block; }
 
-    /* last row — tooltips open upward by default; if near bottom flip */
-    .block-card.flip-tooltip .block-card__tooltip {
+    .block-card.flip .block-card__tip {
       bottom: auto;
-      top: calc(100% + 10px);
+      top: calc(100% + 8px);
     }
 
-    .block-card.flip-tooltip .block-card__tooltip::after {
-      top: auto;
-      bottom: 100%;
+    .block-card.flip .block-card__tip::after {
+      top: auto; bottom: 100%;
       border-top-color: transparent;
-      border-bottom-color: rgba(194,166,109,0.3);
+      border-bottom-color: rgba(194,166,109,0.25);
     }
 
-    .tooltip__label {
-      font-size: 0.68rem;
+    .tip__label {
+      font-size: 0.66rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
       color: var(--gold);
-      margin-bottom: 0.3rem;
+      margin-bottom: 0.25rem;
     }
 
-    .tooltip__note {
-      color: rgba(250,244,235,0.65);
-    }
+    .tip__note { color: rgba(250,244,235,0.65); }
 
-    .tooltip__irrigation {
-      margin-top: 0.6rem;
-      font-size: 0.75rem;
-      color: rgba(250,244,235,0.45);
+    .tip__detail {
+      margin-top: 0.5rem;
+      font-size: 0.72rem;
+      color: rgba(250,244,235,0.4);
     }
 
     /* ── PROGRESS BAR ── */
     .progress-wrap {
-      margin-top: 2.5rem;
       background: rgba(138,127,109,0.1);
       border-radius: 999px;
-      height: 8px;
+      height: 6px;
       overflow: hidden;
+      margin: 1.5rem 0 0.4rem;
     }
 
     .progress-bar {
@@ -498,127 +310,91 @@
       background: linear-gradient(to right, var(--olive), var(--gold));
       border-radius: 999px;
       width: 0;
-      transition: width 1.2s ease;
+      transition: width 1s ease;
     }
 
     .progress-label {
       display: flex;
       justify-content: space-between;
-      font-size: 0.78rem;
+      font-size: 0.75rem;
       color: var(--muted);
-      margin-top: 0.5rem;
     }
 
     /* ── CTA ── */
-    .cta-section {
-      background: var(--bg-dark);
-      padding: clamp(4rem, 8vw, 7rem) clamp(1.5rem, 5vw, 3rem);
+    .cta {
       text-align: center;
-      position: relative;
-      overflow: hidden;
+      margin-top: 4rem;
+      padding-top: 3rem;
+      border-top: 1px solid rgba(138,127,109,0.12);
     }
 
-    .cta-section__bg {
-      position: absolute;
-      inset: 0;
-      background-image: url('assets/images/backdrop.jpg');
-      background-size: cover;
-      background-position: center;
-      opacity: 0.08;
-    }
-
-    .cta-section__inner { position: relative; z-index: 1; max-width: 600px; margin: 0 auto; }
-
-    .cta-section__title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1.8rem, 4vw, 3rem);
-      font-weight: 300;
-      color: var(--cream);
-      margin-bottom: 1rem;
-    }
-
-    .cta-section__text {
-      font-size: 0.95rem;
-      color: rgba(250,244,235,0.6);
-      margin-bottom: 2rem;
-      line-height: 1.9;
-    }
-
-    /* ── BUTTONS ── */
     .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
       font-family: 'Inter', sans-serif;
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       letter-spacing: 0.12em;
       text-transform: uppercase;
       border-radius: 4px;
       padding: 0.8em 2em;
       cursor: pointer;
       border: none;
-      transition: transform 0.15s ease, box-shadow 0.2s ease, background 0.2s ease;
       text-decoration: none;
+      transition: transform 0.15s, box-shadow 0.2s, background 0.2s;
     }
 
     .btn-primary {
-      background: var(--gold);
-      color: var(--bg-dark);
+      background: var(--bg-dark);
+      color: var(--gold);
     }
 
     .btn-primary:hover {
-      background: #d4b87a;
+      background: #2a1e0e;
       transform: translateY(-2px);
-      box-shadow: 0 6px 24px rgba(194,166,109,0.3);
+      box-shadow: 0 6px 24px rgba(26,18,8,0.2);
     }
 
-    .btn-outline-light {
+    .btn-outline {
       background: transparent;
-      color: var(--cream);
-      border: 1px solid rgba(250,244,235,0.3);
-      margin-left: 1rem;
+      color: var(--text);
+      border: 1px solid rgba(138,127,109,0.35);
+      margin-left: 0.75rem;
     }
 
-    .btn-outline-light:hover {
-      border-color: var(--gold);
-      color: var(--gold);
+    .btn-outline:hover {
+      border-color: var(--bg-dark);
+      color: var(--bg-dark);
       transform: translateY(-2px);
+    }
+
+    .hint {
+      font-size: 0.72rem;
+      color: var(--muted);
+      text-align: center;
+      margin-top: 0.5rem;
+      opacity: 0.6;
     }
 
     /* ── FOOTER ── */
     .footer {
-      background: var(--bg-dark);
-      color: rgba(250,244,235,0.45);
-      padding: 2.5rem clamp(1.5rem, 5vw, 3rem);
+      margin-top: 4rem;
+      padding: 2rem 1.5rem;
       text-align: center;
-      border-top: 1px solid rgba(194,166,109,0.08);
+      border-top: 1px solid rgba(138,127,109,0.08);
     }
 
-    .footer__links {
-      display: flex;
-      justify-content: center;
-      gap: 1.5rem;
-      flex-wrap: wrap;
-      margin-bottom: 1.5rem;
+    .footer__copy {
+      font-size: 0.72rem;
+      color: var(--muted);
+      opacity: 0.5;
     }
-
-    .footer__link {
-      color: rgba(250,244,235,0.45);
-      text-decoration: none;
-      font-size: 0.8rem;
-      letter-spacing: 0.08em;
-      transition: color 0.2s;
-    }
-
-    .footer__link:hover { color: var(--gold); }
-
-    .footer__copy { font-size: 0.72rem; opacity: 0.45; }
 
     /* ── REVEAL ── */
     .reveal {
       opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
+      transform: translateY(16px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
     }
 
     .reveal.visible { opacity: 1; transform: translateY(0); }
@@ -632,196 +408,88 @@
   <a href="index.html" class="nav__back">← Back to shop</a>
 </nav>
 
-<!-- Hero -->
-<section class="hero">
-  <div class="hero__photos">
-    <img src="assets/images/nicris-1.jpg" alt="Nicolas in the olive grove" class="hero__photo" />
-    <img src="assets/images/nicris-2.jpg" alt="Inspecting the olive trees" class="hero__photo" />
+<!-- Page content — single centered column -->
+<main class="page">
+
+  <!-- Intro -->
+  <span class="eyebrow reveal">The Project</span>
+  <h1 class="heading reveal">Bringing 16,000 trees<br>back to life.</h1>
+  <div class="divider reveal"></div>
+
+  <p class="text reveal">
+    My name is Nicolas Criticos. I'm an electrical engineer turned farmer, stewarding VrischGewagt Boutique Olive Farm in the Swartberg Karoo — one of the most beautiful and remote valleys in South Africa.
+  </p>
+  <p class="text reveal">
+    Thirteen years ago, 16,000 olive trees were planted here with a bold vision for abundance. At peak, the farm was producing thousands of litres of cold-pressed extra virgin olive oil per year. Then came drought, infrastructure collapse, and years of neglect. Today, less than 1% of the trees bear fruit.
+  </p>
+  <p class="text reveal">
+    I'm bringing them back — not with shortcuts, but with restored irrigation, soil rehabilitation, structural pruning, and years of patient, methodical care. Every bottle of Samsara olive oil directly funds this work.
+  </p>
+
+  <!-- Photo 1 -->
+  <div class="photo-wrap reveal">
+    <img src="assets/images/nicris-1.jpg" alt="Nicolas among the olive trees" loading="lazy" />
   </div>
-  <div class="hero__overlay"></div>
-  <div class="hero__content">
-    <span class="hero__eyebrow">The Project</span>
-    <h1 class="hero__title">Bringing 16,000<br>trees back to life</h1>
-    <p class="hero__subtitle">A rehabilitation story from the Swartberg Karoo — one block at a time.</p>
-  </div>
-</section>
 
-<!-- Stats band -->
-<div class="stats-band">
-  <div class="stats-band__inner">
-    <div class="stat reveal">
-      <span class="stat__num">16,000</span>
-      <span class="stat__label">Olive trees on the farm</span>
+  <!-- Where we are -->
+  <span class="eyebrow reveal" style="margin-top: 2rem;">Where we are now</span>
+  <h2 class="heading heading--sm reveal">5,000 trees. Halfway there.</h2>
+
+  <p class="text reveal">
+    The full farm has 16,000 trees across 40 irrigation blocks. I'm currently focused on the first 10 blocks — approximately 5,000 trees. Blocks 1–3 were the pilot: irrigation has been fully restored and the trees are responding. Blocks 4–6 have irrigation back online but need soil and canopy work. Blocks 7–10 haven't started yet.
+  </p>
+  <p class="text reveal">
+    The work involves repairing decades-old drip irrigation systems, rebuilding soil biology with compost and biochar, heavy structural pruning to redirect growth, and targeted nutrition programs timed to the trees' seasonal cycle. Even with everything done right, stressed olive trees take 2–4 seasons to fully recover.
+  </p>
+  <p class="text reveal">
+    With one labourer, the current pace covers about 2,500 trees per year. With proper funding and a 20-person sprint team, the entire farm could be rehabilitated in 1–2 years — with break-even projected by year three.
+  </p>
+
+  <!-- Stats -->
+  <div class="stats reveal">
+    <div>
+      <div class="stat__num">5,000</div>
+      <div class="stat__label">Trees in active rehab</div>
     </div>
-    <div class="stat reveal">
-      <span class="stat__num">5,000</span>
-      <span class="stat__label">Trees in active rehab</span>
+    <div>
+      <div class="stat__num">~50%</div>
+      <div class="stat__label">Phase one complete</div>
     </div>
-    <div class="stat reveal">
-      <span class="stat__num">~50%</span>
-      <span class="stat__label">Of phase one complete</span>
-    </div>
-    <div class="stat reveal">
-      <span class="stat__num">13</span>
-      <span class="stat__label">Years of history</span>
-    </div>
-  </div>
-</div>
-
-<!-- The Story -->
-<section class="section">
-  <div class="section__inner">
-    <span class="section__eyebrow reveal">How it started</span>
-    <h2 class="section__title reveal">A grove abandoned.<br>A vision reclaimed.</h2>
-    <div class="section__divider reveal"></div>
-    <p class="body-text reveal">
-      Thirteen years ago, 16,000 olive trees were planted across forty irrigation blocks on VrischGewagt Boutique Olive Farm in the Swartberg Karoo — a bold vision for abundance in one of South Africa's most spectacular landscapes. At peak, the farm produced thousands of litres of cold-pressed extra virgin olive oil per year.
-    </p>
-    <p class="body-text reveal" style="margin-top:1rem;">
-      Then came years of drought, infrastructure failure, and operational strain. The irrigation network collapsed. Block by block, the trees fell into decline. Today, less than 1% bear fruit — not because the land gave up, but because the system did.
-    </p>
-    <p class="body-text reveal" style="margin-top:1rem;">
-      Nicolas Criticos — electrical engineer, farmer, and steward of this land — is bringing them back. Not with shortcuts, but with soil science, restored infrastructure, and patient, methodical care. Every bottle of Samsara olive oil directly funds this work.
-    </p>
-  </div>
-</section>
-
-<!-- What it takes -->
-<section class="dark-section">
-  <div class="section__inner">
-    <span class="section__eyebrow reveal">What rehabilitation actually means</span>
-    <h2 class="section__title reveal">It takes more than water.<br>It takes a system.</h2>
-    <div class="section__divider reveal" style="background: linear-gradient(to right, transparent, rgba(194,166,109,0.4), transparent);"></div>
-    <p class="body-text reveal">
-      Rehabilitating neglected olive trees is a multi-year, multi-layer process. It's not just about turning the taps back on — the trees have been stressed for years. Soil biology has collapsed, root systems are compromised, canopies are overgrown and unproductive. Real recovery requires a coordinated approach across several fronts simultaneously.
-    </p>
-
-    <div class="rehab-steps reveal">
-      <div class="rehab-step">
-        <div class="rehab-step__icon">💧</div>
-        <div class="rehab-step__title">Irrigation Restoration</div>
-        <div class="rehab-step__desc">Repairing and re-pressurising 40+ year-old drip systems, replacing burst mainlines, clearing blockages — block by block, tree by tree.</div>
-      </div>
-      <div class="rehab-step">
-        <div class="rehab-step__icon">🌱</div>
-        <div class="rehab-step__title">Soil Rehabilitation</div>
-        <div class="rehab-step__desc">Applying compost, biochar, and organic amendments to rebuild microbial life. Karoo soils are ancient and mineral-rich — they just need the biology back.</div>
-      </div>
-      <div class="rehab-step">
-        <div class="rehab-step__icon">✂️</div>
-        <div class="rehab-step__title">Structural Pruning</div>
-        <div class="rehab-step__desc">Removing years of deadwood and cross-branching. Opening the canopy to light. Redirecting the tree's energy into productive growth rather than survival.</div>
-      </div>
-      <div class="rehab-step">
-        <div class="rehab-step__icon">🧪</div>
-        <div class="rehab-step__title">Foliar & Nutrition Programs</div>
-        <div class="rehab-step__desc">Targeted foliar sprays and slow-release fertilisation programs timed to the tree's phenological cycle — from dormancy to flowering to fruit set.</div>
-      </div>
-      <div class="rehab-step">
-        <div class="rehab-step__icon">📋</div>
-        <div class="rehab-step__title">Block-by-Block Tracking</div>
-        <div class="rehab-step__desc">Every block is monitored individually. Health ratings, irrigation status, and intervention logs are tracked in real time to inform decisions season by season.</div>
-      </div>
-      <div class="rehab-step">
-        <div class="rehab-step__icon">⏳</div>
-        <div class="rehab-step__title">Time & Patience</div>
-        <div class="rehab-step__desc">Even with everything done right, stressed olive trees take 2–4 seasons to fully recover. This is not a quick fix — it's a commitment to the long arc.</div>
-      </div>
-    </div>
-
-    <!-- Timeline -->
-    <div style="margin-top: 3rem;">
-      <span class="section__eyebrow reveal" style="color: var(--gold);">The 2026 Season Plan</span>
-      <div class="timeline reveal">
-        <div class="timeline-item">
-          <div class="timeline-dot">🌿</div>
-          <div class="timeline-body">
-            <div class="timeline-title">Recovery Phase (Apr – May)</div>
-            <div class="timeline-desc">Irrigation restoration on Blocks 1–3. Foliar support. Post-harvest tree stabilisation. Begin soil amendment program on active blocks.</div>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-dot">🍂</div>
-          <div class="timeline-body">
-            <div class="timeline-title">Dormancy Prep (May – Jun)</div>
-            <div class="timeline-desc">Heavy structural pruning. Compost application. Weed suppression. Prepare Blocks 4–6 for activation.</div>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-dot">❄️</div>
-          <div class="timeline-body">
-            <div class="timeline-title">Dormancy Work (Jun – Aug)</div>
-            <div class="timeline-desc">Deep soil work. Biochar integration. Infrastructure repair on next-phase blocks. No irrigation pressure — trees resting.</div>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-dot">🌸</div>
-          <div class="timeline-body">
-            <div class="timeline-title">Spring Activation (Aug – Sep)</div>
-            <div class="timeline-desc">Restart irrigation on all active blocks. Nutrient push. Foliar spray program. Monitor flower bud development on Blocks 1–3.</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- Block Progress -->
-<section class="block-section">
-  <div class="block-section__inner">
-    <span class="section__eyebrow reveal">Live Progress</span>
-    <h2 class="section__title reveal">The first 5,000 trees.<br>Block by block.</h2>
-    <div class="section__divider reveal"></div>
-    <p class="body-text reveal">
-      The full farm has 16,000 trees across 40 blocks. We are currently focused on the first 10 blocks — approximately 5,000 trees. Blocks 1–3 have completed irrigation restoration and are in active recovery. Blocks 4–10 are staged for rehabilitation. We are roughly halfway through phase one.
-    </p>
-
-    <!-- Progress bar -->
-    <div class="reveal" style="margin-top: 2rem;">
-      <div class="progress-wrap">
-        <div class="progress-bar" id="progress-bar"></div>
-      </div>
-      <div class="progress-label">
-        <span>Phase 1 progress</span>
-        <span>~50% complete</span>
-      </div>
-    </div>
-
-    <!-- Block grid (populated by JS) -->
-    <div class="block-grid reveal" id="block-grid">
-      <!-- Injected by JS -->
-    </div>
-
-    <p style="font-size:0.78rem; color: var(--muted); margin-top: 1.5rem; text-align:center;">
-      Hover over each block for details · Data pulled live from myLifeTracker
-    </p>
-  </div>
-</section>
-
-<!-- CTA -->
-<section class="cta-section">
-  <div class="cta-section__bg"></div>
-  <div class="cta-section__inner">
-    <h2 class="cta-section__title reveal">Every bottle<br>plants the next step.</h2>
-    <p class="cta-section__text reveal">
-      Sales from Samsara olive oil directly fund the rehabilitation — tools, labour, soil inputs, and the slow, relentless work of bringing these trees back. When you buy a bottle, you're not just getting oil. You're part of the story.
-    </p>
-    <div class="reveal">
-      <a href="index.html#products" class="btn btn-primary">Shop Now</a>
-      <a href="https://www.instagram.com/niccris_samsara" target="_blank" class="btn btn-outline-light">Follow the Journey</a>
+    <div>
+      <div class="stat__num">3</div>
+      <div class="stat__label">Blocks fully restored</div>
     </div>
   </div>
-</section>
 
-<!-- Footer -->
+  <!-- Photo 2 -->
+  <div class="photo-wrap reveal">
+    <img src="assets/images/nicris-2.jpg" alt="Inspecting the grove" loading="lazy" />
+  </div>
+
+  <!-- Block progress -->
+  <span class="eyebrow reveal" style="margin-top: 2rem;">Block by block</span>
+  <h2 class="heading heading--sm reveal">Live rehabilitation progress</h2>
+
+  <div class="progress-wrap reveal">
+    <div class="progress-bar" id="progress-bar"></div>
+  </div>
+  <div class="progress-label reveal">
+    <span>Phase 1</span>
+    <span>~50%</span>
+  </div>
+
+  <div class="block-grid reveal" id="block-grid"></div>
+  <p class="hint">Hover over a block for details</p>
+
+  <!-- CTA -->
+  <div class="cta reveal">
+    <a href="index.html#products" class="btn btn-primary">Shop Samsara Oil</a>
+    <a href="https://www.instagram.com/niccris_samsara" target="_blank" class="btn btn-outline">Follow the journey</a>
+  </div>
+
+</main>
+
 <footer class="footer">
-  <div class="footer__links">
-    <a href="index.html#story" class="footer__link">Our Story</a>
-    <a href="index.html#products" class="footer__link">Shop</a>
-    <a href="https://www.instagram.com/niccris_samsara" target="_blank" class="footer__link">Instagram</a>
-    <a href="mailto:nicolas.criticos98@gmail.com" class="footer__link">Contact</a>
-  </div>
   <p class="footer__copy">© 2026 Samsara · VrischGewagt Boutique Olive Farm · Swartberg Karoo, South Africa</p>
 </footer>
 
@@ -832,137 +500,90 @@
 (function () {
   'use strict';
 
-  var SUPABASE_URL = 'https://toxgvaqctxbqhqitmxkm.supabase.co';
-  var SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRveGd2YXFjdHhicWhxaXRteGttIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njk0MDg3NjksImV4cCI6MjA4NDk4NDc2OX0.P0r1zYtuxA0y0Qj8j6BpL1NJCwHn5vB68SI8jR4O4U0';
+  var SB_URL = 'https://toxgvaqctxbqhqitmxkm.supabase.co';
+  var SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRveGd2YXFjdHhicWhxaXRteGttIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njk0MDg3NjksImV4cCI6MjA4NDk4NDc2OX0.P0r1zYtuxA0y0Qj8j6BpL1NJCwHn5vB68SI8jR4O4U0';
 
-  /* ── Scroll Reveal ── */
-  function initReveal() {
-    var els = document.querySelectorAll('.reveal');
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
-      });
-    }, { threshold: 0.1 });
-    els.forEach(function (el) { io.observe(el); });
-  }
+  // Reveal on scroll
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
 
-  /* ── Progress Bar ── */
-  function initProgress() {
-    var bar = document.getElementById('progress-bar');
-    if (!bar) return;
-    var io = new IntersectionObserver(function (entries) {
-      if (entries[0].isIntersecting) {
-        setTimeout(function () { bar.style.width = '50%'; }, 200);
-        io.disconnect();
-      }
+  // Progress bar
+  var bar = document.getElementById('progress-bar');
+  if (bar) {
+    var pio = new IntersectionObserver(function (entries) {
+      if (entries[0].isIntersecting) { setTimeout(function () { bar.style.width = '50%'; }, 200); pio.disconnect(); }
     }, { threshold: 0.5 });
-    io.observe(bar);
+    pio.observe(bar);
   }
 
-  /* ── Block status helpers ── */
-  function statusEmoji(irrigation, health) {
-    if (irrigation === 'restored' && health >= 3) return '🌿';
-    if (irrigation === 'restored' && health === 2) return '🌱';
-    if (irrigation === 'restored' && health <= 1) return '⏳';
+  // Helpers
+  function emoji(irr, hp) {
+    if (irr === 'restored' && hp >= 3) return '🌿';
+    if (irr === 'restored' && hp === 2) return '🌱';
+    if (irr === 'restored') return '⏳';
     return '💤';
   }
 
-  function statusLabel(irrigation) {
-    if (irrigation === 'restored') return 'Irrigation restored';
-    return 'Not yet started';
+  function hpLabel(r) { return ['','Poor','Recovering','Good','Thriving','Excellent'][r] || 'Unknown'; }
+
+  function pips(r) {
+    var h = '';
+    for (var i = 1; i <= 5; i++) h += '<div class="pip' + (i <= r ? ' on' : '') + '"></div>';
+    return h;
   }
 
-  function healthLabel(rating) {
-    var labels = ['', 'Poor', 'Recovering', 'Good', 'Thriving', 'Excellent'];
-    return labels[rating] || 'Unknown';
-  }
-
-  function healthPips(rating, max) {
-    var html = '';
-    for (var i = 1; i <= max; i++) {
-      html += '<div class="health-pip' + (i <= rating ? ' filled' : '') + '"></div>';
-    }
-    return html;
-  }
-
-  function dotClass(irrigation) {
-    if (irrigation === 'restored') return 'status-restored';
-    return 'status-unknown';
-  }
-
-  /* ── Render blocks ── */
-  function renderBlocks(blocks) {
-    var grid = document.getElementById('block-grid');
-    if (!grid) return;
-
-    // Sort by name (Block 1 … Block 10)
+  function render(blocks) {
+    var g = document.getElementById('block-grid');
+    if (!g) return;
     blocks.sort(function (a, b) {
-      var na = parseInt((a.name || '').replace(/\D/g, ''), 10);
-      var nb = parseInt((b.name || '').replace(/\D/g, ''), 10);
-      return na - nb;
+      return parseInt((a.name||'').replace(/\D/g,'')) - parseInt((b.name||'').replace(/\D/g,''));
     });
-
-    grid.innerHTML = blocks.map(function (block, idx) {
-      var flip = idx >= 5; // bottom row flips tooltip upward
-      return [
-        '<div class="block-card' + (flip ? ' flip-tooltip' : '') + '">',
-          '<div class="block-card__header">',
-            '<span class="block-card__name">' + (block.name || 'Block') + '</span>',
-            '<span class="block-card__status-dot ' + dotClass(block.irrigation_status) + '"></span>',
-          '</div>',
-          '<span class="block-card__emoji">' + statusEmoji(block.irrigation_status, block.health_rating) + '</span>',
-          '<div class="block-card__health">' + healthPips(block.health_rating || 0, 5) + '</div>',
-          '<div class="block-card__trees">~' + (block.tree_count || 500).toLocaleString() + ' trees</div>',
-
-          '<div class="block-card__tooltip">',
-            '<div class="tooltip__label">' + (block.name || 'Block') + '</div>',
-            '<div class="tooltip__note">' + (block.notes || 'No notes recorded.') + '</div>',
-            '<div class="tooltip__irrigation">',
-              '💧 ' + statusLabel(block.irrigation_status) + '<br>',
-              '📊 Health: ' + healthLabel(block.health_rating),
-            '</div>',
-          '</div>',
-        '</div>',
-      ].join('');
+    g.innerHTML = blocks.map(function (b, i) {
+      return '<div class="block-card' + (i >= 5 ? ' flip' : '') + '">' +
+        '<div class="block-card__head">' +
+          '<span class="block-card__name">' + b.name + '</span>' +
+          '<span class="block-card__dot ' + (b.irrigation_status === 'restored' ? 'dot-green' : 'dot-grey') + '"></span>' +
+        '</div>' +
+        '<span class="block-card__emoji">' + emoji(b.irrigation_status, b.health_rating) + '</span>' +
+        '<div class="block-card__pips">' + pips(b.health_rating || 0) + '</div>' +
+        '<div class="block-card__trees">~' + (b.tree_count || 500) + ' trees</div>' +
+        '<div class="block-card__tip">' +
+          '<div class="tip__label">' + b.name + '</div>' +
+          '<div class="tip__note">' + (b.notes || 'No notes yet.') + '</div>' +
+          '<div class="tip__detail">💧 ' + (b.irrigation_status === 'restored' ? 'Irrigation restored' : 'Not yet started') +
+          '<br>📊 Health: ' + hpLabel(b.health_rating) + '</div>' +
+        '</div>' +
+      '</div>';
     }).join('');
   }
 
-  /* ── Fetch from Supabase ── */
-  function loadBlocks() {
-    var sb = window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY) : null;
-    if (!sb) { renderFallback(); return; }
+  // Load from Supabase
+  var sb = window.supabase ? window.supabase.createClient(SB_URL, SB_KEY) : null;
+  if (sb) {
+    sb.from('rehab_blocks').select('*').then(function (res) {
+      if (res.data && res.data.length) render(res.data);
+      else fallback();
+    }).catch(fallback);
+  } else { fallback(); }
 
-    sb.from('rehab_blocks').select('*')
-      .then(function (res) {
-        if (res.error || !res.data || !res.data.length) { renderFallback(); return; }
-        renderBlocks(res.data);
-      })
-      .catch(function () { renderFallback(); });
+  function fallback() {
+    render([
+      { name:'Block 1', irrigation_status:'restored', health_rating:3, tree_count:500, notes:'Pilot block — trees responding' },
+      { name:'Block 2', irrigation_status:'restored', health_rating:2, tree_count:500, notes:'Pilot block — slower response' },
+      { name:'Block 3', irrigation_status:'restored', health_rating:2, tree_count:500, notes:'Pilot block — mixed condition' },
+      { name:'Block 4', irrigation_status:'restored', health_rating:1, tree_count:500, notes:'Irrigation restored, not yet started' },
+      { name:'Block 5', irrigation_status:'restored', health_rating:1, tree_count:500, notes:'Irrigation restored, not yet started' },
+      { name:'Block 6', irrigation_status:'restored', health_rating:1, tree_count:500, notes:'Irrigation restored, not yet started' },
+      { name:'Block 7', irrigation_status:'unknown',  health_rating:1, tree_count:500, notes:'Not yet started' },
+      { name:'Block 8', irrigation_status:'unknown',  health_rating:1, tree_count:500, notes:'Not yet started' },
+      { name:'Block 9', irrigation_status:'unknown',  health_rating:1, tree_count:500, notes:'Not yet started' },
+      { name:'Block 10', irrigation_status:'unknown', health_rating:1, tree_count:500, notes:'Not yet started' },
+    ]);
   }
-
-  function renderFallback() {
-    // Static fallback if DB is unreachable
-    var fallback = [
-      { name: 'Block 1', irrigation_status: 'restored', health_rating: 3, tree_count: 500, notes: 'Pilot block — irrigation restored, trees responding' },
-      { name: 'Block 2', irrigation_status: 'restored', health_rating: 2, tree_count: 500, notes: 'Pilot block — irrigation restored, slower response' },
-      { name: 'Block 3', irrigation_status: 'restored', health_rating: 2, tree_count: 500, notes: 'Pilot block — irrigation restored, mixed condition' },
-      { name: 'Block 4', irrigation_status: 'restored', health_rating: 1, tree_count: 500, notes: 'Not yet started' },
-      { name: 'Block 5', irrigation_status: 'restored', health_rating: 1, tree_count: 500, notes: 'Not yet started' },
-      { name: 'Block 6', irrigation_status: 'restored', health_rating: 1, tree_count: 500, notes: 'Not yet started' },
-      { name: 'Block 7', irrigation_status: 'unknown',  health_rating: 1, tree_count: 500, notes: 'Not yet started' },
-      { name: 'Block 8', irrigation_status: 'unknown',  health_rating: 1, tree_count: 500, notes: 'Not yet started' },
-      { name: 'Block 9', irrigation_status: 'unknown',  health_rating: 1, tree_count: 500, notes: 'Not yet started' },
-      { name: 'Block 10', irrigation_status: 'unknown', health_rating: 1, tree_count: 500, notes: 'Not yet started' },
-    ];
-    renderBlocks(fallback);
-  }
-
-  /* ── Boot ── */
-  document.addEventListener('DOMContentLoaded', function () {
-    initReveal();
-    initProgress();
-    loadBlocks();
-  });
 
 })();
 </script>
