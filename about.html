@@ -23,6 +23,7 @@
       --gold:     #c2a66d;
       --earth:    #8a7f6d;
       --cream:    #faf4eb;
+      --portal-c: 240,235,220;
     }
 
     html { scroll-behavior: smooth; }
@@ -36,7 +37,7 @@
       overflow-x: hidden;
     }
 
-    /* ── NAV ── */
+    /* ── NAV (matches landing) ── */
     .nav {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -70,95 +71,113 @@
 
     .nav__back:hover { color: var(--text); }
 
-    /* ── CONTENT WRAPPER ── */
-    .page {
-      max-width: 720px;
-      margin: 0 auto;
-      padding: 7rem 1.5rem 4rem;
+    /* ── SECTION BASE (matches landing) ── */
+    .section {
+      position: relative;
+      padding: clamp(4rem, 8vw, 6rem) clamp(1.5rem, 5vw, 3rem);
     }
 
-    /* ── TYPOGRAPHY ── */
-    .eyebrow {
+    .section:first-of-type { padding-top: clamp(6rem, 10vw, 8rem); }
+
+    .section__inner {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .section__eyebrow {
       display: block;
       font-size: 0.72rem;
       letter-spacing: 0.22em;
       text-transform: uppercase;
       color: var(--earth);
-      margin-bottom: 0.75rem;
+      margin-bottom: 1rem;
     }
 
-    .heading {
+    .section__title {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-size: clamp(2rem, 5vw, 3.5rem);
       font-weight: 300;
-      line-height: 1.15;
+      line-height: 1.2;
       margin-bottom: 1.5rem;
     }
 
-    .heading--sm {
-      font-size: clamp(1.5rem, 3.5vw, 2.2rem);
-      margin-bottom: 1.2rem;
-    }
-
-    .divider {
-      width: 50px;
+    .section__divider {
+      width: 60px;
       height: 1px;
       background: linear-gradient(to right, transparent, var(--earth), transparent);
       margin: 1.5rem 0;
       opacity: 0.4;
     }
 
-    .text {
-      font-size: 0.95rem;
+    /* ── TWO-COLUMN ROWS (image + text side by side) ── */
+    .row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+      align-items: center;
+    }
+
+    .row--reverse { direction: rtl; }
+    .row--reverse > * { direction: ltr; }
+
+    @media (max-width: 700px) {
+      .row, .row--reverse { grid-template-columns: 1fr; }
+    }
+
+    .row__img {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+      object-position: center top;
+      border-radius: 6px;
+    }
+
+    .row__text {
+      font-size: 0.92rem;
       color: var(--muted);
       line-height: 1.9;
     }
 
-    .text + .text { margin-top: 0.8rem; }
+    .row__text p + p { margin-top: 0.75rem; }
 
-    /* ── PHOTO ── */
-    .photo-wrap {
-      margin: 2.5rem 0;
-      border-radius: 8px;
-      overflow: hidden;
+    /* ── DARK SECTION (story-style from landing) ── */
+    .section--dark {
+      background: var(--bg-dark);
+      color: var(--cream);
     }
 
-    .photo-wrap img {
-      width: 100%;
-      height: auto;
-      display: block;
-      border-radius: 8px;
+    .section--dark .section__eyebrow { color: var(--gold); }
+    .section--dark .section__title { color: var(--cream); }
+    .section--dark .row__text { color: rgba(250,244,235,0.7); }
+
+    .section--dark .section__divider {
+      background: linear-gradient(to right, transparent, rgba(194,166,109,0.4), transparent);
     }
 
-    /* ── STATS ROW ── */
+    /* ── STATS (landing-page style) ── */
     .stats {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
-      margin: 2.5rem 0;
-      padding: 2rem 0;
-      border-top: 1px solid rgba(138,127,109,0.12);
-      border-bottom: 1px solid rgba(138,127,109,0.12);
+      display: flex;
+      gap: 2.5rem;
+      margin-top: 2rem;
+      flex-wrap: wrap;
     }
 
-    @media (max-width: 480px) {
-      .stats { grid-template-columns: 1fr; gap: 1.2rem; }
-    }
+    .stat { display: flex; flex-direction: column; }
 
     .stat__num {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 2.2rem;
+      font-size: 2.4rem;
       font-weight: 300;
-      color: var(--text);
+      color: var(--gold);
       line-height: 1;
     }
 
     .stat__label {
       font-size: 0.72rem;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: var(--muted);
-      margin-top: 0.25rem;
+      color: rgba(250,244,235,0.45);
+      margin-top: 0.3rem;
     }
 
     /* ── BLOCK GRID ── */
@@ -166,7 +185,7 @@
       display: grid;
       grid-template-columns: repeat(5, 1fr);
       gap: 0.6rem;
-      margin: 2rem 0 0.75rem;
+      margin: 1.5rem 0 0.5rem;
     }
 
     @media (max-width: 600px) {
@@ -204,47 +223,24 @@
       font-weight: 500;
     }
 
-    .block-card__dot {
-      width: 7px; height: 7px;
-      border-radius: 50%;
-      flex-shrink: 0;
-    }
+    .block-card__dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+    .dot-green { background: #6b9e6b; }
+    .dot-grey  { background: #ccc; }
 
-    .dot-green  { background: #6b9e6b; }
-    .dot-grey   { background: #ccc; }
+    .block-card__emoji { font-size: 1.4rem; display: block; margin-bottom: 0.3rem; }
 
-    .block-card__emoji {
-      font-size: 1.4rem;
-      display: block;
-      margin-bottom: 0.3rem;
-    }
-
-    .block-card__pips {
-      display: flex;
-      gap: 2px;
-      margin-bottom: 0.35rem;
-    }
-
-    .pip {
-      width: 12px; height: 3px;
-      border-radius: 2px;
-      background: rgba(138,127,109,0.15);
-    }
-
+    .block-card__pips { display: flex; gap: 2px; margin-bottom: 0.35rem; }
+    .pip { width: 12px; height: 3px; border-radius: 2px; background: rgba(138,127,109,0.15); }
     .pip.on { background: var(--olive); }
 
-    .block-card__trees {
-      font-size: 0.72rem;
-      color: var(--muted);
-    }
+    .block-card__trees { font-size: 0.72rem; color: var(--muted); }
 
     /* Tooltip */
     .block-card__tip {
       display: none;
       position: absolute;
       bottom: calc(100% + 8px);
-      left: 50%;
-      transform: translateX(-50%);
+      left: 50%; transform: translateX(-50%);
       background: var(--bg-dark);
       color: var(--cream);
       border: 1px solid rgba(194,166,109,0.18);
@@ -261,40 +257,23 @@
     .block-card__tip::after {
       content: '';
       position: absolute;
-      top: 100%; left: 50%;
-      transform: translateX(-50%);
+      top: 100%; left: 50%; transform: translateX(-50%);
       border: 6px solid transparent;
       border-top-color: rgba(194,166,109,0.25);
     }
 
     .block-card:hover .block-card__tip { display: block; }
 
-    .block-card.flip .block-card__tip {
-      bottom: auto;
-      top: calc(100% + 8px);
-    }
-
+    .block-card.flip .block-card__tip { bottom: auto; top: calc(100% + 8px); }
     .block-card.flip .block-card__tip::after {
       top: auto; bottom: 100%;
       border-top-color: transparent;
       border-bottom-color: rgba(194,166,109,0.25);
     }
 
-    .tip__label {
-      font-size: 0.66rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 0.25rem;
-    }
-
+    .tip__label { font-size: 0.66rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.25rem; }
     .tip__note { color: rgba(250,244,235,0.65); }
-
-    .tip__detail {
-      margin-top: 0.5rem;
-      font-size: 0.72rem;
-      color: rgba(250,244,235,0.4);
-    }
+    .tip__detail { margin-top: 0.5rem; font-size: 0.72rem; color: rgba(250,244,235,0.4); }
 
     /* ── PROGRESS BAR ── */
     .progress-wrap {
@@ -302,7 +281,7 @@
       border-radius: 999px;
       height: 6px;
       overflow: hidden;
-      margin: 1.5rem 0 0.4rem;
+      margin: 1.2rem 0 0.4rem;
     }
 
     .progress-bar {
@@ -320,45 +299,49 @@
       color: var(--muted);
     }
 
-    /* ── CTA ── */
-    .cta {
+    .hint {
+      font-size: 0.72rem;
+      color: var(--muted);
       text-align: center;
-      margin-top: 4rem;
-      padding-top: 3rem;
-      border-top: 1px solid rgba(138,127,109,0.12);
+      margin-top: 0.4rem;
+      opacity: 0.5;
     }
 
+    /* ── BUTTONS (matches landing) ── */
     .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
       font-family: 'Inter', sans-serif;
-      font-size: 0.78rem;
+      font-size: 0.8rem;
       letter-spacing: 0.12em;
       text-transform: uppercase;
       border-radius: 4px;
-      padding: 0.8em 2em;
+      padding: 0.75em 1.8em;
       cursor: pointer;
       border: none;
       text-decoration: none;
       transition: transform 0.15s, box-shadow 0.2s, background 0.2s;
     }
 
+    .btn:active { transform: scale(0.97); }
+
     .btn-primary {
       background: var(--bg-dark);
       color: var(--gold);
+      box-shadow: 0 4px 16px rgba(26,18,8,0.15);
     }
 
     .btn-primary:hover {
       background: #2a1e0e;
+      box-shadow: 0 6px 24px rgba(26,18,8,0.25);
       transform: translateY(-2px);
-      box-shadow: 0 6px 24px rgba(26,18,8,0.2);
     }
 
     .btn-outline {
       background: transparent;
       color: var(--text);
-      border: 1px solid rgba(138,127,109,0.35);
+      border: 1px solid rgba(138,127,109,0.4);
       margin-left: 0.75rem;
     }
 
@@ -368,27 +351,38 @@
       transform: translateY(-2px);
     }
 
-    .hint {
-      font-size: 0.72rem;
-      color: var(--muted);
+    .cta {
       text-align: center;
-      margin-top: 0.5rem;
-      opacity: 0.6;
+      padding-top: 2rem;
     }
 
-    /* ── FOOTER ── */
+    /* ── FOOTER (matches landing) ── */
     .footer {
-      margin-top: 4rem;
-      padding: 2rem 1.5rem;
+      background: var(--bg-dark);
+      color: rgba(250,244,235,0.45);
+      padding: 2.5rem clamp(1.5rem, 5vw, 3rem);
       text-align: center;
-      border-top: 1px solid rgba(138,127,109,0.08);
+      border-top: 1px solid rgba(194,166,109,0.08);
     }
 
-    .footer__copy {
-      font-size: 0.72rem;
-      color: var(--muted);
-      opacity: 0.5;
+    .footer__links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem;
     }
+
+    .footer__link {
+      color: rgba(250,244,235,0.45);
+      text-decoration: none;
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      transition: color 0.2s;
+    }
+
+    .footer__link:hover { color: var(--gold); }
+    .footer__copy { font-size: 0.72rem; opacity: 0.45; }
 
     /* ── REVEAL ── */
     .reveal {
@@ -408,88 +402,82 @@
   <a href="index.html" class="nav__back">← Back to shop</a>
 </nav>
 
-<!-- Page content — single centered column -->
-<main class="page">
-
-  <!-- Intro -->
-  <span class="eyebrow reveal">The Project</span>
-  <h1 class="heading reveal">Bringing 16,000 trees<br>back to life.</h1>
-  <div class="divider reveal"></div>
-
-  <p class="text reveal">
-    My name is Nicolas Criticos. I'm an electrical engineer turned farmer, stewarding VrischGewagt Boutique Olive Farm in the Swartberg Karoo — one of the most beautiful and remote valleys in South Africa.
-  </p>
-  <p class="text reveal">
-    Thirteen years ago, 16,000 olive trees were planted here with a bold vision for abundance. At peak, the farm was producing thousands of litres of cold-pressed extra virgin olive oil per year. Then came drought, infrastructure collapse, and years of neglect. Today, less than 1% of the trees bear fruit.
-  </p>
-  <p class="text reveal">
-    I'm bringing them back — not with shortcuts, but with restored irrigation, soil rehabilitation, structural pruning, and years of patient, methodical care. Every bottle of Samsara olive oil directly funds this work.
-  </p>
-
-  <!-- Photo 1 -->
-  <div class="photo-wrap reveal">
-    <img src="assets/images/nicris-1.jpg" alt="Nicolas among the olive trees" loading="lazy" />
-  </div>
-
-  <!-- Where we are -->
-  <span class="eyebrow reveal" style="margin-top: 2rem;">Where we are now</span>
-  <h2 class="heading heading--sm reveal">5,000 trees. Halfway there.</h2>
-
-  <p class="text reveal">
-    The full farm has 16,000 trees across 40 irrigation blocks. I'm currently focused on the first 10 blocks — approximately 5,000 trees. Blocks 1–3 were the pilot: irrigation has been fully restored and the trees are responding. Blocks 4–6 have irrigation back online but need soil and canopy work. Blocks 7–10 haven't started yet.
-  </p>
-  <p class="text reveal">
-    The work involves repairing decades-old drip irrigation systems, rebuilding soil biology with compost and biochar, heavy structural pruning to redirect growth, and targeted nutrition programs timed to the trees' seasonal cycle. Even with everything done right, stressed olive trees take 2–4 seasons to fully recover.
-  </p>
-  <p class="text reveal">
-    With one labourer, the current pace covers about 2,500 trees per year. With proper funding and a 20-person sprint team, the entire farm could be rehabilitated in 1–2 years — with break-even projected by year three.
-  </p>
-
-  <!-- Stats -->
-  <div class="stats reveal">
-    <div>
-      <div class="stat__num">5,000</div>
-      <div class="stat__label">Trees in active rehab</div>
-    </div>
-    <div>
-      <div class="stat__num">~50%</div>
-      <div class="stat__label">Phase one complete</div>
-    </div>
-    <div>
-      <div class="stat__num">3</div>
-      <div class="stat__label">Blocks fully restored</div>
+<!-- ═══ SECTION 1: About me — image left, text right ═══ -->
+<section class="section">
+  <div class="section__inner">
+    <div class="row reveal">
+      <img src="assets/images/nicris-1.jpg" alt="Nicolas among the olive trees" class="row__img" />
+      <div class="row__text">
+        <span class="section__eyebrow" style="margin-bottom:0.5rem;">The Project</span>
+        <h1 class="section__title" style="margin-bottom:1rem;">Bringing 16,000 trees back to life.</h1>
+        <p>My name is Nicolas Criticos — electrical engineer turned farmer, stewarding VrischGewagt Boutique Olive Farm in the Swartberg Karoo. Thirteen years ago, 16,000 olive trees were planted here. Years of drought and neglect left less than 1% bearing fruit. I'm bringing them back — block by block, tree by tree.</p>
+      </div>
     </div>
   </div>
+</section>
 
-  <!-- Photo 2 -->
-  <div class="photo-wrap reveal">
-    <img src="assets/images/nicris-2.jpg" alt="Inspecting the grove" loading="lazy" />
+<!-- ═══ SECTION 2: The work — text left, image right (dark) ═══ -->
+<section class="section section--dark">
+  <div class="section__inner">
+    <div class="row row--reverse reveal">
+      <img src="assets/images/nicris-2.jpg" alt="Working in the grove" class="row__img" />
+      <div class="row__text">
+        <span class="section__eyebrow">Where we are</span>
+        <h2 class="section__title" style="font-size:clamp(1.6rem,3.5vw,2.4rem);">5,000 trees. Halfway there.</h2>
+        <p>I'm currently rehabilitating the first 10 blocks — about 5,000 trees. Blocks 1–3 have full irrigation restored and the trees are responding. Blocks 4–6 have water back online but need soil and canopy work. Blocks 7–10 haven't started yet.</p>
+        <p style="margin-top:0.6rem;">The work: repairing decades-old drip systems, rebuilding soil with compost and biochar, heavy structural pruning, and targeted nutrition timed to the seasonal cycle. Every bottle of Samsara oil directly funds this.</p>
+        <div class="stats">
+          <div class="stat">
+            <span class="stat__num">5,000</span>
+            <span class="stat__label">Trees in rehab</span>
+          </div>
+          <div class="stat">
+            <span class="stat__num">~50%</span>
+            <span class="stat__label">Phase 1 complete</span>
+          </div>
+          <div class="stat">
+            <span class="stat__num">3</span>
+            <span class="stat__label">Blocks restored</span>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
+</section>
 
-  <!-- Block progress -->
-  <span class="eyebrow reveal" style="margin-top: 2rem;">Block by block</span>
-  <h2 class="heading heading--sm reveal">Live rehabilitation progress</h2>
+<!-- ═══ SECTION 3: Block progress ═══ -->
+<section class="section">
+  <div class="section__inner">
+    <span class="section__eyebrow reveal">Block by block</span>
+    <h2 class="section__title reveal" style="font-size:clamp(1.6rem,3.5vw,2.4rem);">Live rehabilitation progress</h2>
+    <div class="section__divider reveal"></div>
 
-  <div class="progress-wrap reveal">
-    <div class="progress-bar" id="progress-bar"></div>
+    <div class="progress-wrap reveal">
+      <div class="progress-bar" id="progress-bar"></div>
+    </div>
+    <div class="progress-label reveal">
+      <span>Phase 1</span>
+      <span>~50%</span>
+    </div>
+
+    <div class="block-grid reveal" id="block-grid"></div>
+    <p class="hint">Hover over a block for details</p>
+
+    <div class="cta reveal">
+      <a href="index.html#products" class="btn btn-primary">Shop Samsara Oil</a>
+      <a href="https://www.instagram.com/niccris_samsara" target="_blank" class="btn btn-outline">Follow the journey</a>
+    </div>
   </div>
-  <div class="progress-label reveal">
-    <span>Phase 1</span>
-    <span>~50%</span>
-  </div>
+</section>
 
-  <div class="block-grid reveal" id="block-grid"></div>
-  <p class="hint">Hover over a block for details</p>
-
-  <!-- CTA -->
-  <div class="cta reveal">
-    <a href="index.html#products" class="btn btn-primary">Shop Samsara Oil</a>
-    <a href="https://www.instagram.com/niccris_samsara" target="_blank" class="btn btn-outline">Follow the journey</a>
-  </div>
-
-</main>
-
+<!-- Footer -->
 <footer class="footer">
+  <div class="footer__links">
+    <a href="index.html#story" class="footer__link">Our Story</a>
+    <a href="index.html#products" class="footer__link">Shop</a>
+    <a href="https://www.instagram.com/niccris_samsara" target="_blank" class="footer__link">Instagram</a>
+    <a href="mailto:nicolas.criticos98@gmail.com" class="footer__link">Contact</a>
+  </div>
   <p class="footer__copy">© 2026 Samsara · VrischGewagt Boutique Olive Farm · Swartberg Karoo, South Africa</p>
 </footer>
 
@@ -503,7 +491,7 @@
   var SB_URL = 'https://toxgvaqctxbqhqitmxkm.supabase.co';
   var SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRveGd2YXFjdHhicWhxaXRteGttIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njk0MDg3NjksImV4cCI6MjA4NDk4NDc2OX0.P0r1zYtuxA0y0Qj8j6BpL1NJCwHn5vB68SI8jR4O4U0';
 
-  // Reveal on scroll
+  // Reveal
   var io = new IntersectionObserver(function (entries) {
     entries.forEach(function (e) {
       if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
@@ -527,9 +515,7 @@
     if (irr === 'restored') return '⏳';
     return '💤';
   }
-
   function hpLabel(r) { return ['','Poor','Recovering','Good','Thriving','Excellent'][r] || 'Unknown'; }
-
   function pips(r) {
     var h = '';
     for (var i = 1; i <= 5; i++) h += '<div class="pip' + (i <= r ? ' on' : '') + '"></div>';
@@ -561,7 +547,6 @@
     }).join('');
   }
 
-  // Load from Supabase
   var sb = window.supabase ? window.supabase.createClient(SB_URL, SB_KEY) : null;
   if (sb) {
     sb.from('rehab_blocks').select('*').then(function (res) {
@@ -584,7 +569,6 @@
       { name:'Block 10', irrigation_status:'unknown', health_rating:1, tree_count:500, notes:'Not yet started' },
     ]);
   }
-
 })();
 </script>
 
