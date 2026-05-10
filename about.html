@@ -45,18 +45,9 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 1.2rem clamp(1.5rem, 5vw, 3rem);
+      padding: 1rem clamp(1.5rem, 5vw, 3rem);
       background: var(--bg-dark);
       border-bottom: 1px solid rgba(194,166,109,0.12);
-    }
-
-    .nav__logo {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.3rem;
-      font-weight: 400;
-      color: var(--cream);
-      text-decoration: none;
-      letter-spacing: 0.08em;
     }
 
     .nav__back {
@@ -69,6 +60,25 @@
     }
 
     .nav__back:hover { color: var(--gold); }
+
+    .nav__logo-img {
+      height: 40px;
+      width: auto;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .nav__shop {
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(250,244,235,0.5);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav__shop:hover { color: var(--gold); }
 
     /* ── SECTION BASE (matches landing) ── */
     .section {
@@ -417,8 +427,9 @@
 
 <!-- Nav -->
 <nav class="nav">
-  <a href="index.html" class="nav__logo">Samsara</a>
-  <a href="index.html" class="nav__back">← Back to shop</a>
+  <a href="index.html" class="nav__back">← Back</a>
+  <a href="index.html"><img src="assets/images/logo.png" alt="Samsara" class="nav__logo-img" /></a>
+  <a href="index.html#products" class="nav__shop">Shop</a>
 </nav>
 
 <!-- ═══ SECTION 1: About me — image left, text right ═══ -->
@@ -466,6 +477,21 @@
       <a href="index.html#products" class="btn btn-primary">Shop Samsara Oil</a>
       <a href="https://www.instagram.com/niccris_samsara" target="_blank" class="btn btn-outline">Follow the journey</a>
     </div>
+  </div>
+</section>
+
+<!-- ═══ SECTION 4: Fund the Project ═══ -->
+<section class="section section--story" style="text-align:center;">
+  <div class="story__bg"></div>
+  <div class="story__overlay"></div>
+  <div class="section__inner" style="position:relative;z-index:2;max-width:640px;">
+    <span class="section__eyebrow reveal" style="color:var(--gold);">Support the Mission</span>
+    <h2 class="section__title reveal" style="color:var(--cream);font-size:clamp(1.8rem,4vw,2.8rem);">Help Fund This Project</h2>
+    <div class="section__divider reveal" style="margin:1rem auto;background:linear-gradient(to right,transparent,rgba(194,166,109,0.4),transparent);"></div>
+    <p class="reveal" style="color:rgba(250,244,235,0.7);font-size:0.95rem;line-height:1.9;margin-bottom:2rem;">
+      I'm thrilled to have partnered with <strong style="color:var(--gold);">Milli</strong> to help accelerate the rehabilitation of these olive trees. What would take years alone can happen in months with the right support. Every contribution goes directly into restoring irrigation, rebuilding soil, and bringing these trees back to life. Any support — big or small — is deeply appreciated and makes a real difference on the ground.
+    </p>
+    <a href="https://donate.millicrowd.com/campaign/awHBM5bjHdKV44T5fwKe" target="_blank" class="btn reveal" style="background:var(--gold);color:var(--bg-dark);font-size:0.85rem;padding:1em 2.5em;">Help Fund My Project</a>
   </div>
 </section>
 

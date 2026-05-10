@@ -1238,7 +1238,7 @@
         <div class="product-card__body">
           <h3 class="product-card__name">Extra Virgin<br>Organic Olive Oil</h3>
           <p class="product-card__desc">Cold-pressed. Single-origin. Unfiltered liquid gold from the Swartberg.</p>
-          <p class="product-card__trees">🌿 Helps rehabilitate 4 trees</p>
+          <p class="product-card__trees">🌿 Helps rehabilitate 6.5 trees</p>
           <div class="variants">
             <span class="variant-btn is-active">Tin</span>
           </div>
@@ -1253,7 +1253,7 @@
               data-product-name="5L Extra Virgin Olive Oil"
               data-price="1780"
               data-variant="Tin"
-              data-trees="4"
+              data-trees="6.5"
             >Add to Cart</button>
           </div>
         </div>
@@ -1268,23 +1268,23 @@
         <div class="product-card__body">
           <h3 class="product-card__name">Infused Extra Virgin<br>Olive Oil</h3>
           <p class="product-card__desc">Small-batch cold-pressed oil infused with organic herbs grown right here on the farm. A finishing oil for those who love flavour with intention.</p>
-          <p class="product-card__trees">🌿 Contributes towards half a tree</p>
+          <p class="product-card__trees">🌿 Helps rehabilitate 1 tree</p>
           <div class="variants" data-group="infused">
-            <button class="variant-btn is-active" data-variant="Rosemary" data-price="240">Rosemary</button>
-            <button class="variant-btn" data-variant="Oregano" data-price="240">Oregano</button>
+            <button class="variant-btn is-active" data-variant="Rosemary" data-price="270">Rosemary</button>
+            <button class="variant-btn" data-variant="Oregano" data-price="270">Oregano</button>
           </div>
           <div class="product-card__footer">
             <div class="product-card__price">
-              R<span class="price-display">240</span>
+              R<span class="price-display">270</span>
               <small>per 250ml</small>
             </div>
             <button
               class="btn btn-cart"
               data-product-id="250ml-infused"
               data-product-name="250ml Infused Olive Oil"
-              data-price="240"
+              data-price="270"
               data-variant="Rosemary"
-              data-trees="0.5"
+              data-trees="1"
             >Add to Cart</button>
           </div>
         </div>
@@ -1305,19 +1305,19 @@
           <h3 class="product-card__name">Ritual<br>Health Shot</h3>
           <p class="product-card__desc">14 daily ritual shots — olive oil, lemon, sceletium. Cold-pressed and raw. A morning practice in a box.</p>
           <a href="assets/ritual-shot-benefits.pdf" target="_blank" class="product-card__learn">Learn more →</a>
-          <p class="product-card__trees">🌿 Helps rehabilitate 1 tree</p>
+          <p class="product-card__trees">🌿 Helps rehabilitate 2 trees</p>
           <div class="product-card__footer">
             <div class="product-card__price">
-              R390
+              R546
               <small>box of 14</small>
             </div>
             <button
               class="btn btn-cart"
               data-product-id="ritual-shot"
               data-product-name="Ritual Health Shot Box"
-              data-price="390"
+              data-price="546"
               data-variant=""
-              data-trees="1"
+              data-trees="2"
             >Add to Cart</button>
           </div>
         </div>
@@ -1968,7 +1968,7 @@
 })();
 </script>
 
-<!-- Hover slideshow for product cards -->
+<!-- Auto-cycling slideshow for product cards -->
 <script>
 (function () {
   var sliders = document.querySelectorAll('[data-hover-slide]');
@@ -1976,26 +1976,11 @@
     var imgs = wrap.querySelectorAll('img');
     if (imgs.length < 2) return;
     var idx = 0;
-    var timer = null;
-
-    function advance() {
+    setInterval(function () {
       imgs[idx].classList.remove('is-visible');
       idx = (idx + 1) % imgs.length;
       imgs[idx].classList.add('is-visible');
-    }
-
-    var card = wrap.closest('.product-card');
-    card.addEventListener('mouseenter', function () {
-      timer = setInterval(advance, 2000);
-    });
-    card.addEventListener('mouseleave', function () {
-      clearInterval(timer);
-      timer = null;
-      // Reset to first image
-      imgs[idx].classList.remove('is-visible');
-      idx = 0;
-      imgs[0].classList.add('is-visible');
-    });
+    }, 3000);
   });
 })();
 </script>
