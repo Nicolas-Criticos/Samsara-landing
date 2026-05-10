@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    @page { margin: 0; }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg:    #f6f3ee;
+      --dark:  #1a1208;
+      --text:  #2b2b2b;
+      --muted: #6f6a63;
+      --olive: #6b7f5e;
+      --gold:  #c2a66d;
+      --earth: #8a7f6d;
+      --cream: #faf4eb;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── COVER ── */
+    .cover {
+      height: 100vh;
+      background: var(--dark);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 3rem;
+      position: relative;
+      page-break-after: always;
+    }
+
+    .cover__img {
+      width: 260px;
+      height: 260px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 3px solid rgba(194,166,109,0.25);
+      margin-bottom: 2.5rem;
+    }
+
+    .cover__eyebrow {
+      font-size: 0.68rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.75rem;
+    }
+
+    .cover__title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.8rem;
+      font-weight: 300;
+      color: var(--cream);
+      line-height: 1.15;
+      margin-bottom: 0.75rem;
+    }
+
+    .cover__subtitle {
+      font-size: 0.92rem;
+      color: rgba(250,244,235,0.55);
+      font-style: italic;
+      max-width: 380px;
+    }
+
+    .cover__footer {
+      position: absolute;
+      bottom: 2.5rem;
+      font-size: 0.68rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(250,244,235,0.25);
+    }
+
+    /* ── PAGE CONTENT ── */
+    .page {
+      padding: 3.5rem 3rem;
+      max-width: 100%;
+    }
+
+    .page + .page { page-break-before: always; }
+
+    .eyebrow {
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--earth);
+      margin-bottom: 0.5rem;
+    }
+
+    h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      font-weight: 300;
+      color: var(--text);
+      margin-bottom: 0.75rem;
+      line-height: 1.2;
+    }
+
+    .divider {
+      width: 50px;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--earth), transparent);
+      margin: 0.75rem 0 1.25rem;
+      opacity: 0.4;
+    }
+
+    p {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.85;
+      margin-bottom: 0.6rem;
+    }
+
+    .intro {
+      font-size: 0.92rem;
+      color: var(--text);
+      line-height: 1.9;
+      max-width: 520px;
+      margin-bottom: 1.5rem;
+    }
+
+    /* ── INGREDIENT SECTION ── */
+    .ingredient {
+      margin-bottom: 2rem;
+    }
+
+    .ingredient__header {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .ingredient__icon {
+      font-size: 1.3rem;
+    }
+
+    .ingredient__name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem;
+      font-weight: 400;
+      color: var(--text);
+    }
+
+    .benefits-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 1rem 0;
+    }
+
+    .benefits-list li {
+      font-size: 0.82rem;
+      color: var(--muted);
+      padding: 0.25rem 0;
+      padding-left: 1.2rem;
+      position: relative;
+      line-height: 1.6;
+    }
+
+    .benefits-list li::before {
+      content: '·';
+      position: absolute;
+      left: 0.3rem;
+      color: var(--olive);
+      font-weight: 700;
+      font-size: 1rem;
+    }
+
+    /* ── REFERENCES ── */
+    .ref-section {
+      margin-top: 0.75rem;
+      padding-top: 0.6rem;
+      border-top: 1px solid rgba(138,127,109,0.1);
+    }
+
+    .ref-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--earth);
+      margin-bottom: 0.35rem;
+    }
+
+    .ref {
+      font-size: 0.72rem;
+      color: rgba(107,100,90,0.7);
+      line-height: 1.55;
+      margin-bottom: 0.3rem;
+    }
+
+    .ref a {
+      color: var(--olive);
+      text-decoration: none;
+      word-break: break-all;
+    }
+
+    /* ── RITUAL SECTION ── */
+    .ritual-box {
+      background: var(--dark);
+      border-radius: 8px;
+      padding: 2rem 2.5rem;
+      text-align: center;
+      margin-top: 2rem;
+    }
+
+    .ritual-box h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 300;
+      color: var(--cream);
+      margin-bottom: 0.6rem;
+    }
+
+    .ritual-box p {
+      color: rgba(250,244,235,0.6);
+      font-size: 0.82rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .ritual-box .tagline {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--gold);
+      margin-top: 0.75rem;
+    }
+
+    /* ── FULL REFERENCES PAGE ── */
+    .references-page h2 { margin-bottom: 0.5rem; }
+
+    .ref-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .ref-group__title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      color: var(--text);
+      margin-bottom: 0.4rem;
+    }
+
+    .ref-num {
+      font-size: 0.72rem;
+      color: rgba(107,100,90,0.65);
+      line-height: 1.6;
+      margin-bottom: 0.25rem;
+      padding-left: 1.5rem;
+      text-indent: -1.5rem;
+    }
+
+    .ref-num a {
+      color: var(--olive);
+      text-decoration: none;
+      word-break: break-all;
+    }
+
+    /* ── DISCLAIMER ── */
+    .disclaimer {
+      margin-top: 2rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(138,127,109,0.12);
+      font-size: 0.68rem;
+      color: rgba(107,100,90,0.5);
+      line-height: 1.6;
+      font-style: italic;
+    }
+
+    .footer-bar {
+      margin-top: 3rem;
+      text-align: center;
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--earth);
+      opacity: 0.4;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══ COVER ═══ -->
+<div class="cover">
+  <img src="images/shot1.jpg" alt="Samsara Ritual Shot" class="cover__img" />
+  <div class="cover__eyebrow">Samsara Olive Oil</div>
+  <h1 class="cover__title">The Ritual Shot</h1>
+  <p class="cover__subtitle">A daily grounding ritual for body and mind.</p>
+  <div class="cover__footer">VrischGewagt Boutique Olive Farm · Swartberg Karoo</div>
+</div>
+
+<!-- ═══ PAGE 1: OVERVIEW + OLIVE OIL ═══ -->
+<div class="page">
+  <div class="eyebrow">What's inside</div>
+  <h2>Three ingredients.<br>One daily practice.</h2>
+  <div class="divider"></div>
+
+  <p class="intro">
+    A concentrated morning blend of extra virgin olive oil, fresh lemon, and sceletium — designed to support clarity, calmness, digestion, and long-term vitality. Rooted in ancient plant wisdom and the Mediterranean tradition of daily olive oil consumption.
+  </p>
+
+  <!-- Olive Oil -->
+  <div class="ingredient">
+    <div class="ingredient__header">
+      <span class="ingredient__icon">🫒</span>
+      <span class="ingredient__name">Extra Virgin Olive Oil</span>
+    </div>
+    <p>Rich in polyphenols, antioxidants, and healthy monounsaturated fats.</p>
+    <ul class="benefits-list">
+      <li>Supports heart and cardiovascular health</li>
+      <li>Anti-inflammatory properties</li>
+      <li>Supports brain function and cognitive longevity</li>
+      <li>Helps regulate cholesterol levels</li>
+      <li>May improve gut and digestive health</li>
+      <li>Supports nutrient absorption</li>
+      <li>Rich in antioxidants that help combat oxidative stress</li>
+      <li>Traditionally associated with longevity in Mediterranean diets</li>
+    </ul>
+    <div class="ref-section">
+      <div class="ref-label">Supporting research</div>
+      <div class="ref">[1] Olive oil consumption and cognitive function — <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10598670/">PMC 10598670</a></div>
+      <div class="ref">[2] EVOO polyphenols and cardiovascular protection — <a href="https://pubmed.ncbi.nlm.nih.gov/40507112/">PubMed 40507112</a></div>
+      <div class="ref">[3] Neuroprotective properties of olive oil polyphenols — <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12695547/">PMC 12695547</a></div>
+    </div>
+  </div>
+
+  <!-- Lemon -->
+  <div class="ingredient">
+    <div class="ingredient__header">
+      <span class="ingredient__icon">🍋</span>
+      <span class="ingredient__name">Lemon</span>
+    </div>
+    <p>Fresh citrus source of vitamin C and natural plant compounds.</p>
+    <ul class="benefits-list">
+      <li>Supports liver and digestive function</li>
+      <li>Rich in vitamin C for immune support</li>
+      <li>Helps stimulate digestion in the morning</li>
+      <li>Supports hydration and mineral absorption</li>
+      <li>Refreshing alkalising effect on the body</li>
+      <li>Natural antioxidant support</li>
+    </ul>
+    <div class="ref-section">
+      <div class="ref-label">Supporting research</div>
+      <div class="ref">[4] Citric acid and gastric acid secretion — <a href="https://www.healthline.com/health/food-nutrition/benefits-of-lemon-water">Healthline</a></div>
+      <div class="ref">[5] Citrus polyphenols and cardiovascular support — <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC6403313/">PMC 6403313</a></div>
+    </div>
+  </div>
+
+  <!-- Sceletium -->
+  <div class="ingredient">
+    <div class="ingredient__header">
+      <span class="ingredient__icon">🌿</span>
+      <span class="ingredient__name">Sceletium (Kanna)</span>
+    </div>
+    <p>A traditional South African botanical historically used for mood and stress support.</p>
+    <ul class="benefits-list">
+      <li>May support emotional balance and calmness</li>
+      <li>Helps reduce stress and anxious tension</li>
+      <li>Supports mental clarity and focus</li>
+      <li>May enhance mood and emotional resilience</li>
+      <li>Traditionally used to promote grounded awareness and social ease</li>
+      <li>Supports a calm yet uplifted state without heavy sedation</li>
+    </ul>
+    <div class="ref-section">
+      <div class="ref-label">Supporting research</div>
+      <div class="ref">[6] Sceletium extracts — cognitive function and anxiety — <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8762184/">PMC 8762184</a></div>
+      <div class="ref">[7] Zembrin® clinical research — anxiety and cognition — <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8762184/">PMC 8762184</a></div>
+      <div class="ref">[8] Sceletium ethnobotanical use — <a href="https://www.researchgate.net/publication/306550033">ResearchGate</a></div>
+    </div>
+  </div>
+
+  <div class="ritual-box">
+    <h3>The Ritual</h3>
+    <p>Taken each morning, the Ritual Shot is more than a supplement —<br>it is a daily pause, a grounding practice, and a conscious start to the day.</p>
+    <div class="tagline">Grounded energy. Clear mind. Nourished body.</div>
+  </div>
+</div>
+
+<!-- ═══ PAGE 2: REFERENCES ═══ -->
+<div class="page references-page">
+  <div class="eyebrow">References</div>
+  <h2>Research & Sources</h2>
+  <div class="divider"></div>
+
+  <div class="ref-group">
+    <div class="ref-group__title">Extra Virgin Olive Oil</div>
+    <div class="ref-num">[1] Olive oil consumption and improved cognitive function: A systematic review and meta-analysis. <em>Nutrients</em>, 2023. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10598670/">https://pmc.ncbi.nlm.nih.gov/articles/PMC10598670/</a></div>
+    <div class="ref-num">[2] Polyphenols from extra virgin olive oil and cardiovascular protection: A review. <em>PubMed</em>, 2025. <a href="https://pubmed.ncbi.nlm.nih.gov/40507112/">https://pubmed.ncbi.nlm.nih.gov/40507112/</a></div>
+    <div class="ref-num">[3] Neuroprotective properties of EVOO polyphenols and their role in brain health. <em>Nutrients</em>, 2024. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12695547/">https://pmc.ncbi.nlm.nih.gov/articles/PMC12695547/</a></div>
+  </div>
+
+  <div class="ref-group">
+    <div class="ref-group__title">Lemon</div>
+    <div class="ref-num">[4] Benefits of lemon water: Vitamin C, digestion, and hydration. <em>Healthline</em>. <a href="https://www.healthline.com/health/food-nutrition/benefits-of-lemon-water">https://www.healthline.com/health/food-nutrition/benefits-of-lemon-water</a></div>
+    <div class="ref-num">[5] Citrus flavonoids and their role in cardiovascular disease prevention. <em>Nutrients</em>, 2019. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC6403313/">https://pmc.ncbi.nlm.nih.gov/articles/PMC6403313/</a></div>
+  </div>
+
+  <div class="ref-group">
+    <div class="ref-group__title">Sceletium (Kanna)</div>
+    <div class="ref-num">[6] Sceletium tortuosum: A review of its phytochemistry, pharmacology and toxicology. <em>Journal of Ethnopharmacology</em>, 2022. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8762184/">https://pmc.ncbi.nlm.nih.gov/articles/PMC8762184/</a></div>
+    <div class="ref-num">[7] Zembrin® (Sceletium tortuosum): Clinical evidence for cognitive and anxiolytic effects. <em>Journal of Ethnopharmacology</em>, 2022. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8762184/">https://pmc.ncbi.nlm.nih.gov/articles/PMC8762184/</a></div>
+    <div class="ref-num">[8] The effects of Sceletium tortuosum extract fraction in the chick anxiety-depression model. Smith, C. et al. <em>ResearchGate</em>, 2016. <a href="https://www.researchgate.net/publication/306550033">https://www.researchgate.net/publication/306550033</a></div>
+  </div>
+
+  <div class="disclaimer">
+    This document is for informational purposes only and does not constitute medical advice. The statements made herein have not been evaluated by any regulatory authority. This product is not intended to diagnose, treat, cure, or prevent any disease. Consult a healthcare professional before making changes to your diet or health routine.
+  </div>
+
+  <div class="footer-bar">Samsara Olive Oil · VrischGewagt Boutique Olive Farm · Swartberg Karoo, South Africa</div>
+</div>
+
+</body>
+</html>
