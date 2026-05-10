@@ -353,6 +353,210 @@
   object-position: center 40%;
 }
 
+    /* ── Coming Soon ribbon ── */
+    .product-card__ribbon {
+      position: absolute;
+      top: 14px;
+      right: -32px;
+      background: var(--bg-dark);
+      color: var(--gold);
+      font-size: 0.62rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 0.3rem 2.5rem;
+      transform: rotate(35deg);
+      z-index: 3;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      pointer-events: none;
+    }
+
+    /* ── Pre-order modal ── */
+    #preorder-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 2000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #preorder-modal.open { display: flex; }
+
+    .preorder-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      cursor: pointer;
+    }
+
+    .preorder-panel {
+      position: relative;
+      background: var(--bg);
+      border-radius: 10px;
+      width: min(420px, 92vw);
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 2rem;
+      box-shadow: 0 16px 48px rgba(0,0,0,0.25);
+    }
+
+    .preorder-panel h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 400;
+      margin-bottom: 0.25rem;
+    }
+
+    .preorder-panel .sub {
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+    }
+
+    .preorder-close {
+      position: absolute;
+      top: 1rem;
+      right: 1.2rem;
+      background: none;
+      border: none;
+      font-size: 1.4rem;
+      color: var(--muted);
+      cursor: pointer;
+      line-height: 1;
+    }
+
+    .preorder-close:hover { color: var(--text); }
+
+    .preorder-field {
+      margin-bottom: 1rem;
+    }
+
+    .preorder-field label {
+      display: block;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--earth);
+      margin-bottom: 0.3rem;
+    }
+
+    .preorder-field input,
+    .preorder-field select,
+    .preorder-field textarea {
+      width: 100%;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.88rem;
+      padding: 0.6rem 0.8rem;
+      border: 1px solid rgba(138,127,109,0.25);
+      border-radius: 4px;
+      background: #fff;
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .preorder-field input:focus,
+    .preorder-field select:focus,
+    .preorder-field textarea:focus {
+      border-color: var(--gold);
+    }
+
+    .preorder-field textarea {
+      resize: vertical;
+      min-height: 60px;
+    }
+
+    .qty-row {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .qty-toggle {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: 1px solid rgba(138,127,109,0.3);
+      background: transparent;
+      font-size: 1.1rem;
+      color: var(--text);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+
+    .qty-toggle:hover {
+      background: rgba(138,127,109,0.1);
+    }
+
+    .qty-display {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      min-width: 2rem;
+      text-align: center;
+    }
+
+    .preorder-total {
+      text-align: right;
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 1.2rem;
+    }
+
+    .preorder-total strong {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      color: var(--text);
+    }
+
+    .preorder-submit {
+      width: 100%;
+      background: var(--bg-dark);
+      color: var(--gold);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.85em 1.5em;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .preorder-submit:hover {
+      background: #2a1e0e;
+      transform: translateY(-1px);
+    }
+
+    .preorder-submit:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .preorder-success {
+      text-align: center;
+      padding: 2rem 1rem;
+    }
+
+    .preorder-success .check {
+      font-size: 2.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .preorder-success h3 {
+      margin-bottom: 0.5rem;
+    }
+
+    .preorder-success p {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
     /* ── Image slideshow on hover ── */
     .product-card__slides {
       position: relative;
@@ -1320,6 +1524,7 @@
       <!-- Product C: Ritual Health Shot -->
       <article class="product-card reveal">
         <div class="product-card__img-wrap">
+          <span class="product-card__ribbon">Coming Soon</span>
           <div class="product-card__slides" data-hover-slide>
             <img src="assets/images/shot1.jpg" alt="Ritual Health Shot" class="is-visible" loading="lazy" />
             <img src="assets/images/shot2.jpg" alt="Ritual Health Shot" loading="lazy" />
@@ -1337,14 +1542,7 @@
               R546
               <small>box of 14</small>
             </div>
-            <button
-              class="btn btn-cart"
-              data-product-id="ritual-shot"
-              data-product-name="Ritual Health Shot Box"
-              data-price="546"
-              data-variant=""
-              data-trees="2"
-            >Add to Cart</button>
+            <button class="btn btn-cart" id="preorder-open-btn" type="button">Pre-Order</button>
           </div>
         </div>
       </article>
@@ -1358,6 +1556,60 @@
     </div>
   </div>
 </section>
+
+<!-- ═══ PRE-ORDER MODAL ═══ -->
+<div id="preorder-modal">
+  <div class="preorder-backdrop"></div>
+  <div class="preorder-panel">
+    <button class="preorder-close">&times;</button>
+    <div id="preorder-form-view">
+      <h3>Pre-Order Ritual Shots</h3>
+      <p class="sub">Be the first to know when we launch. Reserve your box today.</p>
+      <div class="preorder-field">
+        <label>Name</label>
+        <input type="text" id="po-name" placeholder="Your full name" required />
+      </div>
+      <div class="preorder-field">
+        <label>Email</label>
+        <input type="email" id="po-email" placeholder="you@example.com" required />
+      </div>
+      <div class="preorder-field">
+        <label>Province</label>
+        <select id="po-province">
+          <option value="" disabled selected>Select province</option>
+          <option>Eastern Cape</option>
+          <option>Free State</option>
+          <option>Gauteng</option>
+          <option>KwaZulu-Natal</option>
+          <option>Limpopo</option>
+          <option>Mpumalanga</option>
+          <option>North West</option>
+          <option>Northern Cape</option>
+          <option>Western Cape</option>
+        </select>
+      </div>
+      <div class="preorder-field">
+        <label>Delivery Address</label>
+        <textarea id="po-address" placeholder="Street address, city, postal code" rows="2"></textarea>
+      </div>
+      <div class="preorder-field">
+        <label>Quantity (boxes)</label>
+        <div class="qty-row">
+          <button type="button" class="qty-toggle" id="po-minus">−</button>
+          <span class="qty-display" id="po-qty">1</span>
+          <button type="button" class="qty-toggle" id="po-plus">+</button>
+        </div>
+      </div>
+      <div class="preorder-total">Total: <strong id="po-total">R546</strong></div>
+      <button class="preorder-submit" id="po-submit">Submit Pre-Order</button>
+    </div>
+    <div id="preorder-success" class="preorder-success" style="display:none;">
+      <div class="check">✔️</div>
+      <h3>Pre-order received!</h3>
+      <p>Thank you — we’ll be in touch as soon as the Ritual Shots are ready. You’re going to love them.</p>
+    </div>
+  </div>
+</div>
 
 <!-- ═══════════════════════════════════════════════════════
      FOOTER
@@ -1991,6 +2243,97 @@
     console.log('%c🌿 Samsara Olive Oil', 'color:#c2a66d;font-family:Georgia,serif;font-size:14px;');
   });
 
+})();
+</script>
+
+<!-- Pre-order modal logic -->
+<script>
+(function () {
+  var PRICE = 546;
+  var modal = document.getElementById('preorder-modal');
+  var formView = document.getElementById('preorder-form-view');
+  var successView = document.getElementById('preorder-success');
+  var qtyEl = document.getElementById('po-qty');
+  var totalEl = document.getElementById('po-total');
+  var qty = 1;
+
+  function updateTotal() {
+    totalEl.textContent = 'R' + (qty * PRICE).toLocaleString();
+  }
+
+  document.getElementById('preorder-open-btn').addEventListener('click', function () {
+    modal.classList.add('open');
+    document.body.classList.add('no-scroll');
+    formView.style.display = '';
+    successView.style.display = 'none';
+  });
+
+  modal.querySelector('.preorder-backdrop').addEventListener('click', close);
+  modal.querySelector('.preorder-close').addEventListener('click', close);
+
+  function close() {
+    modal.classList.remove('open');
+    document.body.classList.remove('no-scroll');
+  }
+
+  document.getElementById('po-minus').addEventListener('click', function () {
+    if (qty > 1) { qty--; qtyEl.textContent = qty; updateTotal(); }
+  });
+
+  document.getElementById('po-plus').addEventListener('click', function () {
+    if (qty < 20) { qty++; qtyEl.textContent = qty; updateTotal(); }
+  });
+
+  document.getElementById('po-submit').addEventListener('click', function () {
+    var name = document.getElementById('po-name').value.trim();
+    var email = document.getElementById('po-email').value.trim();
+    var province = document.getElementById('po-province').value;
+    var address = document.getElementById('po-address').value.trim();
+
+    if (!name || !email || !province || !address) {
+      alert('Please fill in all fields.');
+      return;
+    }
+
+    var btn = this;
+    btn.disabled = true;
+    btn.textContent = 'Submitting...';
+
+    var SB_URL = 'https://toxgvaqctxbqhqitmxkm.supabase.co';
+    var SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRveGd2YXFjdHhicWhxaXRteGttIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njk0MDg3NjksImV4cCI6MjA4NDk4NDc2OX0.P0r1zYtuxA0y0Qj8j6BpL1NJCwHn5vB68SI8jR4O4U0';
+
+    fetch(SB_URL + '/rest/v1/pre_order_shots', {
+      method: 'POST',
+      headers: {
+        'apikey': SB_KEY,
+        'Authorization': 'Bearer ' + SB_KEY,
+        'Content-Type': 'application/json',
+        'Prefer': 'return=minimal'
+      },
+      body: JSON.stringify({
+        name: name,
+        email: email,
+        province: province,
+        address: address,
+        quantity: qty
+      })
+    })
+    .then(function (res) {
+      if (res.ok) {
+        formView.style.display = 'none';
+        successView.style.display = '';
+      } else {
+        alert('Something went wrong. Please try again.');
+        btn.disabled = false;
+        btn.textContent = 'Submit Pre-Order';
+      }
+    })
+    .catch(function () {
+      alert('Connection error. Please try again.');
+      btn.disabled = false;
+      btn.textContent = 'Submit Pre-Order';
+    });
+  });
 })();
 </script>
 
