@@ -1419,7 +1419,7 @@
       <a href="#products" class="btn btn-primary">Shop Now</a>
     </div>
   </div>
- 
+
 </section>
 
 <!-- ═══════════════════════════════════════════════════════
@@ -1474,7 +1474,7 @@
       <article class="product-card reveal">
         <div class="product-card__img-wrap">
           <div class="product-card__slides" data-hover-slide>
-          
+
             <img src="assets/images/5l-2.jpg" alt="5L Olive Oil" loading="lazy" />
             <img src="assets/images/5l-3.jpg" alt="5L Olive Oil" loading="lazy" />
           </div>
@@ -1487,46 +1487,39 @@
           </div>
           <div class="product-card__footer">
             <div class="product-card__price">
-              R1,780
+              R1,890
               <small>per 5L</small>
             </div>
-            <button
-              class="btn btn-cart"
-              data-product-id="5l-evoo"
-              data-product-name="5L Extra Virgin Olive Oil"
-              data-price="1780"
-              data-variant="Tin"
-              data-trees="6.5"
-            >Add to Cart</button>
           </div>
+          <div id="shopify-component-5l-evoo"></div>
         </div>
       </article>
 
       <!-- Product B: 250ml Infused -->
       <article class="product-card reveal">
         <div class="product-card__img-wrap">
-          <img src="assets/images/infusions.jpg" alt="250ml Infused Olive Oils" class="product-card__img" loading="lazy" />
-          <span class="product-card__badge">250ml</span>
+          <img src="assets/images/infusions.jpg" alt="500ml Infused Olive Oils" class="product-card__img" loading="lazy" />
+          <span class="product-card__badge">500ml</span>
         </div>
         <div class="product-card__body">
           <h3 class="product-card__name">Infused Extra Virgin<br>Olive Oil</h3>
           <p class="product-card__desc">Small-batch cold-pressed oil infused with organic herbs grown right here on the farm. A finishing oil for those who love flavour with intention.</p>
           <div class="variants" data-group="infused">
-            <button class="variant-btn is-active" data-variant="Rosemary" data-price="270" data-preorder="false">Rosemary</button>
-            <button class="variant-btn" data-variant="Oregano" data-price="270" data-preorder="false">Oregano</button>
-            <button class="variant-btn" data-variant="Hemp" data-price="270" data-preorder="true">Hemp</button>
+            <button class="variant-btn is-active" data-variant="Rosemary" data-price="380" data-preorder="false">Rosemary</button>
+            <button class="variant-btn" data-variant="Oregano" data-price="380" data-preorder="false">Oregano</button>
+            <button class="variant-btn" data-variant="Hemp" data-price="380" data-preorder="true">Hemp</button>
           </div>
           <div class="product-card__footer">
             <div class="product-card__price">
-              R<span class="price-display">270</span>
-              <small>per 250ml</small>
+              R<span class="price-display">380</span>
+              <small>per 500ml</small>
             </div>
             <button
               class="btn btn-cart"
               id="infused-cart-btn"
-              data-product-id="250ml-infused"
-              data-product-name="250ml Infused Olive Oil"
-              data-price="270"
+              data-product-id="500ml-infused"
+              data-product-name="500ml Infused Olive Oil"
+              data-price="380"
               data-variant="Rosemary"
               data-trees="1"
             >Add to Cart</button>
@@ -1566,7 +1559,7 @@
         We produce by batch. Order while stocks last.
       </p>
     </div>
-    
+
     </div>
   </div>
 </section>
@@ -1578,7 +1571,7 @@
     <button class="preorder-close">&times;</button>
     <div id="hemp-form-view">
       <h3>Pre-Order Hemp Infusion</h3>
-      <p class="sub">Reserve your 250ml Hemp Infused Olive Oil. We’ll notify you when it’s ready.</p>
+      <p class="sub">Reserve your 500ml Hemp Infused Olive Oil. We'll notify you when it's ready.</p>
       <div class="preorder-field"><label>Name</label><input type="text" id="hp-name" placeholder="Your full name" required /></div>
       <div class="preorder-field"><label>Email</label><input type="email" id="hp-email" placeholder="you@example.com" required /></div>
       <div class="preorder-field">
@@ -1599,7 +1592,7 @@
           <button type="button" class="qty-toggle" id="hp-plus">+</button>
         </div>
       </div>
-      <div class="preorder-total">Total: <strong id="hp-total">R270</strong></div>
+      <div class="preorder-total">Total: <strong id="hp-total">R380</strong></div>
       <button class="preorder-submit" id="hp-submit">Submit Pre-Order</button>
     </div>
     <div id="hemp-success" class="preorder-success" style="display:none;">
@@ -1659,7 +1652,7 @@
     <div id="preorder-success" class="preorder-success" style="display:none;">
       <div class="check">✔️</div>
       <h3>Pre-order received!</h3>
-      <p>Thank you — we’ll be in touch as soon as the Ritual Shots are ready. You’re going to love them.</p>
+      <p>Thank you — we’ll be in touch as soon as the Ritual Shots are ready. You're going to love them.</p>
     </div>
   </div>
 </div>
@@ -2328,7 +2321,7 @@
 
   // Hemp pre-order modal
   (function () {
-    var HEMP_PRICE = 270;
+    var HEMP_PRICE = 380;
     var modal = document.getElementById('hemp-preorder-modal');
     var formView = document.getElementById('hemp-form-view');
     var successView = document.getElementById('hemp-success');
@@ -2467,6 +2460,118 @@
       imgs[idx].classList.add('is-visible');
     }, 3000);
   });
+})();
+</script>
+
+<!-- Shopify Buy Button -->
+<script type="text/javascript">
+(function () {
+  var scriptURL = 'https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js';
+  if (window.ShopifyBuy) {
+    if (window.ShopifyBuy.UI) { ShopifyBuyInit(); } else { loadScript(); }
+  } else { loadScript(); }
+  function loadScript() {
+    var script = document.createElement('script');
+    script.async = true;
+    script.src = scriptURL;
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(script);
+    script.onload = ShopifyBuyInit;
+  }
+  function ShopifyBuyInit() {
+    var client = ShopifyBuy.buildClient({
+      domain: 'c594fd-5.myshopify.com',
+      storefrontAccessToken: '0b2269775c6564ca9bc30e43734b8a79',
+    });
+    ShopifyBuy.UI.onReady(client).then(function (ui) {
+      ui.createComponent('product', {
+        id: '10354351931666',
+        node: document.getElementById('shopify-component-5l-evoo'),
+        moneyFormat: 'R%20%7B%7Bamount%7D%7D',
+        options: {
+          "product": {
+            "styles": {
+              "product": {
+                "@media (min-width: 601px)": {
+                  "max-width": "100%",
+                  "margin-left": "0px",
+                  "margin-bottom": "0px"
+                }
+              },
+              "button": {
+                "font-family": "Inter, sans-serif",
+                "font-size": "0.75rem",
+                "font-weight": "500",
+                "letter-spacing": "0.08em",
+                "padding-top": "0.65em",
+                "padding-bottom": "0.65em",
+                "padding-left": "1.4em",
+                "padding-right": "1.4em",
+                "border-radius": "4px",
+                "background-color": "#1a1208",
+                "color": "#c2a66d",
+                ":hover": { "background-color": "#2a1e0e" },
+                ":focus": { "background-color": "#2a1e0e" }
+              },
+              "quantityInput": {
+                "font-size": "0.75rem",
+                "padding-top": "0.65em",
+                "padding-bottom": "0.65em"
+              }
+            },
+            "contents": {
+              "img": false,
+              "button": false,
+              "buttonWithQuantity": true,
+              "title": false,
+              "price": false
+            },
+            "text": { "button": "Add to cart" }
+          },
+          "productSet": {
+            "styles": { "products": { "@media (min-width: 601px)": { "margin-left": "0px" } } }
+          },
+          "modalProduct": {
+            "contents": { "img": false, "imgWithCarousel": true, "button": false, "buttonWithQuantity": true },
+            "styles": { "product": { "@media (min-width: 601px)": { "max-width": "100%", "margin-left": "0px", "margin-bottom": "0px" } } },
+            "text": { "button": "Add to cart" }
+          },
+          "option": {},
+          "cart": {
+            "styles": {
+              "button": {
+                "font-family": "Inter, sans-serif",
+                "font-size": "0.8rem",
+                "font-weight": "600",
+                "letter-spacing": "0.12em",
+                "border-radius": "4px",
+                "background-color": "#c2a66d",
+                "color": "#1a1208",
+                ":hover": { "background-color": "#d4b87a" },
+                ":focus": { "background-color": "#d4b87a" }
+              }
+            },
+            "text": { "total": "Subtotal", "button": "Checkout" },
+            "popup": false
+          },
+          "toggle": {
+            "styles": {
+              "toggle": {
+                "font-family": "Inter, sans-serif",
+                "background-color": "#1a1208",
+                ":hover": { "background-color": "#2a1e0e" },
+                ":focus": { "background-color": "#2a1e0e" }
+              },
+              "count": {
+                "font-size": "0.68rem",
+                "color": "#1a1208",
+                "background-color": "#c2a66d"
+              }
+            }
+          }
+        },
+      });
+    });
+  }
 })();
 </script>
 
