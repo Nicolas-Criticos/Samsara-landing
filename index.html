@@ -1514,17 +1514,9 @@
               R<span class="price-display">380</span>
               <small>per 500ml</small>
             </div>
-            <button
-              class="btn btn-cart"
-              id="infused-cart-btn"
-              data-product-id="500ml-infused"
-              data-product-name="500ml Infused Olive Oil"
-              data-price="380"
-              data-variant="Rosemary"
-              data-trees="1"
-            >Add to Cart</button>
-            <button class="btn btn-cart" id="hemp-preorder-btn" type="button" style="display:none;">Pre-Order</button>
           </div>
+          <div id="shopify-component-infused" class="shopify-embed"></div>
+          <button class="btn btn-cart" id="hemp-preorder-btn" type="button" style="display:none;">Pre-Order</button>
         </div>
       </article>
 
@@ -1549,8 +1541,8 @@
               R546
               <small>box of 14</small>
             </div>
-            <button class="btn btn-cart" id="preorder-open-btn" type="button">Pre-Order</button>
           </div>
+          <div id="shopify-component-shots"></div>
         </div>
       </article>
 
@@ -2483,91 +2475,96 @@
       storefrontAccessToken: '0b2269775c6564ca9bc30e43734b8a79',
     });
     ShopifyBuy.UI.onReady(client).then(function (ui) {
+      var btnStyle = {
+        "font-family": "Inter, sans-serif",
+        "font-size": "0.75rem",
+        "font-weight": "500",
+        "letter-spacing": "0.08em",
+        "padding-top": "0.65em",
+        "padding-bottom": "0.65em",
+        "padding-left": "1.4em",
+        "padding-right": "1.4em",
+        "border-radius": "4px",
+        "background-color": "#1a1208",
+        "color": "#c2a66d",
+        ":hover": { "background-color": "#2a1e0e" },
+        ":focus": { "background-color": "#2a1e0e" }
+      };
+      var productOpts = {
+        "styles": {
+          "product": { "@media (min-width: 601px)": { "max-width": "100%", "margin-left": "0px", "margin-bottom": "0px" } },
+          "button": btnStyle,
+          "quantityInput": { "font-size": "0.75rem", "padding-top": "0.65em", "padding-bottom": "0.65em" }
+        },
+        "contents": { "img": false, "button": false, "buttonWithQuantity": true, "title": false, "price": false },
+        "text": { "button": "Add to cart" }
+      };
+      var cartOpts = {
+        "styles": {
+          "button": {
+            "font-family": "Inter, sans-serif", "font-size": "0.8rem", "font-weight": "600",
+            "letter-spacing": "0.12em", "border-radius": "4px",
+            "background-color": "#c2a66d", "color": "#1a1208",
+            ":hover": { "background-color": "#d4b87a" }, ":focus": { "background-color": "#d4b87a" }
+          }
+        },
+        "text": { "total": "Subtotal", "button": "Checkout" },
+        "popup": false
+      };
+      var toggleOpts = {
+        "styles": {
+          "toggle": { "font-family": "Inter, sans-serif", "background-color": "#1a1208", ":hover": { "background-color": "#2a1e0e" }, ":focus": { "background-color": "#2a1e0e" } },
+          "count": { "font-size": "0.68rem", "color": "#1a1208", "background-color": "#c2a66d" }
+        }
+      };
+      var modalOpts = {
+        "contents": { "img": false, "imgWithCarousel": true, "button": false, "buttonWithQuantity": true },
+        "styles": { "product": { "@media (min-width: 601px)": { "max-width": "100%", "margin-left": "0px", "margin-bottom": "0px" } } },
+        "text": { "button": "Add to cart" }
+      };
+
+      /* 5L Extra Virgin Olive Oil */
       ui.createComponent('product', {
         id: '10354351931666',
         node: document.getElementById('shopify-component-5l-evoo'),
         moneyFormat: 'R%20%7B%7Bamount%7D%7D',
         options: {
-          "product": {
-            "styles": {
-              "product": {
-                "@media (min-width: 601px)": {
-                  "max-width": "100%",
-                  "margin-left": "0px",
-                  "margin-bottom": "0px"
-                }
-              },
-              "button": {
-                "font-family": "Inter, sans-serif",
-                "font-size": "0.75rem",
-                "font-weight": "500",
-                "letter-spacing": "0.08em",
-                "padding-top": "0.65em",
-                "padding-bottom": "0.65em",
-                "padding-left": "1.4em",
-                "padding-right": "1.4em",
-                "border-radius": "4px",
-                "background-color": "#1a1208",
-                "color": "#c2a66d",
-                ":hover": { "background-color": "#2a1e0e" },
-                ":focus": { "background-color": "#2a1e0e" }
-              },
-              "quantityInput": {
-                "font-size": "0.75rem",
-                "padding-top": "0.65em",
-                "padding-bottom": "0.65em"
-              }
-            },
-            "contents": {
-              "img": false,
-              "button": false,
-              "buttonWithQuantity": true,
-              "title": false,
-              "price": false
-            },
-            "text": { "button": "Add to cart" }
-          },
-          "productSet": {
-            "styles": { "products": { "@media (min-width: 601px)": { "margin-left": "0px" } } }
-          },
-          "modalProduct": {
-            "contents": { "img": false, "imgWithCarousel": true, "button": false, "buttonWithQuantity": true },
-            "styles": { "product": { "@media (min-width: 601px)": { "max-width": "100%", "margin-left": "0px", "margin-bottom": "0px" } } },
-            "text": { "button": "Add to cart" }
-          },
+          "product": productOpts,
+          "productSet": { "styles": { "products": { "@media (min-width: 601px)": { "margin-left": "0px" } } } },
+          "modalProduct": modalOpts,
           "option": {},
-          "cart": {
-            "styles": {
-              "button": {
-                "font-family": "Inter, sans-serif",
-                "font-size": "0.8rem",
-                "font-weight": "600",
-                "letter-spacing": "0.12em",
-                "border-radius": "4px",
-                "background-color": "#c2a66d",
-                "color": "#1a1208",
-                ":hover": { "background-color": "#d4b87a" },
-                ":focus": { "background-color": "#d4b87a" }
-              }
-            },
-            "text": { "total": "Subtotal", "button": "Checkout" },
-            "popup": false
-          },
-          "toggle": {
-            "styles": {
-              "toggle": {
-                "font-family": "Inter, sans-serif",
-                "background-color": "#1a1208",
-                ":hover": { "background-color": "#2a1e0e" },
-                ":focus": { "background-color": "#2a1e0e" }
-              },
-              "count": {
-                "font-size": "0.68rem",
-                "color": "#1a1208",
-                "background-color": "#c2a66d"
-              }
-            }
-          }
+          "cart": cartOpts,
+          "toggle": toggleOpts
+        },
+      });
+
+      /* 500ml Infused Olive Oil (2 variants) */
+      ui.createComponent('product', {
+        id: '10354352619794',
+        node: document.getElementById('shopify-component-infused'),
+        moneyFormat: 'R%20%7B%7Bamount%7D%7D',
+        options: {
+          "product": productOpts,
+          "productSet": { "styles": { "products": { "@media (min-width: 601px)": { "margin-left": "0px" } } } },
+          "modalProduct": modalOpts,
+          "option": {},
+          "cart": cartOpts,
+          "toggle": toggleOpts
+        },
+      });
+
+      /* Ritual Morning Shots */
+      ui.createComponent('product', {
+        id: '10354352652562',
+        node: document.getElementById('shopify-component-shots'),
+        moneyFormat: 'R%20%7B%7Bamount%7D%7D',
+        options: {
+          "product": productOpts,
+          "productSet": { "styles": { "products": { "@media (min-width: 601px)": { "margin-left": "0px" } } } },
+          "modalProduct": modalOpts,
+          "option": {},
+          "cart": cartOpts,
+          "toggle": toggleOpts
         },
       });
     });
