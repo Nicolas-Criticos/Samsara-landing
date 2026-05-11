@@ -753,6 +753,9 @@
       transform: translateY(-2px);
     }
 
+    /* Hide Shopify's own variant dropdown on infused card (we use custom buttons) */
+    #shopify-component-infused .shopify-buy__option-select-wrapper { display: none !important; }
+
     .btn-cart {
       background: var(--bg-dark);
       color: var(--gold);
@@ -1542,7 +1545,7 @@
               <small>box of 14</small>
             </div>
           </div>
-          <div id="shopify-component-shots"></div>
+          <button class="btn btn-cart" id="preorder-open-btn" type="button">Pre-Order</button>
         </div>
       </article>
 
@@ -2553,22 +2556,33 @@
         },
       });
 
-      /* Ritual Morning Shots */
-      ui.createComponent('product', {
-        id: '10354352652562',
-        node: document.getElementById('shopify-component-shots'),
-        moneyFormat: 'R%20%7B%7Bamount%7D%7D',
-        options: {
-          "product": productOpts,
-          "productSet": { "styles": { "products": { "@media (min-width: 601px)": { "margin-left": "0px" } } } },
-          "modalProduct": modalOpts,
-          "option": {},
-          "cart": cartOpts,
-          "toggle": toggleOpts
-        },
-      });
+      /* Ritual Morning Shots — pre-order only, no Shopify embed */
+
+      /* Hook Shopify cart updates to show tree ghost toast */
+      ui.cart && ui.cart.model && ui.cart.model.on && ui.cart.model.on('updateItem', showShopifyToast);
     });
   }
+
+  /* Ghost toast for Shopify add-to-cart */
+  function showShopifyToast() {
+    var container = document.getElementById('ghost-container');
+    if (!container) return;
+    var toast = document.createElement('div');
+    toast.className = 'ghost-toast';
+    toast.innerHTML = '<span>🌿</span><span>You\'re helping restore olive trees</span>';
+    container.appendChild(toast);
+    setTimeout(function () {
+      toast.classList.add('out');
+      setTimeout(function () { toast.remove(); }, 400);
+    }, 3500);
+  }
+
+  /* Also listen for Shopify iframe button clicks as fallback */
+  document.addEventListener('click', function (e) {
+    if (e.target && e.target.closest && e.target.closest('.shopify-buy__btn')) {
+      setTimeout(showShopifyToast, 300);
+    }
+  });
 })();
 </script>
 
