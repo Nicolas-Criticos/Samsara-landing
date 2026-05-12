@@ -2559,29 +2559,27 @@
         "text": { "button": "Add to cart" }
       };
 
-      /* ── Event hooks (go INSIDE options.product / options.cart per SDK docs) ── */
-      var productOptsWithEvents = JSON.parse(JSON.stringify(productOpts));
-      productOptsWithEvents.events = {
-        addVariantToCart: function () {
-          if (window.__samsaraTreeToast) window.__samsaraTreeToast();
-          if (window.__samsaraTreeBar) window.__samsaraTreeBar();
-        }
-      };
+      /* ── Event hooks: per-product tree counts ── */
+      function makeProductOpts(trees) {
+        var opts = JSON.parse(JSON.stringify(productOpts));
+        opts.events = {
+          addVariantToCart: function () {
+            if (window.__samsaraAddTrees) window.__samsaraAddTrees(trees);
+          }
+        };
+        return opts;
+      }
 
       var cartOptsWithEvents = JSON.parse(JSON.stringify(cartOpts));
-      cartOptsWithEvents.events = {
-        updateItemQuantity: function () {
-          if (window.__samsaraTreeBar) window.__samsaraTreeBar();
-        }
-      };
+      /* No cart-level event needed — we track trees ourselves */
 
-      /* 5L Extra Virgin Olive Oil */
+      /* 5L Extra Virgin Olive Oil — 5 trees */
       ui.createComponent('product', {
         id: '10354351931666',
         node: document.getElementById('shopify-component-5l-evoo'),
         moneyFormat: 'R%20%7B%7Bamount%7D%7D',
         options: {
-          "product": productOptsWithEvents,
+          "product": makeProductOpts(5),
           "productSet": { "styles": { "products": { "@media (min-width: 601px)": { "margin-left": "0px" } } } },
           "modalProduct": modalOpts,
           "option": {},
@@ -2590,13 +2588,13 @@
         },
       });
 
-      /* 500ml Infused Olive Oil (2 variants) */
+      /* 500ml Infused Olive Oil — 1 tree */
       ui.createComponent('product', {
         id: '10354352619794',
         node: document.getElementById('shopify-component-infused'),
         moneyFormat: 'R%20%7B%7Bamount%7D%7D',
         options: {
-          "product": productOptsWithEvents,
+          "product": makeProductOpts(1),
           "productSet": { "styles": { "products": { "@media (min-width: 601px)": { "margin-left": "0px" } } } },
           "modalProduct": modalOpts,
           "option": {},
@@ -2611,91 +2609,46 @@
 })();
 </script>
 
-<!-- ═══ TREE IMPACT: Toast + Impact Bar (global helpers for SDK events + polling fallback) ═══ -->
+<!-- ═══ TREE IMPACT: Accurate per-product tree tracking ═══ -->
 <script>
 (function () {
-  var treesPerItem = 3; /* approx weighted avg: 5L=5, infused=1, shots=2 */
-  var lastSeenCount = 0;
+  var totalTrees = 0;
   var toastDebounce = 0;
 
-  /* ---- Ghost toast (called by SDK addVariantToCart event) ---- */
-  window.__samsaraTreeToast = function () {
-    if (Date.now() - toastDebounce < 2000) return; /* prevent double-fire */
+  /* Called by each product's addVariantToCart with the exact tree count */
+  window.__samsaraAddTrees = function (trees) {
+    totalTrees += trees;
+    showToast(trees);
+    updateBar();
+  };
+
+  function showToast(treesJustAdded) {
+    if (Date.now() - toastDebounce < 2000) return;
     toastDebounce = Date.now();
     var container = document.getElementById('ghost-container');
     if (!container) return;
+    var label = treesJustAdded === 1 ? '1 olive tree' : treesJustAdded + ' olive trees';
     var toast = document.createElement('div');
     toast.className = 'ghost-toast';
-    var trees = (lastSeenCount + 1) * treesPerItem;
-    toast.innerHTML = '<span>🌿</span><span>You\'re helping restore <strong>' + trees + ' olive trees</strong></span>';
+    toast.innerHTML = '<span>🌿</span><span>+' + label + ' rehabilitated</span>';
     container.appendChild(toast);
     setTimeout(function () {
       toast.classList.add('out');
       setTimeout(function () { toast.remove(); }, 400);
     }, 3500);
-  };
+  }
 
-  /* ---- Impact bar (called by SDK events + polling fallback) ---- */
-  window.__samsaraTreeBar = function () {
+  function updateBar() {
     var bar = document.getElementById('tree-impact-bar');
     var num = document.getElementById('tree-impact-count');
     if (!bar || !num) return;
-
-    /* Try reading cart count from Shopify toggle iframe */
-    var count = getCartCount();
-    if (count > 0) {
-      num.textContent = count * treesPerItem;
+    if (totalTrees > 0) {
+      num.textContent = totalTrees;
       bar.classList.add('visible');
-    } else if (count === 0) {
+    } else {
       bar.classList.remove('visible');
     }
-  };
-
-  function getCartCount() {
-    /* Approach 1: Same-origin iframe content (Shopify serves from same domain) */
-    var toggleFrames = document.querySelectorAll('.shopify-buy-frame--toggle');
-    for (var i = 0; i < toggleFrames.length; i++) {
-      var iframe = toggleFrames[i].querySelector('iframe');
-      if (!iframe) continue;
-      try {
-        var doc = iframe.contentDocument || iframe.contentWindow.document;
-        var el = doc.querySelector('.shopify-buy__btn--cart-tab__count');
-        if (el) {
-          var n = parseInt(el.textContent, 10);
-          if (!isNaN(n)) return n;
-        }
-      } catch (e) { /* cross-origin */ }
-    }
-    /* Approach 2: data attribute */
-    var frames = document.querySelectorAll('[class*="shopify-buy-frame"]');
-    for (var j = 0; j < frames.length; j++) {
-      var q = frames[j].getAttribute('data-shopify-buy-cart-quantity');
-      if (q !== null && !isNaN(parseInt(q, 10))) return parseInt(q, 10);
-    }
-    return -1;
   }
-
-  /* Polling fallback: if SDK events don't fire, poll every 2s */
-  function poll() {
-    var c = getCartCount();
-    if (c === -1) return;
-    if (c > lastSeenCount) {
-      window.__samsaraTreeToast();
-    }
-    if (c !== lastSeenCount) {
-      lastSeenCount = c;
-      window.__samsaraTreeBar();
-    }
-  }
-
-  /* Start polling once Shopify frames exist */
-  var wait = setInterval(function () {
-    if (document.querySelector('.shopify-buy-frame--toggle')) {
-      clearInterval(wait);
-      setTimeout(function () { setInterval(poll, 2000); }, 2000);
-    }
-  }, 500);
-  setTimeout(function () { clearInterval(wait); setInterval(poll, 2000); }, 10000);
 })();
 </script>
 
