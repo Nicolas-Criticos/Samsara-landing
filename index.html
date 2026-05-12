@@ -2522,10 +2522,16 @@
       };
 
       /* 5L Extra Virgin Olive Oil */
+      var sharedEvents = {
+        addVariantToCart: function () { showShopifyToast(); }
+      };
+
+      /* 5L Extra Virgin Olive Oil */
       ui.createComponent('product', {
         id: '10354351931666',
         node: document.getElementById('shopify-component-5l-evoo'),
         moneyFormat: 'R%20%7B%7Bamount%7D%7D',
+        events: sharedEvents,
         options: {
           "product": productOpts,
           "productSet": { "styles": { "products": { "@media (min-width: 601px)": { "margin-left": "0px" } } } },
@@ -2541,6 +2547,7 @@
         id: '10354352619794',
         node: document.getElementById('shopify-component-infused'),
         moneyFormat: 'R%20%7B%7Bamount%7D%7D',
+        events: sharedEvents,
         options: {
           "product": productOpts,
           "productSet": { "styles": { "products": { "@media (min-width: 601px)": { "margin-left": "0px" } } } },
@@ -2552,32 +2559,21 @@
       });
 
       /* Ritual Morning Shots — pre-order only, no Shopify embed */
-
-      /* Hook Shopify cart updates to show tree ghost toast */
-      ui.cart && ui.cart.model && ui.cart.model.on && ui.cart.model.on('updateItem', showShopifyToast);
     });
   }
 
-  /* Ghost toast for Shopify add-to-cart */
   function showShopifyToast() {
     var container = document.getElementById('ghost-container');
     if (!container) return;
     var toast = document.createElement('div');
     toast.className = 'ghost-toast';
-    toast.innerHTML = '<span>🌿</span><span>You\'re helping restore olive trees</span>';
+    toast.innerHTML = '<span>🌿</span><span>You\'re helping restore olive trees 🌳</span>';
     container.appendChild(toast);
     setTimeout(function () {
       toast.classList.add('out');
       setTimeout(function () { toast.remove(); }, 400);
     }, 3500);
   }
-
-  /* Also listen for Shopify iframe button clicks as fallback */
-  document.addEventListener('click', function (e) {
-    if (e.target && e.target.closest && e.target.closest('.shopify-buy__btn')) {
-      setTimeout(showShopifyToast, 300);
-    }
-  });
 })();
 </script>
 
