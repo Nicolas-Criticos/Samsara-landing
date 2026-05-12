@@ -768,7 +768,7 @@
     /* ── GHOST TOAST ───────────────────────────────────────── */
     #ghost-container {
       position: fixed;
-      bottom: 2rem;
+      bottom: 3.5rem;
       left: 2rem;
       z-index: 9999;
       display: flex;
@@ -792,6 +792,35 @@
     }
 
     .ghost-toast.out { animation: toastOut 0.4s ease forwards; }
+
+    /* ── TREE IMPACT BAR (persistent bottom bar) ──────────── */
+    #tree-impact-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 800;
+      background: var(--bg-dark);
+      border-top: 1px solid rgba(194,166,109,0.2);
+      color: var(--cream);
+      text-align: center;
+      padding: 0.55rem 1rem;
+      font-size: 0.8rem;
+      font-family: 'Inter', sans-serif;
+      letter-spacing: 0.03em;
+      transform: translateY(100%);
+      transition: transform 0.4s cubic-bezier(0.4,0,0.2,1);
+      pointer-events: none;
+    }
+
+    #tree-impact-bar.visible {
+      transform: translateY(0);
+    }
+
+    #tree-impact-bar strong {
+      color: var(--gold);
+      font-weight: 500;
+    }
 
     /* ── CART ICON ─────────────────────────────────────────── */
     /* Custom cart button hidden — using Shopify cart instead */
@@ -1385,7 +1414,8 @@
         transform: translateY(100%);
       }
       #checkout-modal.open .modal-panel { transform: translateY(0); }
-      #ghost-container { left: 1rem; bottom: 1rem; }
+      #ghost-container { left: 1rem; bottom: 3.5rem; }
+      #tree-impact-bar { font-size: 0.75rem; padding: 0.5rem 0.8rem; }
     }
   </style>
 </head>
@@ -1485,6 +1515,7 @@
         <div class="product-card__body">
           <h3 class="product-card__name">Extra Virgin<br>Organic Olive Oil</h3>
           <p class="product-card__desc">Cold-pressed. Single-origin. Unfiltered liquid gold from the Swartberg.</p>
+          <p class="product-card__trees">🌿 Rehabilitates 6.5 olive trees</p>
           <div class="variants">
           </div>
           <div class="product-card__footer">
@@ -1506,6 +1537,7 @@
         <div class="product-card__body">
           <h3 class="product-card__name">Infused Extra Virgin<br>Olive Oil</h3>
           <p class="product-card__desc">Small-batch cold-pressed oil infused with organic herbs grown right here on the farm. A finishing oil for those who love flavour with intention.</p>
+          <p class="product-card__trees">🌿 Rehabilitates 1 olive tree</p>
 
           <div class="product-card__footer">
             <div class="product-card__price">
@@ -1533,6 +1565,7 @@
         <div class="product-card__body">
           <h3 class="product-card__name">Ritual<br>Health Shot</h3>
           <p class="product-card__desc">14 daily ritual shots — olive oil, lemon, sceletium. Cold-pressed and raw. A morning ritual in a box.</p>
+          <p class="product-card__trees">🌿 Rehabilitates 2 olive trees</p>
           <a href="assets/ritual-shot-benefits.pdf" target="_blank" class="product-card__learn">Learn more →</a>
           <div class="product-card__footer">
             <div class="product-card__price">
@@ -1665,6 +1698,11 @@
     <p class="footer__copy">© 2026 Samsara · VrischGewagt Boutique Olive Farm · Swartberg Karoo, South Africa</p>
   </div>
 </footer>
+
+<!-- Tree impact bar -->
+<div id="tree-impact-bar">
+  🌿 Your order is helping restore <strong id="tree-impact-count">0</strong> olive trees
+</div>
 
 <!-- ═══════════════════════════════════════════════════════
      CART DRAWER
@@ -2522,16 +2560,10 @@
       };
 
       /* 5L Extra Virgin Olive Oil */
-      var sharedEvents = {
-        addVariantToCart: function () { showShopifyToast(); }
-      };
-
-      /* 5L Extra Virgin Olive Oil */
       ui.createComponent('product', {
         id: '10354351931666',
         node: document.getElementById('shopify-component-5l-evoo'),
         moneyFormat: 'R%20%7B%7Bamount%7D%7D',
-        events: sharedEvents,
         options: {
           "product": productOpts,
           "productSet": { "styles": { "products": { "@media (min-width: 601px)": { "margin-left": "0px" } } } },
@@ -2547,7 +2579,6 @@
         id: '10354352619794',
         node: document.getElementById('shopify-component-infused'),
         moneyFormat: 'R%20%7B%7Bamount%7D%7D',
-        events: sharedEvents,
         options: {
           "product": productOpts,
           "productSet": { "styles": { "products": { "@media (min-width: 601px)": { "margin-left": "0px" } } } },
@@ -2561,19 +2592,142 @@
       /* Ritual Morning Shots — pre-order only, no Shopify embed */
     });
   }
+})();
+</script>
 
-  function showShopifyToast() {
+<!-- ═══ SHOPIFY CART WATCHER (MutationObserver) ═══ -->
+<script>
+(function () {
+  /*
+   * The Shopify Buy Button renders inside iframes, so we can't hook its
+   * internal click events. Instead we watch for the cart-count badge
+   * that Shopify injects into the toggle button. When its text content
+   * changes (e.g. "0" → "1"), we know an item was added.
+   *
+   * We also periodically poll the toggle iframe as a fallback for
+   * mobile browsers where MutationObserver on cross-origin frames
+   * may not fire.
+   */
+
+  var lastSeenCount = 0;
+  var treesPerItem  = 4; /* weighted average: (6.5 + 1) / 2 ≈ 3.75, round to 4 */
+  var impactBar     = null;
+  var impactNum     = null;
+
+  function getShopifyCartCount() {
+    /* Shopify toggle button renders a <span> with class
+       'shopify-buy__btn--cart-tab__count' inside an iframe,
+       but it ALSO injects a visible count badge as a direct
+       child of the toggle frame wrapper. Try both approaches. */
+
+    /* Approach 1: Look for Shopify's cart count in the toggle iframe wrapper */
+    var toggleFrames = document.querySelectorAll('.shopify-buy-frame--toggle');
+    for (var i = 0; i < toggleFrames.length; i++) {
+      var iframe = toggleFrames[i].querySelector('iframe');
+      if (!iframe) continue;
+      try {
+        var iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+        var countEl = iframeDoc.querySelector('.shopify-buy__btn--cart-tab__count');
+        if (countEl) {
+          var n = parseInt(countEl.textContent, 10);
+          if (!isNaN(n)) return n;
+        }
+      } catch (e) { /* cross-origin — expected */ }
+    }
+
+    /* Approach 2: Shopify SDK sometimes sets data-shopify-buy-cart-quantity */
+    var cartFrames = document.querySelectorAll('.shopify-buy-frame--cart');
+    for (var j = 0; j < cartFrames.length; j++) {
+      var q = cartFrames[j].getAttribute('data-shopify-buy-cart-quantity');
+      if (q !== null) {
+        var n2 = parseInt(q, 10);
+        if (!isNaN(n2)) return n2;
+      }
+    }
+
+    /* Approach 3: Scrape the visible badge text from any Shopify count element */
+    var allCounts = document.querySelectorAll('[class*="cart-tab__count"]');
+    for (var k = 0; k < allCounts.length; k++) {
+      var n3 = parseInt(allCounts[k].textContent, 10);
+      if (!isNaN(n3)) return n3;
+    }
+
+    return -1; /* unknown */
+  }
+
+  function showGhostToast(newCount) {
     var container = document.getElementById('ghost-container');
     if (!container) return;
+    var trees = newCount * treesPerItem;
+    var treeText = trees === 1 ? '1 olive tree' : trees + ' olive trees';
     var toast = document.createElement('div');
     toast.className = 'ghost-toast';
-    toast.innerHTML = '<span>🌿</span><span>You\'re helping restore olive trees 🌳</span>';
+    toast.innerHTML = '<span>🌿</span><span>You\'re helping restore <strong>' + treeText + '</strong></span>';
     container.appendChild(toast);
     setTimeout(function () {
       toast.classList.add('out');
       setTimeout(function () { toast.remove(); }, 400);
     }, 3500);
   }
+
+  function updateImpactBar(count) {
+    if (!impactBar) impactBar = document.getElementById('tree-impact-bar');
+    if (!impactNum) impactNum = document.getElementById('tree-impact-count');
+    if (!impactBar || !impactNum) return;
+
+    var trees = count * treesPerItem;
+    if (trees > 0) {
+      impactNum.textContent = trees;
+      impactBar.classList.add('visible');
+    } else {
+      impactBar.classList.remove('visible');
+    }
+  }
+
+  function checkCartChange() {
+    var current = getShopifyCartCount();
+    if (current === -1) return; /* couldn't read it yet */
+    if (current > lastSeenCount) {
+      showGhostToast(current);
+    }
+    if (current !== lastSeenCount) {
+      updateImpactBar(current);
+    }
+    lastSeenCount = current;
+  }
+
+  /* MutationObserver: watch for any DOM changes Shopify makes */
+  var observer = new MutationObserver(function () {
+    checkCartChange();
+  });
+
+  /* Start observing once Shopify has injected its frames */
+  function startWatching() {
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true,
+      characterData: true,
+      attributes: true
+    });
+    /* Also poll every 1.5s as fallback (mobile, cross-origin restrictions) */
+    setInterval(checkCartChange, 1500);
+  }
+
+  /* Wait for Shopify frames to appear, then start */
+  var waitInterval = setInterval(function () {
+    if (document.querySelector('.shopify-buy-frame--toggle') ||
+        document.querySelector('.shopify-buy-frame--cart')) {
+      clearInterval(waitInterval);
+      /* Small delay to let Shopify fully render */
+      setTimeout(startWatching, 1000);
+    }
+  }, 500);
+
+  /* Safety: start watching after 8s regardless */
+  setTimeout(function () {
+    clearInterval(waitInterval);
+    startWatching();
+  }, 8000);
 })();
 </script>
 
