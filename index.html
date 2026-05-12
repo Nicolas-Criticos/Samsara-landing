@@ -769,8 +769,8 @@
     #ghost-container {
       position: fixed;
       bottom: 2rem;
-      right: 2rem;
-      z-index: 3000;
+      left: 2rem;
+      z-index: 9999;
       display: flex;
       flex-direction: column;
       gap: 0.6rem;
@@ -794,7 +794,9 @@
     .ghost-toast.out { animation: toastOut 0.4s ease forwards; }
 
     /* ── CART ICON ─────────────────────────────────────────── */
+    /* Custom cart button hidden — using Shopify cart instead */
     #cart-btn {
+      display: none !important;
       position: fixed;
       top: 1.25rem;
       right: 1.25rem;
@@ -1383,7 +1385,7 @@
         transform: translateY(100%);
       }
       #checkout-modal.open .modal-panel { transform: translateY(0); }
-      #ghost-container { right: 1rem; bottom: 1rem; }
+      #ghost-container { left: 1rem; bottom: 1rem; }
     }
   </style>
 </head>
