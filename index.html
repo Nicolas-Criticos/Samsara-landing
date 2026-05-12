@@ -1515,12 +1515,12 @@
         <div class="product-card__body">
           <h3 class="product-card__name">Extra Virgin<br>Organic Olive Oil</h3>
           <p class="product-card__desc">Cold-pressed. Single-origin. Unfiltered liquid gold from the Swartberg.</p>
-          <p class="product-card__trees">🌿 Rehabilitates 6.5 olive trees</p>
+          <p class="product-card__trees">🌿 Rehabilitates 5 olive trees</p>
           <div class="variants">
           </div>
           <div class="product-card__footer">
             <div class="product-card__price">
-              R1,890
+              R1,780
               <small>per 5L</small>
             </div>
           </div>
@@ -2614,7 +2614,7 @@
 <!-- ═══ TREE IMPACT: Toast + Impact Bar (global helpers for SDK events + polling fallback) ═══ -->
 <script>
 (function () {
-  var treesPerItem = 4;
+  var treesPerItem = 3; /* approx weighted avg: 5L=5, infused=1, shots=2 */
   var lastSeenCount = 0;
   var toastDebounce = 0;
 
@@ -2626,7 +2626,8 @@
     if (!container) return;
     var toast = document.createElement('div');
     toast.className = 'ghost-toast';
-    toast.innerHTML = '<span>🌿</span><span>You\'re helping restore olive trees</span>';
+    var trees = (lastSeenCount + 1) * treesPerItem;
+    toast.innerHTML = '<span>🌿</span><span>You\'re helping restore <strong>' + trees + ' olive trees</strong></span>';
     container.appendChild(toast);
     setTimeout(function () {
       toast.classList.add('out');
