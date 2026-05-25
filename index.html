@@ -281,11 +281,11 @@
 
     .products__grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       gap: 2rem;
     }
 
-    @media (max-width: 900px) {
+    @media (max-width: 1100px) {
       .products__grid { grid-template-columns: repeat(2, 1fr); }
     }
 
@@ -337,19 +337,19 @@
 }
 
     /* shot1.jpg */
-.products__grid .product-card:nth-child(3) .product-card__slides img:nth-child(1) {
+.products__grid .product-card:nth-child(4) .product-card__slides img:nth-child(1) {
   object-position: center 30%;
 }
 /* shot2.jpg */
-.products__grid .product-card:nth-child(3) .product-card__slides img:nth-child(2) {
+.products__grid .product-card:nth-child(4) .product-card__slides img:nth-child(2) {
   object-position: center 60%;
 }
 /* shot3.jpg */
-.products__grid .product-card:nth-child(3) .product-card__slides img:nth-child(3) {
+.products__grid .product-card:nth-child(4) .product-card__slides img:nth-child(3) {
   object-position: center 40%;
 }
 /* shot4.jpg */
-.products__grid .product-card:nth-child(3) .product-card__slides img:nth-child(4) {
+.products__grid .product-card:nth-child(4) .product-card__slides img:nth-child(4) {
   object-position: center 40%;
 }
 
@@ -1528,7 +1528,30 @@
         </div>
       </article>
 
-      <!-- Product B: 250ml Infused -->
+      <!-- Product B: 1L EVOO -->
+      <article class="product-card reveal">
+        <div class="product-card__img-wrap">
+          <div class="product-card__slides" data-hover-slide>
+            <img src="assets/images/5l-2.jpg" alt="1L Olive Oil" loading="lazy" class="is-visible" />
+            <img src="assets/images/5l-3.jpg" alt="1L Olive Oil" loading="lazy" />
+          </div>
+          <span class="product-card__badge">1 Litre Tin</span>
+        </div>
+        <div class="product-card__body">
+          <h3 class="product-card__name">Extra Virgin<br>Organic Olive Oil</h3>
+          <p class="product-card__desc">The same cold-pressed, single-origin Karoo gold — in a convenient 1L tin. Perfect for the everyday kitchen.</p>
+          <p class="product-card__trees">🌿 Rehabilitates 1 olive tree</p>
+          <div class="product-card__footer">
+            <div class="product-card__price">
+              R378
+              <small>per 1L</small>
+            </div>
+          </div>
+          <div id="shopify-component-1l-evoo"></div>
+        </div>
+      </article>
+
+      <!-- Product C: 500ml Infused -->
       <article class="product-card reveal">
         <div class="product-card__img-wrap">
           <img src="assets/images/infusions.jpg" alt="500ml Infused Olive Oils" class="product-card__img" loading="lazy" />
@@ -1538,19 +1561,23 @@
           <h3 class="product-card__name">Infused Extra Virgin<br>Olive Oil</h3>
           <p class="product-card__desc">Small-batch cold-pressed oil infused with organic herbs grown right here on the farm. A finishing oil for those who love flavour with intention.</p>
           <p class="product-card__trees">🌿 Rehabilitates 1 olive tree</p>
-
+          <ul style="font-size:0.78rem;color:var(--muted);line-height:1.9;padding-left:1.1rem;margin-top:0.25rem;">
+            <li>Cold-pressed extra virgin base</li>
+            <li>Farm-grown organic herb infusions</li>
+            <li>Small batch — limited availability</li>
+            <li>Ships within 5–7 business days</li>
+          </ul>
           <div class="product-card__footer">
             <div class="product-card__price">
-              R<span class="price-display">380</span>
+              R380
               <small>per 500ml</small>
             </div>
           </div>
-          <div id="shopify-component-infused" class="shopify-embed"></div>
-          <button class="btn btn-cart" id="hemp-preorder-btn" type="button" style="display:none;">Pre-Order</button>
+          <button class="btn btn-cart" id="hemp-preorder-btn" type="button">Pre-Order</button>
         </div>
       </article>
 
-      <!-- Product C: Ritual Health Shot -->
+      <!-- Product D: Ritual Health Shot -->
       <article class="product-card reveal">
         <div class="product-card__img-wrap">
           <span class="product-card__ribbon">Coming Soon</span>
@@ -1573,14 +1600,19 @@
               <small>box of 14</small>
             </div>
           </div>
-          <button class="btn btn-cart" id="preorder-open-btn" type="button">Pre-Order</button>
+          <p style="font-size:0.78rem;color:var(--olive);letter-spacing:0.08em;text-transform:uppercase;margin-top:0.5rem;">✦ New Product Coming Soon</p>
         </div>
       </article>
 
-      <div class="section__divider" style="margin: 1rem auto;"></div>
-      <p style="color:var(--muted); font-size:0.9rem; max-width:900px; margin:0 auto; white-space:nowrap;">
-        We produce by batch. Order while stocks last.
-      </p>
+      <div class="section__divider" style="margin: 2rem auto;"></div>
+      <div style="text-align:center;padding:1rem 0 0.5rem;" class="reveal">
+        <p style="color:var(--muted); font-size:0.9rem; max-width:900px; margin:0 auto 0.75rem;">
+          We produce by batch. Order while stocks last.
+        </p>
+        <p style="font-size:0.85rem;color:var(--olive);letter-spacing:0.04em;max-width:600px;margin:0 auto;">
+          ♻️ <strong>Refill in store</strong> — reuse your 1L or 5L tin and refill for only <strong>R330 per litre</strong>.
+        </p>
+      </div>
     </div>
 
     </div>
@@ -2580,6 +2612,21 @@
         moneyFormat: 'R%20%7B%7Bamount%7D%7D',
         options: {
           "product": makeProductOpts(5),
+          "productSet": { "styles": { "products": { "@media (min-width: 601px)": { "margin-left": "0px" } } } },
+          "modalProduct": modalOpts,
+          "option": {},
+          "cart": cartOptsWithEvents,
+          "toggle": toggleOpts
+        },
+      });
+
+      /* 1L Extra Virgin Olive Oil — 1 tree */
+      ui.createComponent('product', {
+        id: '10358258958610',
+        node: document.getElementById('shopify-component-1l-evoo'),
+        moneyFormat: 'R%20%7B%7Bamount%7D%7D',
+        options: {
+          "product": makeProductOpts(1),
           "productSet": { "styles": { "products": { "@media (min-width: 601px)": { "margin-left": "0px" } } } },
           "modalProduct": modalOpts,
           "option": {},

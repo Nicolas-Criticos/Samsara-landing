@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    @page { margin: 0; size: A4; }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg:      #f6f3ee;
+      --dark:    #1a1208;
+      --darker:  #0f0b05;
+      --text:    #2b2b2b;
+      --muted:   #6f6a63;
+      --olive:   #6b7f5e;
+      --gold:    #c2a66d;
+      --earth:   #8a7f6d;
+      --cream:   #faf4eb;
+      --soft:    rgba(250,244,235,0.08);
+    }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ═══════════════════════════════════
+       PAGE 1: COVER
+       ═══════════════════════════════════ */
+    .cover {
+      height: 100vh;
+      background: var(--dark);
+      position: relative;
+      overflow: hidden;
+      page-break-after: always;
+    }
+
+    .cover__bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.35;
+      filter: brightness(0.7);
+    }
+
+    .cover__overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(26,18,8,0.85) 0%,
+        rgba(26,18,8,0.4) 40%,
+        rgba(26,18,8,0.6) 70%,
+        rgba(26,18,8,0.95) 100%
+      );
+    }
+
+    .cover__content {
+      position: relative;
+      z-index: 2;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 3rem;
+    }
+
+    /* EDIT: Logo image */
+    .cover__logo {
+      width: 180px;
+      height: auto;
+      margin-bottom: 2rem;
+      opacity: 0.95;
+    }
+
+    .cover__eyebrow {
+      font-size: 0.62rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+    }
+
+    /* EDIT: Main title */
+    .cover__title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3.2rem;
+      font-weight: 300;
+      color: var(--cream);
+      line-height: 1.1;
+      margin-bottom: 0.6rem;
+    }
+
+    .cover__title em {
+      font-style: italic;
+      font-weight: 300;
+    }
+
+    /* EDIT: Subtitle */
+    .cover__subtitle {
+      font-size: 0.88rem;
+      color: rgba(250,244,235,0.5);
+      font-style: italic;
+      max-width: 400px;
+      line-height: 1.6;
+      margin-bottom: 2.5rem;
+    }
+
+    .cover__divider {
+      width: 60px;
+      height: 1px;
+      background: var(--gold);
+      opacity: 0.4;
+      margin-bottom: 2.5rem;
+    }
+
+    /* EDIT: Box info (what's in the box) */
+    .cover__box-info {
+      font-size: 0.72rem;
+      color: rgba(250,244,235,0.4);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .cover__footer {
+      position: absolute;
+      bottom: 2rem;
+      left: 0;
+      right: 0;
+      text-align: center;
+      font-size: 0.58rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(250,244,235,0.2);
+      z-index: 2;
+    }
+
+    /* ═══════════════════════════════════
+       PAGE 2: THE PRODUCT
+       ═══════════════════════════════════ */
+    .product-page {
+      height: 100vh;
+      display: flex;
+      page-break-after: always;
+    }
+
+    .product-page__image {
+      width: 45%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .product-page__content {
+      width: 55%;
+      padding: 3.5rem 3rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .eyebrow {
+      font-size: 0.6rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--earth);
+      margin-bottom: 0.6rem;
+    }
+
+    h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.9rem;
+      font-weight: 300;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+      line-height: 1.2;
+    }
+
+    .divider {
+      width: 45px;
+      height: 1px;
+      background: linear-gradient(to right, var(--earth), transparent);
+      margin: 0.6rem 0 1.2rem;
+      opacity: 0.35;
+    }
+
+    .product-intro {
+      font-size: 0.88rem;
+      color: var(--text);
+      line-height: 1.9;
+      margin-bottom: 1.8rem;
+    }
+
+    .product-detail {
+      font-size: 0.8rem;
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 0.5rem;
+    }
+
+    .product-detail strong {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    /* EDIT: Ritual box (dark callout) */
+    .ritual-callout {
+      background: var(--dark);
+      border-radius: 6px;
+      padding: 1.6rem 2rem;
+      margin-top: 2rem;
+    }
+
+    .ritual-callout h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      font-weight: 300;
+      color: var(--cream);
+      margin-bottom: 0.5rem;
+    }
+
+    .ritual-callout p {
+      font-size: 0.78rem;
+      color: rgba(250,244,235,0.55);
+      line-height: 1.7;
+    }
+
+    .ritual-callout .tagline {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.95rem;
+      font-style: italic;
+      color: var(--gold);
+      margin-top: 0.8rem;
+    }
+
+    /* ═══════════════════════════════════
+       PAGE 3: INGREDIENTS
+       ═══════════════════════════════════ */
+    .ingredients-page {
+      min-height: 100vh;
+      padding: 3rem;
+      page-break-after: always;
+    }
+
+    .ingredients-page h2 {
+      margin-bottom: 0.4rem;
+    }
+
+    .ingredient-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      margin-top: 1.4rem;
+    }
+
+    .ingredient-card {
+      background: white;
+      border-radius: 8px;
+      padding: 1.5rem 1.8rem;
+      border: 1px solid rgba(138,127,109,0.1);
+    }
+
+    .ingredient-card__header {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .ingredient-card__icon {
+      font-size: 1.4rem;
+    }
+
+    /* EDIT: Ingredient names */
+    .ingredient-card__name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 400;
+      color: var(--text);
+    }
+
+    .ingredient-card__subtitle {
+      font-size: 0.75rem;
+      color: var(--muted);
+      font-style: italic;
+      margin-bottom: 0.8rem;
+    }
+
+    /* EDIT: Benefit items */
+    .benefit-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.2rem 1.5rem;
+    }
+
+    .benefit-item {
+      font-size: 0.78rem;
+      color: var(--muted);
+      padding: 0.25rem 0;
+      padding-left: 1rem;
+      position: relative;
+      line-height: 1.5;
+    }
+
+    .benefit-item::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.55rem;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--olive);
+      opacity: 0.6;
+    }
+
+    .ingredient-card__ref {
+      margin-top: 0.6rem;
+      padding-top: 0.5rem;
+      border-top: 1px solid rgba(138,127,109,0.08);
+      font-size: 0.65rem;
+      color: rgba(107,100,90,0.55);
+    }
+
+    .ingredient-card__ref a {
+      color: var(--olive);
+      text-decoration: none;
+    }
+
+    /* ═══════════════════════════════════
+       PAGE 4: SCIENCE / REFERENCES
+       ═══════════════════════════════════ */
+    .references-page {
+      min-height: 100vh;
+      padding: 3rem;
+      page-break-after: always;
+    }
+
+    .ref-group {
+      margin-bottom: 1.4rem;
+    }
+
+    .ref-group__title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.05rem;
+      color: var(--text);
+      margin-bottom: 0.4rem;
+      font-weight: 500;
+    }
+
+    .ref-num {
+      font-size: 0.7rem;
+      color: rgba(107,100,90,0.7);
+      line-height: 1.6;
+      margin-bottom: 0.35rem;
+      padding-left: 1.5rem;
+      text-indent: -1.5rem;
+    }
+
+    .ref-num a {
+      color: var(--olive);
+      text-decoration: none;
+      word-break: break-all;
+    }
+
+    .disclaimer {
+      margin-top: 2rem;
+      padding: 1.2rem 1.5rem;
+      background: rgba(138,127,109,0.06);
+      border-radius: 6px;
+      font-size: 0.66rem;
+      color: rgba(107,100,90,0.55);
+      line-height: 1.7;
+      font-style: italic;
+    }
+
+    /* ═══════════════════════════════════
+       PAGE 5: BACK COVER
+       ═══════════════════════════════════ */
+    .back-cover {
+      height: 100vh;
+      background: var(--dark);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .back-cover__bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.2;
+      filter: brightness(0.6);
+    }
+
+    .back-cover__overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(26,18,8,0.9) 0%,
+        rgba(26,18,8,0.5) 50%,
+        rgba(26,18,8,0.95) 100%
+      );
+    }
+
+    .back-cover__content {
+      position: relative;
+      z-index: 2;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 3rem;
+    }
+
+    .back-cover__logo {
+      width: 120px;
+      margin-bottom: 2rem;
+      opacity: 0.8;
+    }
+
+    .back-cover__tagline {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--gold);
+      line-height: 1.3;
+      margin-bottom: 1.5rem;
+      max-width: 400px;
+    }
+
+    .back-cover__divider {
+      width: 40px;
+      height: 1px;
+      background: var(--gold);
+      opacity: 0.3;
+      margin-bottom: 1.5rem;
+    }
+
+    /* EDIT: Contact / social info */
+    .back-cover__contact {
+      font-size: 0.72rem;
+      color: rgba(250,244,235,0.45);
+      line-height: 2;
+      letter-spacing: 0.05em;
+    }
+
+    .back-cover__contact a {
+      color: var(--gold);
+      text-decoration: none;
+      opacity: 0.7;
+    }
+
+    .back-cover__origin {
+      margin-top: 2.5rem;
+      font-size: 0.6rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: rgba(250,244,235,0.2);
+      max-width: 320px;
+      line-height: 1.8;
+    }
+
+    /* ═══ IMAGE STRIP (product gallery) ═══ */
+    .image-strip {
+      display: flex;
+      gap: 0;
+      margin: 1.5rem 0;
+      border-radius: 6px;
+      overflow: hidden;
+      height: 160px;
+    }
+
+    .image-strip img {
+      flex: 1;
+      object-fit: cover;
+      height: 100%;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══ PAGE 1: COVER ═══ -->
+<div class="cover">
+  <!-- EDIT: Cover background image -->
+  <img class="cover__bg" src="images/shot1.jpg" alt="" />
+  <div class="cover__overlay"></div>
+  <div class="cover__content">
+    <!-- EDIT: Logo -->
+    <img class="cover__logo" src="images/samsara-tree-logo.jpg" alt="Samsara" />
+    <div class="cover__eyebrow">Samsara Olive Oil</div>
+    <!-- EDIT: Product title -->
+    <h1 class="cover__title">Ritual<br><em>Health Shot</em></h1>
+    <!-- EDIT: Cover subtitle -->
+    <p class="cover__subtitle">A daily grounding ritual of olive oil, lemon &amp; sceletium — cold-pressed, raw, and rooted in ancient plant wisdom.</p>
+    <div class="cover__divider"></div>
+    <!-- EDIT: Box contents line -->
+    <div class="cover__box-info">14 daily shots · 30ml each · cold-pressed &amp; raw</div>
+  </div>
+  <div class="cover__footer">VrischGewagt Boutique Olive Farm · Swartberg Karoo, South Africa</div>
+</div>
+
+<!-- ═══ PAGE 2: THE PRODUCT ═══ -->
+<div class="product-page">
+  <!-- EDIT: Left product image -->
+  <img class="product-page__image" src="images/shot3.jpg" alt="Samsara Ritual Health Shot" />
+  <div class="product-page__content">
+    <div class="eyebrow">The Product</div>
+    <!-- EDIT: Section heading -->
+    <h2>Three ingredients.<br>One daily practice.</h2>
+    <div class="divider"></div>
+
+    <!-- EDIT: Product introduction paragraph -->
+    <p class="product-intro">
+      The Samsara Ritual Health Shot is a concentrated morning blend of extra virgin olive oil, fresh lemon, and sceletium — designed to support clarity, calmness, digestion, and long-term vitality.
+    </p>
+
+    <!-- EDIT: Product details -->
+    <p class="product-detail"><strong>Format:</strong> 14 individual daily shots per box</p>
+    <p class="product-detail"><strong>Volume:</strong> 30ml per shot</p>
+    <p class="product-detail"><strong>Ingredients:</strong> Extra virgin olive oil, fresh lemon juice, sceletium extract</p>
+    <p class="product-detail"><strong>Processing:</strong> Cold-pressed, unfiltered, raw — no heat, no additives</p>
+    <p class="product-detail"><strong>Origin:</strong> VrischGewagt Olive Farm, Swartberg Karoo, SA</p>
+    <p class="product-detail"><strong>Storage:</strong> Refrigerate after opening. Best consumed within 14 days.</p>
+
+    <!-- Product image strip -->
+    <div class="image-strip">
+      <img src="images/shot2.jpg" alt="Product detail" />
+      <img src="images/shot4.jpg" alt="Product branding" />
+    </div>
+
+    <!-- EDIT: Ritual callout -->
+    <div class="ritual-callout">
+      <h3>The Ritual</h3>
+      <p>Taken each morning on an empty stomach, the Ritual Shot is more than a supplement — it is a daily pause, a grounding practice, and a conscious start to the day.</p>
+      <div class="tagline">Grounded energy. Clear mind. Nourished body.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ PAGE 3: INGREDIENTS & BENEFITS ═══ -->
+<div class="ingredients-page">
+  <div class="eyebrow">What's Inside</div>
+  <h2>Ingredients &amp; Benefits</h2>
+  <div class="divider"></div>
+
+  <div class="ingredient-cards">
+
+    <!-- EDIT: INGREDIENT 1 — Olive Oil -->
+    <div class="ingredient-card">
+      <div class="ingredient-card__header">
+        <span class="ingredient-card__icon">🫒</span>
+        <span class="ingredient-card__name">Extra Virgin Olive Oil</span>
+      </div>
+      <div class="ingredient-card__subtitle">Rich in polyphenols, antioxidants &amp; monounsaturated fats</div>
+      <div class="benefit-grid">
+        <div class="benefit-item">Supports heart &amp; cardiovascular health</div>
+        <div class="benefit-item">Anti-inflammatory properties</div>
+        <div class="benefit-item">Supports brain function &amp; cognitive longevity</div>
+        <div class="benefit-item">Helps regulate cholesterol levels</div>
+        <div class="benefit-item">Improves gut &amp; digestive health</div>
+        <div class="benefit-item">Enhances nutrient absorption</div>
+        <div class="benefit-item">Rich antioxidants combat oxidative stress</div>
+        <div class="benefit-item">Associated with longevity in Mediterranean diets</div>
+      </div>
+      <div class="ingredient-card__ref">Research: [1] PMC 10598670 · [2] PubMed 40507112 · [3] PMC 12695547</div>
+    </div>
+
+    <!-- EDIT: INGREDIENT 2 — Lemon -->
+    <div class="ingredient-card">
+      <div class="ingredient-card__header">
+        <span class="ingredient-card__icon">🍋</span>
+        <span class="ingredient-card__name">Fresh Lemon</span>
+      </div>
+      <div class="ingredient-card__subtitle">Natural source of vitamin C, citric acid &amp; polyphenols</div>
+      <div class="benefit-grid">
+        <div class="benefit-item">Supports liver &amp; digestive function</div>
+        <div class="benefit-item">Rich in vitamin C for immune support</div>
+        <div class="benefit-item">Stimulates morning digestion</div>
+        <div class="benefit-item">Supports hydration &amp; mineral absorption</div>
+        <div class="benefit-item">Alkalising effect on the body</div>
+        <div class="benefit-item">Natural antioxidant &amp; anti-aging support</div>
+      </div>
+      <div class="ingredient-card__ref">Research: [4] Healthline · [5] PMC 6403313</div>
+    </div>
+
+    <!-- EDIT: INGREDIENT 3 — Sceletium -->
+    <div class="ingredient-card">
+      <div class="ingredient-card__header">
+        <span class="ingredient-card__icon">🌿</span>
+        <span class="ingredient-card__name">Sceletium (Kanna)</span>
+      </div>
+      <div class="ingredient-card__subtitle">Traditional South African botanical for mood &amp; stress support</div>
+      <div class="benefit-grid">
+        <div class="benefit-item">Supports emotional balance &amp; calmness</div>
+        <div class="benefit-item">Reduces stress &amp; anxious tension</div>
+        <div class="benefit-item">Supports mental clarity &amp; focus</div>
+        <div class="benefit-item">Enhances mood &amp; emotional resilience</div>
+        <div class="benefit-item">Promotes grounded awareness</div>
+        <div class="benefit-item">Calm, uplifted state without sedation</div>
+      </div>
+      <div class="ingredient-card__ref">Research: [6] PMC 8762184 · [7] ResearchGate 306550033</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══ PAGE 4: SCIENCE & REFERENCES ═══ -->
+<div class="references-page">
+  <div class="eyebrow">The Science</div>
+  <h2>Research &amp; Sources</h2>
+  <div class="divider"></div>
+
+  <!-- EDIT: Reference entries -->
+  <div class="ref-group">
+    <div class="ref-group__title">Extra Virgin Olive Oil</div>
+    <div class="ref-num">[1] Olive oil consumption and improved cognitive function: A systematic review and meta-analysis. <em>Nutrients</em>, 2023. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10598670/">pmc.ncbi.nlm.nih.gov/articles/PMC10598670</a></div>
+    <div class="ref-num">[2] Exploring the benefits of extra virgin olive oil on cardiovascular health enhancement and disease prevention: A systematic review. Ussia, S. et al. <em>Nutrients</em>, 2025. <a href="https://pubmed.ncbi.nlm.nih.gov/40507112/">pubmed.ncbi.nlm.nih.gov/40507112</a></div>
+    <div class="ref-num">[3] Neuroprotective properties of EVOO polyphenols and their role in brain health. <em>Nutrients</em>, 2024. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12695547/">pmc.ncbi.nlm.nih.gov/articles/PMC12695547</a></div>
+  </div>
+
+  <div class="ref-group">
+    <div class="ref-group__title">Lemon</div>
+    <div class="ref-num">[4] Benefits of lemon water: Vitamin C, digestion, and hydration. <em>Healthline</em>. <a href="https://www.healthline.com/health/food-nutrition/benefits-of-lemon-water">healthline.com</a></div>
+    <div class="ref-num">[5] Effects of lifelong intake of lemon polyphenols on aging and intestinal microbiome. <em>Scientific Reports</em>, 2019. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC6403313/">pmc.ncbi.nlm.nih.gov/articles/PMC6403313</a></div>
+  </div>
+
+  <div class="ref-group">
+    <div class="ref-group__title">Sceletium (Kanna)</div>
+    <div class="ref-num">[6] Sceletium for managing anxiety, depression and cognitive impairment: A traditional herbal medicine in modern-day regulatory systems. <em>Journal of Ethnopharmacology</em>, 2022. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8762184/">pmc.ncbi.nlm.nih.gov/articles/PMC8762184</a></div>
+    <div class="ref-num">[7] The effects of <em>Sceletium tortuosum</em> in the chick anxiety-depression model. Smith, C. et al. <em>ResearchGate</em>, 2016. <a href="https://www.researchgate.net/publication/306550033">researchgate.net/publication/306550033</a></div>
+  </div>
+
+  <!-- EDIT: Disclaimer text -->
+  <div class="disclaimer">
+    <strong>Disclaimer:</strong> This document is for informational purposes only and does not constitute medical advice. The statements made herein have not been evaluated by any regulatory authority. This product is not intended to diagnose, treat, cure, or prevent any disease. Consult a healthcare professional before making changes to your diet or health routine.
+  </div>
+</div>
+
+<!-- ═══ PAGE 5: BACK COVER ═══ -->
+<div class="back-cover">
+  <!-- EDIT: Back cover background -->
+  <img class="back-cover__bg" src="images/shot4.jpg" alt="" />
+  <div class="back-cover__overlay"></div>
+  <div class="back-cover__content">
+    <img class="back-cover__logo" src="images/samsara-tree-logo.jpg" alt="Samsara" />
+    <!-- EDIT: Back cover tagline -->
+    <div class="back-cover__tagline">Grounded energy.<br>Clear mind.<br>Nourished body.</div>
+    <div class="back-cover__divider"></div>
+    <!-- EDIT: Contact info -->
+    <div class="back-cover__contact">
+      <a href="https://www.instagram.com/niccris_samsara">@niccris_samsara</a><br>
+      VrischGewagt Boutique Olive Farm<br>
+      Swartberg Karoo, South Africa
+    </div>
+    <!-- EDIT: Origin line -->
+    <div class="back-cover__origin">
+      Crafted from organically rehabilitated olive trees ·<br>
+      Cold-pressed on the farm · From soil to soul
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
