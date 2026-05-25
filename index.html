@@ -1569,6 +1569,7 @@
               <small>per 500ml</small>
             </div>
           </div>
+          <button class="btn btn-cart" id="hemp-preorder-btn" type="button">Pre-Order</button>
         </div>
       </article>
 
@@ -2620,21 +2621,6 @@
       ui.createComponent('product', {
         id: '10358258958610',
         node: document.getElementById('shopify-component-1l-evoo'),
-        moneyFormat: 'R%20%7B%7Bamount%7D%7D',
-        options: {
-          "product": makeProductOpts(1),
-          "productSet": { "styles": { "products": { "@media (min-width: 601px)": { "margin-left": "0px" } } } },
-          "modalProduct": modalOpts,
-          "option": {},
-          "cart": cartOptsWithEvents,
-          "toggle": toggleOpts
-        },
-      });
-
-      /* 500ml Infused Olive Oil — 1 tree */
-      ui.createComponent('product', {
-        id: '10354352619794',
-        node: document.getElementById('shopify-component-infused'),
         moneyFormat: 'R%20%7B%7Bamount%7D%7D',
         options: {
           "product": makeProductOpts(1),
