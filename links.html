@@ -41,13 +41,18 @@
     .logo-bg {
       position: fixed;
       inset: 0;
-      background-image: url('assets/images/samsara-logo-full.jpg');
-      background-size: contain;
-      background-position: center;
-      background-repeat: no-repeat;
-      opacity: 0.08;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       z-index: 1;
-      filter: sepia(1) saturate(0.5) brightness(3);
+      pointer-events: none;
+    }
+
+    .logo-bg img {
+      width: 80vmin;
+      max-width: 600px;
+      opacity: 0.12;
+      mix-blend-mode: screen;
     }
 
     /* ── Dark vignette to keep content readable ── */
@@ -180,9 +185,10 @@
 </head>
 <body>
   <div class="backdrop"></div>
-  <div class="logo-bg"></div>
+  <div class="logo-bg">
+    <img src="assets/images/samsara-logo-white.jpg" alt="" />
+  </div>
   <div class="overlay"></div>
-  <!-- layers: trees → logo watermark → vignette → content -->
 
   <div class="card">
 
