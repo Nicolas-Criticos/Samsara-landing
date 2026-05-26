@@ -26,15 +26,18 @@
       background: #1a1208;
     }
 
-    /* ── Solid dark background ── */
+    /* ── Olive tree backdrop ── */
     .backdrop {
       position: fixed;
       inset: 0;
-      background: #1a1208;
+      background-image: url('assets/images/backdrop.jpg');
+      background-size: cover;
+      background-position: center;
+      filter: brightness(0.35) saturate(0.7);
       z-index: 0;
     }
 
-    /* ── Logo as full-screen watermark ── */
+    /* ── Logo watermark over trees ── */
     .logo-bg {
       position: fixed;
       inset: 0;
@@ -42,19 +45,19 @@
       background-size: contain;
       background-position: center;
       background-repeat: no-repeat;
-      opacity: 0.07;
+      opacity: 0.08;
       z-index: 1;
-      filter: sepia(1) saturate(0.3) brightness(2);
+      filter: sepia(1) saturate(0.5) brightness(3);
     }
 
-    /* ── Subtle vignette to keep edges dark ── */
+    /* ── Dark vignette to keep content readable ── */
     .overlay {
       position: fixed;
       inset: 0;
       background: radial-gradient(
         ellipse at center,
-        transparent 30%,
-        rgba(26, 18, 8, 0.6) 100%
+        rgba(26, 18, 8, 0.25) 0%,
+        rgba(26, 18, 8, 0.65) 100%
       );
       z-index: 2;
     }
@@ -82,10 +85,7 @@
     }
 
     .logo-wrap img {
-      width: 120px;
-      height: auto;
-      filter: brightness(0) invert(1) sepia(1) saturate(0.6) hue-rotate(0deg) brightness(1.15);
-      opacity: 0.92;
+      display: none;
     }
 
     /* ── Heading ── */
@@ -182,6 +182,7 @@
   <div class="backdrop"></div>
   <div class="logo-bg"></div>
   <div class="overlay"></div>
+  <!-- layers: trees → logo watermark → vignette → content -->
 
   <div class="card">
 
