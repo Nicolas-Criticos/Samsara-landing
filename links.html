@@ -173,13 +173,74 @@
       flex-shrink: 0;
     }
 
-    /* ── Tagline ── */
-    .tagline {
+    /* ── Discount widget ── */
+    .discount {
+      width: 100%;
+      border: 1px solid rgba(201, 160, 64, 0.4);
+      border-radius: 3px;
+      padding: 0.9rem 1.2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      background: rgba(26, 18, 8, 0.5);
+    }
+
+    .discount-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #c9a040;
+    }
+
+    .discount-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+    }
+
+    .discount-code {
       font-family: 'Cormorant Garamond', serif;
-      font-style: italic;
-      font-size: 0.9rem;
-      color: rgba(247, 240, 230, 0.45);
-      letter-spacing: 0.04em;
+      font-size: 1.6rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      color: #f7f0e6;
+    }
+
+    .copy-btn {
+      background: none;
+      border: 1px solid rgba(201, 160, 64, 0.5);
+      border-radius: 3px;
+      color: #c9a040;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.4rem 0.75rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .copy-btn:hover {
+      background: rgba(201, 160, 64, 0.12);
+      border-color: #c9a040;
+    }
+
+    .copy-btn.copied {
+      color: #8fa44e;
+      border-color: #8fa44e;
+    }
+
+    .discount-hint {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.7rem;
+      color: rgba(247, 240, 230, 0.4);
+      letter-spacing: 0.03em;
     }
   </style>
 </head>
@@ -227,8 +288,30 @@
 
     </div>
 
-
+    <!-- Discount code -->
+    <div class="discount">
+      <span class="discount-label">Discount code</span>
+      <div class="discount-row">
+        <span class="discount-code" id="code">SAMSARA</span>
+        <button class="copy-btn" id="copyBtn" onclick="copyCode()">Copy</button>
+      </div>
+      <span class="discount-hint">Apply at checkout for olive oil orders</span>
+    </div>
 
   </div>
+
+  <script>
+    function copyCode() {
+      navigator.clipboard.writeText('SAMSARA').then(function() {
+        var btn = document.getElementById('copyBtn');
+        btn.textContent = 'Copied!';
+        btn.classList.add('copied');
+        setTimeout(function() {
+          btn.textContent = 'Copy';
+          btn.classList.remove('copied');
+        }, 2000);
+      });
+    }
+  <\/script>
 </body>
 </html>
