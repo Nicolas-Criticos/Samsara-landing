@@ -345,6 +345,19 @@
   object-position: center 15%;
 }
 
+/* Mobile: 1L images are portrait — use contain so nothing gets clipped */
+@media (max-width: 580px) {
+  .products__grid .product-card:nth-child(2) .product-card__img-wrap {
+    height: 280px;
+    background: radial-gradient(circle at center, rgba(var(--portal-c),1), rgba(238,233,220,0.8));
+  }
+  .products__grid .product-card:nth-child(2) .product-card__slides img:nth-child(1),
+  .products__grid .product-card:nth-child(2) .product-card__slides img:nth-child(2) {
+    object-fit: contain;
+    object-position: center center;
+  }
+}
+
     /* shot1.jpg */
 .products__grid .product-card:nth-child(4) .product-card__slides img:nth-child(1) {
   object-position: center 30%;
