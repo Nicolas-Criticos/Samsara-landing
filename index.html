@@ -1552,26 +1552,31 @@
         </div>
       </article>
 
-      <!-- Product B: 1L EVOO -->
+      <!-- Product B: 1L / 750ml EVOO -->
       <article class="product-card reveal">
         <div class="product-card__img-wrap">
           <div class="product-card__slides" data-hover-slide>
             <img src="assets/images/1l-1.jpg" alt="1L Olive Oil" loading="lazy" class="is-visible" />
             <img src="assets/images/1l-2.jpg" alt="1L Olive Oil" loading="lazy" />
           </div>
-          <span class="product-card__badge">1 Litre Tin</span>
+          <span class="product-card__badge" id="1l-card-badge">1 Litre Tin</span>
         </div>
         <div class="product-card__body">
           <h3 class="product-card__name">Extra Virgin<br>Organic Olive Oil</h3>
           <p class="product-card__desc">The same cold-pressed, single-origin Karoo gold — in a convenient 1L refil tin. Perfect for the everyday kitchen.</p>
-          <p class="product-card__trees">🌿 Rehabilitates 1 olive tree</p>
+          <p class="product-card__trees" id="1l-card-trees">🌿 Rehabilitates 1 olive tree</p>
+          <div class="variants">
+            <button class="variant-btn is-active" data-size="1l">1 Litre</button>
+            <button class="variant-btn" data-size="750ml">750ml</button>
+          </div>
           <div class="product-card__footer">
-            <div class="product-card__price">
+            <div class="product-card__price" id="1l-card-price">
               R360
-              <small>per 1L</small>
+              <small id="1l-card-price-label">per 1L</small>
             </div>
           </div>
           <div id="shopify-component-1l-evoo"></div>
+          <div id="shopify-component-750ml-evoo" style="display:none;"></div>
         </div>
       </article>
 
@@ -2655,6 +2660,22 @@
         },
       });
 
+      /* 750ml Extra Virgin Olive Oil — 1 tree */
+      /* TODO: replace 'SHOPIFY_PRODUCT_ID_750ML' with the actual Shopify product ID */
+      ui.createComponent('product', {
+        id: 'SHOPIFY_PRODUCT_ID_750ML',
+        node: document.getElementById('shopify-component-750ml-evoo'),
+        moneyFormat: 'R%20%7B%7Bamount%7D%7D',
+        options: {
+          "product": makeProductOpts(1),
+          "productSet": { "styles": { "products": { "@media (min-width: 601px)": { "margin-left": "0px" } } } },
+          "modalProduct": modalOpts,
+          "option": {},
+          "cart": cartOptsWithEvents,
+          "toggle": toggleOpts
+        },
+      });
+
       /* Ritual Morning Shots — pre-order only, no Shopify embed */
     });
   }
@@ -2701,6 +2722,39 @@
       bar.classList.remove('visible');
     }
   }
+})();
+</script>
+
+<!-- ═══ 1L CARD: Size variant switcher ═══ -->
+<script>
+(function () {
+  var PRICES = { '1l': { amount: 'R360', label: 'per 1L', trees: '🌿 Rehabilitates 1 olive tree', badge: '1 Litre Tin' },
+                 '750ml': { amount: 'R280', label: 'per 750ml', trees: '🌿 Rehabilitates 1 olive tree', badge: '750ml Bottle' } };
+
+  document.querySelectorAll('[data-size]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var size = btn.getAttribute('data-size');
+      /* Update active button */
+      document.querySelectorAll('[data-size]').forEach(function (b) { b.classList.remove('is-active'); });
+      btn.classList.add('is-active');
+
+      /* Swap Shopify components */
+      document.getElementById('shopify-component-1l-evoo').style.display   = size === '1l'    ? '' : 'none';
+      document.getElementById('shopify-component-750ml-evoo').style.display = size === '750ml' ? '' : 'none';
+
+      /* Update price + badge + trees text */
+      var p = PRICES[size];
+      var priceEl = document.getElementById('1l-card-price');
+      if (priceEl) {
+        priceEl.childNodes[0].textContent = p.amount;
+        document.getElementById('1l-card-price-label').textContent = p.label;
+      }
+      var treesEl = document.getElementById('1l-card-trees');
+      if (treesEl) treesEl.textContent = p.trees;
+      var badgeEl = document.getElementById('1l-card-badge');
+      if (badgeEl) badgeEl.textContent = p.badge;
+    });
+  });
 })();
 </script>
 
