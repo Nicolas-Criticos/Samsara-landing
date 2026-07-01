@@ -2660,20 +2660,22 @@
         },
       });
 
-      /* 750ml Extra Virgin Olive Oil — 1 tree */
-      ui.createComponent('product', {
-        id: '10376554217746',
-        node: document.getElementById('shopify-component-750ml-evoo'),
-        moneyFormat: 'R%20%7B%7Bamount%7D%7D',
-        options: {
-          "product": makeProductOpts(1),
-          "productSet": { "styles": { "products": { "@media (min-width: 601px)": { "margin-left": "0px" } } } },
-          "modalProduct": modalOpts,
-          "option": {},
-          "cart": cartOptsWithEvents,
-          "toggle": toggleOpts
-        },
-      });
+      /* 750ml — lazy-inited on first variant click via window.__init750ml */
+      window.__init750ml = function () {
+        ui.createComponent('product', {
+          id: '10376554217746',
+          node: document.getElementById('shopify-component-750ml-evoo'),
+          moneyFormat: 'R%20%7B%7Bamount%7D%7D',
+          options: {
+            "product": makeProductOpts(1),
+            "productSet": { "styles": { "products": { "@media (min-width: 601px)": { "margin-left": "0px" } } } },
+            "modalProduct": modalOpts,
+            "option": {},
+            "cart": cartOptsWithEvents,
+            "toggle": toggleOpts
+          },
+        });
+      };
 
       /* Ritual Morning Shots — pre-order only, no Shopify embed */
     });
@@ -2727,19 +2729,27 @@
 <!-- ═══ 1L CARD: Size variant switcher ═══ -->
 <script>
 (function () {
-  var PRICES = { '1l': { amount: 'R360', label: 'per 1L', trees: '🌿 Rehabilitates 1 olive tree', badge: '1 Litre Tin' },
-                 '750ml': { amount: 'R330', label: 'per 750ml', trees: '🌿 Rehabilitates 1 olive tree', badge: '750ml Bottle' } };
+  var PRICES = { '1l':    { amount: 'R360', label: 'per 1L',    trees: '🌿 Rehabilitates 1 olive tree', badge: '1 Litre Tin'   },
+                 '750ml': { amount: 'R330', label: 'per 750ml', trees: '🌿 Rehabilitates 1 olive tree', badge: '750ml Bottle'  } };
+  var ml750Inited = false;
 
   document.querySelectorAll('[data-size]').forEach(function (btn) {
     btn.addEventListener('click', function () {
       var size = btn.getAttribute('data-size');
+
       /* Update active button */
       document.querySelectorAll('[data-size]').forEach(function (b) { b.classList.remove('is-active'); });
       btn.classList.add('is-active');
 
-      /* Swap Shopify components */
+      /* Show the target component FIRST (Shopify needs visible node to render) */
       document.getElementById('shopify-component-1l-evoo').style.display   = size === '1l'    ? '' : 'none';
       document.getElementById('shopify-component-750ml-evoo').style.display = size === '750ml' ? '' : 'none';
+
+      /* Lazy-init 750ml on first click — Shopify won't render into a hidden element */
+      if (size === '750ml' && !ml750Inited) {
+        ml750Inited = true;
+        if (window.__init750ml) window.__init750ml();
+      }
 
       /* Update price + badge + trees text */
       var p = PRICES[size];
