@@ -2730,26 +2730,31 @@
   var PRICES = { '1l':    { amount: 'R360', label: 'per 1L',    trees: '🌿 Rehabilitates 1 olive tree', badge: '1 Litre Tin'   },
                  '750ml': { amount: 'R330', label: 'per 750ml', trees: '🌿 Rehabilitates 1 olive tree', badge: '750ml Bottle'  } };
 
-  /* Both components render fully visible at load so Shopify SDK can init.
-     After 3s (enough for SDK iframes to mount), hide the 750ml. */
-  setTimeout(function () {
+  /* Shopify renders both components at page load (both divs are visible in HTML).
+     We hide 750ml via JS after the SDK has had time to mount its iframe.
+     Shopify polls for readiness — we wait for the iframe to appear inside the div. */
+  function hideWhenReady() {
     var el = document.getElementById('shopify-component-750ml-evoo');
-    if (el) el.style.display = 'none';
-  }, 3000);
+    if (!el) return;
+    var iframe = el.querySelector('iframe');
+    if (iframe) {
+      el.style.display = 'none';
+    } else {
+      setTimeout(hideWhenReady, 200);
+    }
+  }
+  hideWhenReady();
 
   document.querySelectorAll('[data-size]').forEach(function (btn) {
     btn.addEventListener('click', function () {
       var size = btn.getAttribute('data-size');
 
-      /* Update active button */
       document.querySelectorAll('[data-size]').forEach(function (b) { b.classList.remove('is-active'); });
       btn.classList.add('is-active');
 
-      /* Swap components */
       document.getElementById('shopify-component-1l-evoo').style.display   = size === '1l'    ? '' : 'none';
       document.getElementById('shopify-component-750ml-evoo').style.display = size === '750ml' ? '' : 'none';
 
-      /* Update price + badge + trees text */
       var p = PRICES[size];
       var priceEl = document.getElementById('1l-card-price');
       if (priceEl) {
