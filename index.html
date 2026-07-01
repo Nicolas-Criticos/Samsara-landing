@@ -2455,12 +2455,15 @@
     });
   })();
 
-  document.getElementById('preorder-open-btn').addEventListener('click', function () {
-    modal.classList.add('open');
-    document.body.classList.add('no-scroll');
-    formView.style.display = '';
-    successView.style.display = 'none';
-  });
+  var preorderOpenBtn = document.getElementById('preorder-open-btn');
+  if (preorderOpenBtn) {
+    preorderOpenBtn.addEventListener('click', function () {
+      modal.classList.add('open');
+      document.body.classList.add('no-scroll');
+      formView.style.display = '';
+      successView.style.display = 'none';
+    });
+  }
 
   modal.querySelector('.preorder-backdrop').addEventListener('click', close);
   modal.querySelector('.preorder-close').addEventListener('click', close);
