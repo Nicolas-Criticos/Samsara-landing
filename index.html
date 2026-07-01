@@ -1576,8 +1576,7 @@
             </div>
           </div>
           <div id="shopify-component-1l-evoo"></div>
-          <!-- 750ml: hidden via height/overflow so Shopify can render into it at load -->
-          <div id="shopify-component-750ml-evoo" style="height:0;overflow:hidden;visibility:hidden;"></div>
+          <div id="shopify-component-750ml-evoo"></div>
         </div>
       </article>
 
@@ -2731,20 +2730,12 @@
   var PRICES = { '1l':    { amount: 'R360', label: 'per 1L',    trees: '🌿 Rehabilitates 1 olive tree', badge: '1 Litre Tin'   },
                  '750ml': { amount: 'R330', label: 'per 750ml', trees: '🌿 Rehabilitates 1 olive tree', badge: '750ml Bottle'  } };
 
-  function showComponent(id) {
-    var el = document.getElementById(id);
-    if (!el) return;
-    el.style.height = '';
-    el.style.overflow = '';
-    el.style.visibility = '';
-  }
-  function hideComponent(id) {
-    var el = document.getElementById(id);
-    if (!el) return;
-    el.style.height = '0';
-    el.style.overflow = 'hidden';
-    el.style.visibility = 'hidden';
-  }
+  /* Both components render fully visible at load so Shopify SDK can init.
+     After 3s (enough for SDK iframes to mount), hide the 750ml. */
+  setTimeout(function () {
+    var el = document.getElementById('shopify-component-750ml-evoo');
+    if (el) el.style.display = 'none';
+  }, 3000);
 
   document.querySelectorAll('[data-size]').forEach(function (btn) {
     btn.addEventListener('click', function () {
@@ -2754,14 +2745,9 @@
       document.querySelectorAll('[data-size]').forEach(function (b) { b.classList.remove('is-active'); });
       btn.classList.add('is-active');
 
-      /* Reveal selected, hide other */
-      if (size === '1l') {
-        showComponent('shopify-component-1l-evoo');
-        hideComponent('shopify-component-750ml-evoo');
-      } else {
-        hideComponent('shopify-component-1l-evoo');
-        showComponent('shopify-component-750ml-evoo');
-      }
+      /* Swap components */
+      document.getElementById('shopify-component-1l-evoo').style.display   = size === '1l'    ? '' : 'none';
+      document.getElementById('shopify-component-750ml-evoo').style.display = size === '750ml' ? '' : 'none';
 
       /* Update price + badge + trees text */
       var p = PRICES[size];
