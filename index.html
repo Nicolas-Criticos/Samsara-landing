@@ -1576,7 +1576,7 @@
             </div>
           </div>
           <div id="shopify-component-1l-evoo"></div>
-          <div id="shopify-component-750ml-evoo"></div>
+          <div id="shopify-component-750ml-evoo" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;"></div>
         </div>
       </article>
 
@@ -2733,20 +2733,34 @@
   var PRICES = { '1l':    { amount: 'R360', label: 'per 1L',    trees: '🌿 Rehabilitates 1 olive tree', badge: '1 Litre Tin'   },
                  '750ml': { amount: 'R330', label: 'per 750ml', trees: '🌿 Rehabilitates 1 olive tree', badge: '750ml Bottle'  } };
 
-  /* Shopify renders both components at page load (both divs are visible in HTML).
-     We hide 750ml via JS after the SDK has had time to mount its iframe.
-     Shopify polls for readiness — we wait for the iframe to appear inside the div. */
-  function hideWhenReady() {
+  /* 750ml div sits off-screen at load (position:absolute;left:-9999px) so
+     Shopify SDK can render into it. On click we move it into normal flow. */
+  function show750() {
     var el = document.getElementById('shopify-component-750ml-evoo');
     if (!el) return;
-    var iframe = el.querySelector('iframe');
-    if (iframe) {
-      el.style.display = 'none';
-    } else {
-      setTimeout(hideWhenReady, 200);
-    }
+    el.style.position = '';
+    el.style.left = '';
+    el.style.width = '';
+    el.style.height = '';
+    el.style.overflow = '';
   }
-  hideWhenReady();
+  function hide750() {
+    var el = document.getElementById('shopify-component-750ml-evoo');
+    if (!el) return;
+    el.style.position = 'absolute';
+    el.style.left = '-9999px';
+    el.style.width = '1px';
+    el.style.height = '1px';
+    el.style.overflow = 'hidden';
+  }
+  function show1l() {
+    var el = document.getElementById('shopify-component-1l-evoo');
+    if (el) { el.style.position = ''; el.style.left = ''; el.style.width = ''; el.style.height = ''; el.style.overflow = ''; }
+  }
+  function hide1l() {
+    var el = document.getElementById('shopify-component-1l-evoo');
+    if (el) { el.style.position = 'absolute'; el.style.left = '-9999px'; el.style.width = '1px'; el.style.height = '1px'; el.style.overflow = 'hidden'; }
+  }
 
   document.querySelectorAll('[data-size]').forEach(function (btn) {
     btn.addEventListener('click', function () {
@@ -2755,8 +2769,8 @@
       document.querySelectorAll('[data-size]').forEach(function (b) { b.classList.remove('is-active'); });
       btn.classList.add('is-active');
 
-      document.getElementById('shopify-component-1l-evoo').style.display   = size === '1l'    ? '' : 'none';
-      document.getElementById('shopify-component-750ml-evoo').style.display = size === '750ml' ? '' : 'none';
+      if (size === '1l') { show1l(); hide750(); }
+      else               { hide1l(); show750(); }
 
       var p = PRICES[size];
       var priceEl = document.getElementById('1l-card-price');
